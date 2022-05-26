@@ -17,11 +17,9 @@ class WebCrawler {
             try {
                 Log.d("TestText", "start")
                 val downloadUrl = "http://tw.evga.com/products/productlist.aspx?type=0"
-//                val downloadUrl = "http://www.google.com/search?q=lakshman"
-//                val downloadUrl = "https://www.oucare.com/app/flag20171106.html"
-//                val downloadUrl = "http://imdb.com/search/title?count=100&genres=action&languages=en&release_date=2010,2016&title_type=feature"
 
-                val mp3LinkText = mutableListOf<String>()
+                val itemsName = mutableListOf<String>()
+                val itemsImgUrl = mutableListOf<String>()
 
                 val doc: Document = Jsoup.connect(downloadUrl)
 //                    .userAgent("Mozilla")
@@ -39,37 +37,18 @@ class WebCrawler {
                     .get()
 
                 val gridItemElements = doc.getElementsByClass("grid-item")
-//                Log.d("TestText", "gridItemElements = $gridItemElements")
                 for (gridItemElement in gridItemElements) {
                     val plGridImageElements = gridItemElement.getElementsByClass("pl-grid-image")
                     for (plGridImageElement in plGridImageElements) {
                         val item = plGridImageElement.child(1)
-                        Log.d("TestText", "item.title = ${item.attr("title")}")
-                        Log.d("TestText", "item.img = ${item.getElementsByTag("img").attr("src")}")
-
-//                        plGridImageElement.getEle
-//                        val links = plGridImageElement.getElementsByTag("a")
-//                        for (linksEl in links) {
-//                            val title: String = linksEl.attr("title")
-//                            Log.d("TestText", "Title = ${title}")
-//                        }
+                        itemsName.add(item.attr("title"))
+                        itemsImgUrl.add(item.getElementsByTag("img").attr("src"))
                     }
-//                    for (in gridItemElement)
-//                    val links: Elements = gridItemElement.getElementsByTag("a")
-//                    for (linksEl in links) {
-//                        val linkText: String = linksEl.attr("title")
-//                        Log.d("TestText", "linkText = ${linkText}")
-//                    }
-//                    Log.d("TestText", "gridItemElement = $el")
-//                    mp3LinkText.add(linkText)
+                    val btnAddCartElements = gridItemElement.getElementsByClass("btnAddCart")
+                    Log.d("TestText", "btnAddCartElements = $btnAddCartElements")
                 }
-//                val links: Elements = doc.getElementsByTag("a")
-//                for (el in links) {
-////                    val linkText: String = el.attr("href")
-//                    val linkText: String = el.attr("title")
-//                    mp3LinkText.add(linkText)
-//                    Log.d("TestText", "linkText = ${linkText}")
-//                }
+                Log.d("TestText", "item.title = $itemsName")
+                Log.d("TestText", "item.img = $itemsImgUrl")
             } catch (e: Exception) {
                 Log.d("TestText", "e = $e")
                 e.printStackTrace()
