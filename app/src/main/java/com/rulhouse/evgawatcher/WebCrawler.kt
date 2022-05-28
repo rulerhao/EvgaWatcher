@@ -20,6 +20,9 @@ class WebCrawler {
 
                 val itemsName = mutableListOf<String>()
                 val itemsImgUrl = mutableListOf<String>()
+                val itemCanBuy = mutableListOf<Boolean>()
+                val serial = mutableListOf<String>()
+                val itemDetails = mutableListOf<List<String>>()
 
                 val doc: Document = Jsoup.connect(downloadUrl)
 //                    .userAgent("Mozilla")
@@ -37,18 +40,36 @@ class WebCrawler {
                     .get()
 
                 val gridItemElements = doc.getElementsByClass("grid-item")
-                for (gridItemElement in gridItemElements) {
-                    val plGridImageElements = gridItemElement.getElementsByClass("pl-grid-image")
+                gridItemElements.forEach { element ->
+                    val plGridImageElements = element.getElementsByClass("pl-grid-image")
                     for (plGridImageElement in plGridImageElements) {
                         val item = plGridImageElement.child(1)
                         itemsName.add(item.attr("title"))
                         itemsImgUrl.add(item.getElementsByTag("img").attr("src"))
+                        serial.add(item.getElementsByTag("img").attr("alt"))
                     }
-                    val btnAddCartElements = gridItemElement.getElementsByClass("btnAddCart")
-                    Log.d("TestText", "btnAddCartElements = $btnAddCartElements")
+                    val btnAddCartElements = element.getElementsByClass("btnAddCart")
+                    itemCanBuy.add(!btnAddCartElements.isEmpty())
+
+                    val plGridInfo = element.getElementsByClass("pl-grid-info")
+                    plGridInfo.forEach { element ->
+                        val ulList = element.getElementsByTag("ul")
+                        val details = ulList.first()
+                        val detailsList: MutableList<String> = mutableListOf()
+                        details?.children()?.forEach { element ->
+                            detailsList.add(element.text())
+                        }
+                        itemDetails.add(detailsList)
+                    }
+                }
+                for (gridItemElement in gridItemElements) {
+
                 }
                 Log.d("TestText", "item.title = $itemsName")
                 Log.d("TestText", "item.img = $itemsImgUrl")
+                Log.d("TestText", "item.serial = $serial")
+                Log.d("TestText", "item.itemCanBuy = $itemCanBuy")
+                Log.d("TestText", "item.itemDetails = $itemDetails")
             } catch (e: Exception) {
                 Log.d("TestText", "e = $e")
                 e.printStackTrace()
