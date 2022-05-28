@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher
+package com.rulhouse.evgawatcher.presentation
 
 import android.app.Application
 import android.util.Log

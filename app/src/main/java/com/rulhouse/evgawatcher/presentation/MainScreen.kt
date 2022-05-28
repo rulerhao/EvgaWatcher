@@ -1,11 +1,6 @@
-package com.rulhouse.evgawatcher
+package com.rulhouse.evgawatcher.presentation
 
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable

@@ -1,6 +1,8 @@
-package com.rulhouse.evgawatcher
+package com.rulhouse.evgawatcher.crawler
 
 import android.util.Log
+import com.rulhouse.evgawatcher.GpuProduct
+import com.rulhouse.evgawatcher.StringMethods
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
