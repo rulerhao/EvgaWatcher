@@ -4,9 +4,9 @@ data class GpuProduct(
     val serial: String,
     val name: String,
     val statement: List<String?>,
-    val warranty: Int?,
-    val limitedNumber: Int?,
+    val warranty: String,
+    val limitedNumber: String,
     val price: Int?,
-    val canBeBuy: Boolean?,
+    val canBeBought: Boolean?,
     val imgUrl: String?
 )
