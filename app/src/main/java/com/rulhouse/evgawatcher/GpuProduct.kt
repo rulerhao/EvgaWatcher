@@ -8,5 +8,6 @@ data class GpuProduct(
     val limitedNumber: String,
     val price: Int?,
     val canBeBought: Boolean?,
-    val imgUrl: String?
+    val imgUrl: String?,
+    val url: String?
 )
