@@ -10,7 +10,8 @@ import org.jsoup.nodes.Document
 
 class WebCrawler {
     companion object {
-        suspend fun test(): List<GpuProduct> {
+        suspend fun test(): List<GpuProduct>? {
+            var ans: List<GpuProduct>? = null
             withContext(Dispatchers.IO) {
                 try {
                     val downloadUrl = "http://tw.evga.com/products/productlist.aspx?type=0"
@@ -81,16 +82,7 @@ class WebCrawler {
                         }
                         itemWarranty.add(warranty)
                     }
-                    Log.d("TestText", "item.name = $itemsName")
-                    Log.d("TestText", "item.img = $itemsImgUrl")
-                    Log.d("TestText", "item.serial = $itemSerial")
-                    Log.d("TestText", "item.itemCanBuy = $itemCanBuy")
-                    Log.d("TestText", "item.itemDetails = $itemDetails")
-                    Log.d("TestText", "item.itemUrl = $itemUrl")
-                    Log.d("TestText", "item.itemLimit = $itemLimit")
-                    Log.d("TestText", "item.itemPrice = $itemPrice")
-                    Log.d("TestText", "item.itemWarranty = $itemWarranty")
-                    return@withContext convertStringToObject(
+                    ans = convertStringToObject(
                         nameList = itemsName,
                         imgUtlList = itemsImgUrl,
                         serialList = itemSerial,
@@ -102,11 +94,10 @@ class WebCrawler {
                         warrantyList = itemWarranty
                     )
                 } catch (e: Exception) {
-                    Log.d("TestText", "e = $e")
                     e.printStackTrace()
                 }
             }
-            return emptyList()
+            return ans
         }
 
         private fun convertStringToObject(
@@ -129,7 +120,8 @@ class WebCrawler {
                 val details = detailsList[i]
                 val url = "https://tw.evga.com" + urlList[i]
                 val limit = limitList[i]
-                val price = StringMethods.removeStringCharacter(priceList[i], listOf(',')).toInt()
+                val priceString = StringMethods.removeStringCharacter(priceList[i], listOf(','))
+                val price = if (priceString.isEmpty()) 0 else priceString.toInt()
                 val warranty = warrantyList[i]
 
                 list.add(

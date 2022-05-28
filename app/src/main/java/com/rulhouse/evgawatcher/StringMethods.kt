@@ -2,6 +2,8 @@ package com.rulhouse.evgawatcher
 
 object StringMethods {
     fun removeStringCharacter(str: String, charList: List<Char>): String {
+        if (str.isEmpty())
+            return ""
         var nowStr = str
         charList.forEach { char ->
             if (nowStr.contains(char)) {

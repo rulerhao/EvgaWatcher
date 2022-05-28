@@ -7,7 +7,7 @@ import com.rulhouse.evgawatcher.crawler.repository.CrawlerRepository
 class CrawlerImpl (
 ) : CrawlerRepository {
 
-    override suspend fun getGpuItems(): List<GpuProduct> {
+    override suspend fun getGpuItems(): List<GpuProduct>? {
         return WebCrawler.test()
     }
 }

@@ -1,5 +1,9 @@
 package com.rulhouse.evgawatcher.presentation
 
+import android.util.Log
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 
@@ -7,15 +11,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun MainScreen(
     viewModel: MainScreenViewModel = hiltViewModel()
 ) {
-//    LocalUriHandler.current.openUri("https://tw.evga.com/products/productlist.aspx?type=0")
-//    val context = LocalContext.current
-
-
-//    AndroidView(factory = {
-//        WebView(context).apply {
-//            webViewClient = WebViewClient()
-//
-//            loadUrl("https://tw.evga.com/products/productlist.aspx?type=0")
-//        }
-//    })
+    Text(
+        text = "Test"
+    )
+    LazyColumn(
+        
+    ) {
+        val products = viewModel.products.value
+        if (products != null) {
+            items(products) { item ->
+                GpuProductItem(item = item)
+            }
+        }
+    }
 }

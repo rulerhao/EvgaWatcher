@@ -4,5 +4,5 @@ import com.rulhouse.evgawatcher.GpuProduct
 import kotlinx.coroutines.flow.Flow
 
 interface CrawlerRepository {
-    suspend fun getGpuItems(): List<GpuProduct>
+    suspend fun getGpuItems(): List<GpuProduct>?
 }

@@ -6,7 +6,7 @@ import com.rulhouse.evgawatcher.crawler.repository.CrawlerRepository
 class GetGpuItems(
     private val repository: CrawlerRepository
 ) {
-    suspend operator fun invoke(): List<GpuProduct> {
+    suspend operator fun invoke(): List<GpuProduct>? {
         return repository.getGpuItems()
     }
 }
