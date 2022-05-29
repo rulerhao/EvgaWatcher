@@ -17,11 +17,13 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @Inject
     lateinit var gpuProductsUseCases: CrawlerUseCases
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             EvgaWatcherTheme {
                 // A surface container using the 'background' color from the theme
@@ -30,11 +32,20 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     LaunchedEffect(key1 = true) {
-                        Log.d("gpuProductsUseCases", "gpuProductsUseCases ${gpuProductsUseCases.getGpuItems()}")
+                        val nameList = mutableListOf<String>()
+                        val gpuItems = gpuProductsUseCases.getGpuItems()
+                        gpuItems?.forEach { product ->
+                            val pattern = Regex(".* \\d\\d\\d\\d( Ti)?")
+                            val found = pattern.find(product.name)
+                            val str = found?.value
+                            if (str != null) {
+                                if (!nameList.contains(str)) {
+                                    nameList.add(str)
+                                }
+                            }
+                        }
                     }
-//                    this.openUri("https://www.polygreen.com.tw/")
                     MainScreen()
-
                 }
             }
         }
