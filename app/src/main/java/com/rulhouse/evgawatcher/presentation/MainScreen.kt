@@ -1,18 +1,9 @@
 package com.rulhouse.evgawatcher.presentation
 
-import android.util.Log
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 @Composable
@@ -32,17 +23,36 @@ fun MainScreen(
 //            UserScreen(navController = navController)
 //        }
 //    }
-    LazyColumn(
-        modifier = Modifier
-            .padding(16.dp)
-    ) {
-        val products = viewModel.products.value
-        if (products != null) {
-            items(products) { item ->
-                GpuProductItem(
-                    item = item
-                )
-            }
-        }
+    val expandCollapseModel = remember {
+        mutableStateOf(
+            ExpandCollapseModel(
+                1, "GpuProduct",
+                needsPlusButton = false,
+                isOpen = true
+            )
+        )
     }
+    val products = viewModel.products.value
+    if (products != null) {
+        ExpandCollapseColumn(
+            expandCollapseModel = expandCollapseModel.value,
+            products = products,
+            onCollapsedStateChanged = {
+                expandCollapseModel.value = expandCollapseModel.value.copy(isOpen = it)
+            }
+        )
+    }
+//    LazyColumn(
+//        modifier = Modifier
+//            .padding(16.dp)
+//    ) {
+//        val products = viewModel.products.value
+//        if (products != null) {
+//            items(products) { item ->
+//                GpuProductItem(
+//                    item = item
+//                )
+//            }
+//        }
+//    }
 }

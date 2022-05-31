@@ -88,10 +88,10 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation "androidx.activity:activity-ktx:1.4.0"
 
-    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.24.4-alpha'
+    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.24.9-beta'
 
     // Jsoup
-    implementation 'org.jsoup:jsoup:1.14.3'
+    implementation 'org.jsoup:jsoup:1.15.1'
 
     // Glide
     implementation "com.github.skydoves:landscapist-glide:$landscapist_glide_version"
