@@ -1,18 +1,14 @@
 package com.rulhouse.evgawatcher.presentation
 
-import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rulhouse.evgawatcher.GpuProduct
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,12 +45,12 @@ class MainScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _products.value = crawlerUseCases.getGpuItems()
-            _productsSortedBySerial.value = GpuProductsMethods.getNamedBySerial(products.value)
+            _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
             val models: MutableList<ExpandCollapseModel> = mutableListOf()
             productsSortedBySerial.value?.forEachIndexed { index, item ->
                 models.add(
                     ExpandCollapseModel(
-                        title = item[0].name,
+                        title = GpuProductsMethods.getNameBySerial(item[0].name)!!,
                         isOpen = false
                     )
                 )

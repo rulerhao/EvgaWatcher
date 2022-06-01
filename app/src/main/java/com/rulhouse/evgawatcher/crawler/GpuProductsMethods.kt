@@ -4,11 +4,19 @@ import android.util.Log
 import com.rulhouse.evgawatcher.GpuProduct
 
 object GpuProductsMethods {
-    fun getNamedBySerial(gpuProducts: List<GpuProduct>?): List<List<GpuProduct>> {
+    private val regex = ".* \\d\\d\\d\\d( Ti)?"
+
+    fun getNameBySerial(str: String): String? {
+        val pattern = Regex(regex)
+        val found = pattern.find(str)
+        return found?.value
+    }
+
+    fun getNamesBySerial(gpuProducts: List<GpuProduct>?): List<List<GpuProduct>> {
         var nameList = mutableListOf<String>()
         var gpuProductsNameList = mutableListOf<MutableList<GpuProduct>>()
         gpuProducts?.forEach { product ->
-            val pattern = Regex(".* \\d\\d\\d\\d( Ti)?")
+            val pattern = Regex(regex)
             val found = pattern.find(product.name)
             val str = found?.value
             if (str != null) {
