@@ -59,11 +59,11 @@ private fun ProductsList(
     products: List<GpuProduct>
 ) {
     AnimatedVisibility(visible = expandCollapseModel.isOpen) {
-        LazyColumn(
+        Column(
 
         ) {
-            items(products) { item ->
-                GpuProductItem(item = item)
+            repeat(products.size) { index ->
+                GpuProductItem(item = products[index])
             }
         }
     }
