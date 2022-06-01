@@ -10,11 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.navigation.NavController
 import com.rulhouse.evgawatcher.GpuProduct
 
 @Composable
 fun ProductsScreen(
-    viewModel: MainScreenViewModel
+    viewModel: MainScreenViewModel,
+    navController: NavController
 ) {
     LazyColumn(
 
@@ -25,6 +27,9 @@ fun ProductsScreen(
                 products = item,
                 onCollapsedStateChanged = {
                     viewModel.onEvent(MainScreenEvent.OnCollapseColumnStateChanged(index))
+                },
+                onClick = {
+                    navController.navigate(Screen.ProductScreen.route)
                 }
             )
         }
