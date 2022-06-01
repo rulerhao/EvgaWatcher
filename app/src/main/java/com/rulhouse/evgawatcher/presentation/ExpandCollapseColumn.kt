@@ -21,7 +21,8 @@ import com.rulhouse.evgawatcher.GpuProduct
 fun ExpandCollapseColumn(
     expandCollapseModel: ExpandCollapseModel,
     onCollapsedStateChanged: (isChecked: Boolean) -> Unit,
-    products: List<GpuProduct>
+    products: List<GpuProduct>,
+    onClick: (GpuProduct) -> Unit
 ) {
     Column(
         Modifier
@@ -55,7 +56,10 @@ fun ExpandCollapseColumn(
         }
         ProductsList(
             expandCollapseModel = expandCollapseModel,
-            products = products
+            products = products,
+            onClick = {
+                onClick(it)
+            }
         )
         Divider(thickness = 0.5.dp)
     }
@@ -64,14 +68,20 @@ fun ExpandCollapseColumn(
 @Composable
 private fun ProductsList(
     expandCollapseModel: ExpandCollapseModel,
-    products: List<GpuProduct>
+    products: List<GpuProduct>,
+    onClick: (GpuProduct) -> Unit
 ) {
     AnimatedVisibility(visible = expandCollapseModel.isOpen) {
         Column(
 
         ) {
             repeat(products.size) { index ->
-                GpuProductItem(item = products[index])
+                GpuProductItem(
+                    item = products[index],
+                    onClick = {
+                        onClick(it)
+                    }
+                )
             }
         }
     }
