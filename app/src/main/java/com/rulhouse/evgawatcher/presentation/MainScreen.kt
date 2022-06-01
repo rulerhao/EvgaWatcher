@@ -4,13 +4,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainScreen(
-    viewModel: MainScreenViewModel = hiltViewModel()
+    viewModel: MainScreenViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
 
@@ -20,10 +21,14 @@ fun MainScreen(
     ) {
         composable(route = Screen.AllProductsScreenScreen.route) {
             ProductsScreen(
-                viewModel
+                viewModel,
+                navController = navController
             )
         }
         composable(route = Screen.FavoriteProductsScreen.route) {
+
+        }
+        composable(route = Screen.ProductScreen.route) {
 
         }
     }
