@@ -29,7 +29,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             EvgaWatcherTheme {
-                MainScreen()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    MainScreen()
+                }
             }
         }
     }
