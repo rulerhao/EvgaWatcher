@@ -8,7 +8,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.gson.Gson
-import com.rulhouse.evgawatcher.presentation.ExpandCollapseColumn
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel

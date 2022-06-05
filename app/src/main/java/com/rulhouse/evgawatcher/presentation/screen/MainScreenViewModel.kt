@@ -10,7 +10,7 @@ import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.feature_node.data.InvalidFavoriteGpuProductException
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
-import com.rulhouse.evgawatcher.presentation.ExpandCollapseModel
+import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

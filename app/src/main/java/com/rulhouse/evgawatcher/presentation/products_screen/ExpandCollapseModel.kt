@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation
+package com.rulhouse.evgawatcher.presentation.products_screen
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject
