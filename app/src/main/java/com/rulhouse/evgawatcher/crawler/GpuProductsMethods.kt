@@ -1,7 +1,6 @@
 package com.rulhouse.evgawatcher.crawler
 
-import android.util.Log
-import com.rulhouse.evgawatcher.GpuProduct
+import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 
 object GpuProductsMethods {
     private val regex = ".* \\d\\d\\d\\d( Ti)?"

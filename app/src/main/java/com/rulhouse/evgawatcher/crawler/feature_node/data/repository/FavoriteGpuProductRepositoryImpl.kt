@@ -1,6 +1,6 @@
 package com.rulhouse.ruler.feature_node.data.repository
 
-import com.rulhouse.evgawatcher.GpuProduct
+import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.feature_node.data.data_source.FavoriteGpuProductsDao
 import com.rulhouse.evgawatcher.crawler.feature_node.domain.repository.FavoriteGpuProductRepository
 import kotlinx.coroutines.flow.Flow

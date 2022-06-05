@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.crawler.feature_node.domain.repository
 
-import com.rulhouse.evgawatcher.GpuProduct
+import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import kotlinx.coroutines.flow.Flow
 
 interface FavoriteGpuProductRepository {

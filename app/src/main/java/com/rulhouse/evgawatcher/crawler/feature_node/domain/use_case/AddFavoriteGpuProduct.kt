@@ -1,8 +1,8 @@
 package com.oucare.bbt_oucare.feature_node.domain.use_case
 
 
-import com.rulhouse.evgawatcher.GpuProduct
-import com.rulhouse.evgawatcher.InvalidFavoriteGpuProductException
+import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.crawler.feature_node.data.InvalidFavoriteGpuProductException
 import com.rulhouse.evgawatcher.crawler.feature_node.domain.repository.FavoriteGpuProductRepository
 
 class AddFavoriteGpuProduct (

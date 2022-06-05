@@ -1,32 +1,54 @@
 package com.rulhouse.evgawatcher.presentation.products_screen
 
+import android.net.Uri
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.gson.Gson
 import com.rulhouse.evgawatcher.presentation.ExpandCollapseColumn
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ProductsScreen(
-    viewModel: MainScreenViewModel,
+    mainScreenViewModel: MainScreenViewModel,
+    viewModel: ProductsScreenViewModel = hiltViewModel(),
     navController: NavController
 ) {
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is ProductsScreenViewModel.UiEvent.OnCollapseColumnStateChanged -> {
+                    mainScreenViewModel.onEvent(MainScreenEvent.OnCollapseColumnStateChanged(event.index))
+                }
+            }
+        }
+    }
+
     LazyColumn(
 
     ) {
-        if (viewModel.productsSortedBySerial.value != null && viewModel.productsSortedBySerialModel.value != null) {
-            itemsIndexed(viewModel.productsSortedBySerial.value!!) { index, item ->
+        if (mainScreenViewModel.productsSortedBySerial.value != null && mainScreenViewModel.productsSortedBySerialModel.value != null) {
+            itemsIndexed(mainScreenViewModel.productsSortedBySerial.value!!) { index, item ->
                 ExpandCollapseColumn(
-                    expandCollapseModel = viewModel.productsSortedBySerialModel.value!![index],
+                    expandCollapseModel = mainScreenViewModel.productsSortedBySerialModel.value!![index],
                     products = item,
                     onCollapsedStateChanged = {
-                        viewModel.onEvent(MainScreenEvent.OnCollapseColumnStateChanged(index))
+                        mainScreenViewModel.onEvent(
+                            MainScreenEvent.OnCollapseColumnStateChanged(index)
+                        )
                     },
                     onClick = {
-                        navController.navigate(Screen.ProductScreen.route)
+//                        navController.navigate(Screen.ProductScreen.route + "?gpuProduct={$item}")
+                        val route = Screen.ProductScreen.route + "?" + Uri.encode(
+                            Gson().toJson(it))
+                        navController.navigate(Screen.ProductScreen.route + "?gpuProduct=${Uri.encode(
+                            Gson().toJson(it))}")
                     }
                 )
             }

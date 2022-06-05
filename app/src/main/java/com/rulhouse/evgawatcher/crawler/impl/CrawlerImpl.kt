@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.crawler.impl
 
-import com.rulhouse.evgawatcher.GpuProduct
+import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.WebCrawler
 import com.rulhouse.evgawatcher.crawler.repository.CrawlerRepository
 
