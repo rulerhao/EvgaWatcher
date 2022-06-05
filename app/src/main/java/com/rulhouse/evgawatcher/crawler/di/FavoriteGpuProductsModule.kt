@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.oucare.bbt_oucare.feature_node.domain.use_case.*
 import com.rulhouse.evgawatcher.crawler.feature_node.data.data_source.FavoriteGpuProductDataBase
 import com.rulhouse.evgawatcher.crawler.feature_node.domain.repository.FavoriteGpuProductRepository
+import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.ruler.feature_node.data.repository.FavoriteGpuProductRepositoryImpl
 import dagger.Module
 import dagger.Provides
