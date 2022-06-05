@@ -13,6 +13,10 @@ class FavoriteGpuProductRepositoryImpl (
         return dao.getFavoriteGpuProducts()
     }
 
+    override suspend fun getFavoriteGpuProductsByName(name: String): GpuProduct? {
+        return dao.getFavoriteGpuProductsByName(name)
+    }
+
     override suspend fun getFavoriteGpuProductById(id: Int): GpuProduct? {
         return dao.getFavoriteGpuProductById(id)
     }
