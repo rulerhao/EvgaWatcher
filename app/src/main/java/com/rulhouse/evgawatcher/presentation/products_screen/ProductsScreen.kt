@@ -43,9 +43,6 @@ fun ProductsScreen(
                         )
                     },
                     onClick = {
-//                        navController.navigate(Screen.ProductScreen.route + "?gpuProduct={$item}")
-                        val route = Screen.ProductScreen.route + "?" + Uri.encode(
-                            Gson().toJson(it))
                         navController.navigate(Screen.ProductScreen.route + "?gpuProduct=${Uri.encode(
                             Gson().toJson(it))}")
                     }
