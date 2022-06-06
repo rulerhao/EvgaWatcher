@@ -44,7 +44,10 @@ class ProductScreenViewModel @Inject constructor(
         when(event) {
             is ProductScreenEvent.ToggleFavoriteButton -> {
                 viewModelScope.launch {
-                    favoriteGpuProductUseCases.addFavoriteGpuProduct(gpuProduct.value.copy(favorite = !gpuProduct.value.favorite))
+                    if (favoriteGpuProduct.value == null)
+                        favoriteGpuProductUseCases.addFavoriteGpuProduct(gpuProduct.value.copy(favorite = !gpuProduct.value.favorite))
+                    else
+                        favoriteGpuProductUseCases.deleteFavoriteGpuProduct(favoriteGpuProduct.value!!)
                 }
             }
         }
