@@ -5,7 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.oucare.bbt_oucare.feature_node.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.feature_node.data.InvalidFavoriteGpuProductException
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
@@ -61,16 +61,15 @@ class MainScreenViewModel @Inject constructor(
                 )
             }
             _productsSortedBySerialModel.value = models
-            products.value?.forEach { product ->
-                try {
-                    favoriteGpuProductUseCases.addFavoriteGpuProduct(product)
-                } catch (e: InvalidFavoriteGpuProductException) {
-                    e.printStackTrace()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-
+//            products.value?.forEach { product ->
+//                try {
+//                    favoriteGpuProductUseCases.addFavoriteGpuProduct(product)
+//                } catch (e: InvalidFavoriteGpuProductException) {
+//                    e.printStackTrace()
+//                } catch (e: Exception) {
+//                    e.printStackTrace()
+//                }
+//            }
         }
     }
 }

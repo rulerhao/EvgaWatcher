@@ -6,6 +6,8 @@ import com.oucare.bbt_oucare.feature_node.domain.use_case.*
 import com.rulhouse.evgawatcher.crawler.feature_node.data.data_source.FavoriteGpuProductDataBase
 import com.rulhouse.evgawatcher.crawler.feature_node.domain.repository.FavoriteGpuProductRepository
 import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.GetFavoriteGpuProductByName
+import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.GetFavoriteGpuProductFlowByName
 import com.rulhouse.ruler.feature_node.data.repository.FavoriteGpuProductRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -39,6 +41,8 @@ object FavoriteGpuProductsModule {
             getFavoriteGpuProducts = GetFavoriteGpuProducts(repository),
             deleteFavoriteGpuProduct = DeleteFavoriteGpuProduct(repository),
             addFavoriteGpuProduct = AddFavoriteGpuProduct(repository),
+            getFavoriteGpuProductFlowByName = GetFavoriteGpuProductFlowByName(repository),
+            getFavoriteGpuProductByName = GetFavoriteGpuProductByName(repository),
             getFavoriteGpuProduct = GetFavoriteGpuProduct(repository)
         )
     }

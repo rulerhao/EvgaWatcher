@@ -17,6 +17,7 @@ data class GpuProduct(
     val canBeBought: Boolean?,
     val imgUrl: String?,
     val url: String?,
+    val favorite: Boolean,
     @PrimaryKey val id: Int? = null
 ) : Parcelable {
     constructor() : this(
@@ -28,7 +29,8 @@ data class GpuProduct(
         url = "",
         limitedNumber = "",
         price = 0,
-        warranty = ""
+        warranty = "",
+        favorite = false
     )
 }
 

@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 interface FavoriteGpuProductRepository {
     fun getFavoriteGpuProducts(): Flow<List<GpuProduct>>
 
-    suspend fun getFavoriteGpuProductsByName(name: String): GpuProduct?
+    fun getFavoriteGpuProductFlowByName(name: String): Flow<GpuProduct>
+
+    suspend fun getFavoriteGpuProductByName(name: String): GpuProduct?
 
     suspend fun getFavoriteGpuProductById(id: Int): GpuProduct?
 

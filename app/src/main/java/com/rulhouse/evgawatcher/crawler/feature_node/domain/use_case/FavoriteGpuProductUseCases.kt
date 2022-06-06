@@ -9,6 +9,7 @@ data class FavoriteGpuProductUseCases (
     val getFavoriteGpuProducts: GetFavoriteGpuProducts,
     val deleteFavoriteGpuProduct: DeleteFavoriteGpuProduct,
     val addFavoriteGpuProduct: AddFavoriteGpuProduct,
+    val getFavoriteGpuProductFlowByName: GetFavoriteGpuProductFlowByName,
     val getFavoriteGpuProductByName: GetFavoriteGpuProductByName,
     val getFavoriteGpuProduct: GetFavoriteGpuProduct
 )

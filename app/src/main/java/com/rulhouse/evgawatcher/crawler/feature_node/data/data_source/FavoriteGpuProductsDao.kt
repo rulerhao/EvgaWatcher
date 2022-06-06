@@ -14,7 +14,10 @@ interface FavoriteGpuProductsDao {
     fun getFavoriteGpuProductsCanBeBrought(canBeBrought: Boolean): Flow<List<GpuProduct>>
 
     @Query("SELECT * FROM GpuProduct WHERE name = :name")
-    suspend fun getFavoriteGpuProductsByName(name: String): GpuProduct?
+    suspend fun getFavoriteGpuProductByName(name: String): GpuProduct?
+
+    @Query("SELECT * FROM GpuProduct WHERE name = :name")
+    fun getFavoriteGpuProductFlowByName(name: String): Flow<GpuProduct>
 
     @Query("SELECT * FROM GpuProduct WHERE id = :id")
     suspend fun getFavoriteGpuProductById(id: Int) : GpuProduct?

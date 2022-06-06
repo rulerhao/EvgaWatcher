@@ -137,7 +137,8 @@ class WebCrawler {
                         url = url,
                         limitedNumber = limit,
                         price = price,
-                        warranty = warranty
+                        warranty = warranty,
+                        favorite = false
                     )
                 )
             }
