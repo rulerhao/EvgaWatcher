@@ -1,7 +1,13 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
 import android.util.Log
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -22,34 +28,45 @@ fun MainScreen(
 
     val navController = rememberNavController()
 
-    NavHost(
-        navController = navController,
-        startDestination = Screen.AllProductsScreenScreen.route
-    ) {
-        composable(route = Screen.AllProductsScreenScreen.route) {
-            ProductsScreen(
-                viewModel,
-                navController = navController
-            )
-        }
-        composable(route = Screen.FavoriteProductsScreen.route) {
-
-        }
-        composable(
-            route = Screen.ProductScreen.route + "?" +
-                    "gpuProduct={gpuProduct}",
-            arguments = listOf(
-                navArgument(
-                    name = "gpuProduct"
-                ) {
-
-                    type = GpuProductType()
-                    Log.d("TestGson", "type = $type")
+    Scaffold(
+        bottomBar = {
+            Text(text = "TEST")
+        },
+    ) { innerPadding ->
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colors.background
+        ) {
+            NavHost(
+                navController = navController,
+                startDestination = Screen.AllProductsScreenScreen.route
+            ) {
+                composable(route = Screen.AllProductsScreenScreen.route) {
+                    ProductsScreen(
+                        viewModel,
+                        navController = navController
+                    )
+                }
+                composable(route = Screen.FavoriteProductsScreen.route) {
 
                 }
-            )
-        ) {
-            ProductScreen(navController = navController)
+                composable(
+                    route = Screen.ProductScreen.route + "?" +
+                            "gpuProduct={gpuProduct}",
+                    arguments = listOf(
+                        navArgument(
+                            name = "gpuProduct"
+                        ) {
+
+                            type = GpuProductType()
+                            Log.d("TestGson", "type = $type")
+
+                        }
+                    )
+                ) {
+                    ProductScreen(navController = navController)
+                }
+            }
         }
     }
 }
