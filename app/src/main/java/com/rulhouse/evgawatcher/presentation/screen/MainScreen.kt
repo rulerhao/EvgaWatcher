@@ -30,7 +30,7 @@ fun MainScreen(
 
     Scaffold(
         bottomBar = {
-            Text(text = "TEST")
+            BottomNavigationBar(navController)
         },
     ) { innerPadding ->
         Surface(
