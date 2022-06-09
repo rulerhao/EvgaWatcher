@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rulhouse.evgawatcher.presentation.screen.MainScreen
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel
-import com.rulhouse.evgawatcher.ui.theme.EvgaWatcherTheme
+import com.rulhouse.evgawatcher.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            EvgaWatcherTheme {
+            AppTheme {
                 MainScreen()
             }
         }
