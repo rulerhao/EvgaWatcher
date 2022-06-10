@@ -1,6 +1,7 @@
 package com.rulhouse.evgawatcher.presentation.products_screen
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
@@ -29,6 +30,8 @@ fun ProductsScreen(
         }
     }
 
+    Log.d("FavoriteChange", "Recompose")
+    Log.d("FavoriteChange", "Products = ${mainScreenViewModel.favoriteProducts}")
     LazyColumn(
 
     ) {
