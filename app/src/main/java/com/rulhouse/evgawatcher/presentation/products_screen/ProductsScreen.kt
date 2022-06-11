@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.gson.Gson
+import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel
@@ -46,6 +47,9 @@ fun ProductsScreen(
                     onClick = {
                         navController.navigate(Screen.ProductScreen.route + "?gpuProduct=${Uri.encode(
                             Gson().toJson(it))}")
+                    },
+                    onFavoriteClick = {
+                        viewModel.onEvent(ProductsScreenEvent.ToggleFavoriteGpuProduct(it))
                     }
                 )
             }

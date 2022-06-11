@@ -19,7 +19,8 @@ fun ExpandCollapseColumn(
     expandCollapseModel: ExpandCollapseModel,
     onCollapsedStateChanged: (isChecked: Boolean) -> Unit,
     products: List<GpuProduct>,
-    onClick: (GpuProduct) -> Unit
+    onClick: (GpuProduct) -> Unit,
+    onFavoriteClick: (GpuProduct) -> Unit = {}
 ) {
     Column(
         Modifier
@@ -56,6 +57,9 @@ fun ExpandCollapseColumn(
             products = products,
             onClick = {
                 onClick(it)
+            },
+            onFavoriteClick = {
+                onFavoriteClick(it)
             }
         )
         Divider(thickness = 0.5.dp)
@@ -66,17 +70,22 @@ fun ExpandCollapseColumn(
 private fun ProductsList(
     expandCollapseModel: ExpandCollapseModel,
     products: List<GpuProduct>,
-    onClick: (GpuProduct) -> Unit
+    onClick: (GpuProduct) -> Unit,
+    onFavoriteClick: (GpuProduct) -> Unit
 ) {
     AnimatedVisibility(visible = expandCollapseModel.isOpen) {
         Column(
 
         ) {
             repeat(products.size) { index ->
+                val item = products[index]
                 GpuProductItem(
-                    item = products[index],
+                    item = item,
                     onClick = {
                         onClick(it)
+                    },
+                    onFavoriteClick = {
+                        onFavoriteClick(it)
                     }
                 )
             }

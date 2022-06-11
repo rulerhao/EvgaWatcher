@@ -17,7 +17,8 @@ import com.skydoves.landscapist.glide.GlideImage
 @Composable
 fun GpuProductItem(
     item: GpuProduct,
-    onClick: (GpuProduct) -> Unit
+    onClick: (GpuProduct) -> Unit,
+    onFavoriteClick: (GpuProduct) -> Unit
 ) {
     val isFavorite = item.favorite
     Card(
@@ -40,7 +41,7 @@ fun GpuProductItem(
                     modifier = Modifier
                         .align(Alignment.CenterEnd),
                     onClick = {
-
+                        onFavoriteClick(item)
                     }
                 ) {
                     Icon(

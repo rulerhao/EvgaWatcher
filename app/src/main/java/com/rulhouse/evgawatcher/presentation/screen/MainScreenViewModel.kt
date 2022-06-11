@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -83,7 +84,7 @@ class MainScreenViewModel @Inject constructor(
         if (favoriteProducts == null) return
         val newProducts = mutableListOf<GpuProduct>()
         products.value?.forEach { product ->
-            var newProduct = product
+            var newProduct = product.copy(favorite = false)
             favoriteProducts.forEach { favoriteProduct ->
                 if (favoriteProduct.name == product.name) {
                     newProduct = newProduct.copy(
