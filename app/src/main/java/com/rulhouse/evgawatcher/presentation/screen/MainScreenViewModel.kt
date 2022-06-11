@@ -1,16 +1,12 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.crawler.feature_node.data.InvalidFavoriteGpuProductException
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
@@ -58,37 +54,46 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             _products.value = crawlerUseCases.getGpuItems()
             _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
-            val models: MutableList<ExpandCollapseModel> = mutableListOf()
-            productsSortedBySerial.value?.forEachIndexed { index, item ->
-                models.add(
-                    ExpandCollapseModel(
-                        title = GpuProductsMethods.getNameBySerial(item[0].name)!!,
-                        isOpen = false
-                    )
-                )
-            }
-            _productsSortedBySerialModel.value = models
+            setCollapsedModels(productsSortedBySerial.value)
+            setFavoriteValue(favoriteProducts = favoriteProducts.value)
         }
         viewModelScope.launch {
             favoriteGpuProductUseCases.getFavoriteGpuProducts().collectLatest {
-                Log.d("FavoriteChange", "Favorite change")
                 _favoriteProducts.value = it
-                val newProducts = mutableListOf<GpuProduct>()
-                products.value?.forEach { product ->
-                    var newProduct = product
-                    favoriteProducts.value?.forEach { favoriteProduct ->
-                        if (favoriteProduct.name == product.name) {
-                            Log.d("FavoriteChange", "Favorite change -- ${product.serial} = ${favoriteProduct.favorite}")
-                            newProduct = newProduct.copy(
-                                favorite = favoriteProduct.favorite
-                            )
-                        }
-                    }
-                    newProducts.add(newProduct)
-                }
-                _products.value = newProducts
-                _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
+                setFavoriteValue(it)
             }
         }
+    }
+
+    private fun setCollapsedModels(productsSortedBySerial: List<List<GpuProduct>>?) {
+        if (productsSortedBySerial == null) return
+        val models: MutableList<ExpandCollapseModel> = mutableListOf()
+        productsSortedBySerial.forEach { item ->
+            models.add(
+                ExpandCollapseModel(
+                    title = GpuProductsMethods.getNameBySerial(item[0].name)!!,
+                    isOpen = false
+                )
+            )
+        }
+        _productsSortedBySerialModel.value = models
+    }
+
+    private fun setFavoriteValue(favoriteProducts: List<GpuProduct>?) {
+        if (favoriteProducts == null) return
+        val newProducts = mutableListOf<GpuProduct>()
+        products.value?.forEach { product ->
+            var newProduct = product
+            favoriteProducts.forEach { favoriteProduct ->
+                if (favoriteProduct.name == product.name) {
+                    newProduct = newProduct.copy(
+                        favorite = favoriteProduct.favorite
+                    )
+                }
+            }
+            newProducts.add(newProduct)
+        }
+        _products.value = newProducts
+        _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
     }
 }

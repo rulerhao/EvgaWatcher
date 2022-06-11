@@ -19,7 +19,7 @@ fun GpuProductItem(
     item: GpuProduct,
     onClick: (GpuProduct) -> Unit
 ) {
-    val isFavorite = false
+    val isFavorite = item.favorite
     Card(
         modifier = Modifier
             .background(MaterialTheme.colors.background)

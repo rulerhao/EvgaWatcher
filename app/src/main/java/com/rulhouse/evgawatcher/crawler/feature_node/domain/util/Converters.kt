@@ -15,7 +15,6 @@ class Converters {
 
     @TypeConverter
     fun fromList(list: List<String?>?): String {
-        Log.d("TestConverter", "DoThings = $list")
         if (list != null) {
             if (list.isNotEmpty()) {
                 val gson = Gson()

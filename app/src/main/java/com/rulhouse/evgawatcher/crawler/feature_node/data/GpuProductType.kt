@@ -16,7 +16,6 @@ class GpuProductType: NavType<GpuProduct>(
     }
 
     override fun parseValue(value: String): GpuProduct {
-        Log.d("TestGson", "value = $value")
         return Gson().fromJson(value, GpuProduct::class.java)
     }
 }

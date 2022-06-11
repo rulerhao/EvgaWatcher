@@ -30,8 +30,6 @@ fun ProductsScreen(
         }
     }
 
-    Log.d("FavoriteChange", "Recompose")
-    Log.d("FavoriteChange", "Products = ${mainScreenViewModel.favoriteProducts}")
     LazyColumn(
 
     ) {

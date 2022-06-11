@@ -57,7 +57,6 @@ fun MainScreen(
                         ) {
 
                             type = GpuProductType()
-                            Log.d("TestGson", "type = $type")
 
                         }
                     )
