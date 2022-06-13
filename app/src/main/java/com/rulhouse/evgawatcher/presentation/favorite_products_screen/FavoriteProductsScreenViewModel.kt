@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.favorite_products_screen
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -20,20 +21,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteProductsScreenViewModel @Inject constructor(
-    favoriteGpuProductUseCases: FavoriteGpuProductUseCases
-): ViewModel() {
+    private val favoriteGpuProductUseCases: FavoriteGpuProductUseCases
+) : ViewModel() {
     private val _products: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
     val products: State<List<GpuProduct>?> = _products
 
-    private val _productsSortedBySerial: MutableState<List<List<GpuProduct>>?> = mutableStateOf(
-        emptyList()
-    )
+    private val _productsSortedBySerial: MutableState<List<List<GpuProduct>>?> =
+        mutableStateOf(emptyList())
     val productsSortedBySerial: State<List<List<GpuProduct>>?> = _productsSortedBySerial
 
     private val _productsSortedBySerialModel: MutableState<List<ExpandCollapseModel>?> =
-        mutableStateOf(
-            emptyList()
-        )
+        mutableStateOf(emptyList())
     val productsSortedBySerialModel: State<List<ExpandCollapseModel>?> =
         _productsSortedBySerialModel
 
@@ -44,8 +42,9 @@ class FavoriteProductsScreenViewModel @Inject constructor(
         viewModelScope.launch {
             favoriteGpuProductUseCases.getFavoriteGpuProducts().collectLatest {
                 _products.value = it
+                val nowProductsSortedBySerial = productsSortedBySerial.value
                 _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
-                _productsSortedBySerialModel.value = getModels(productsSortedBySerial.value)
+                _productsSortedBySerialModel.value = ViewModelMethods.getModels(nowProductsSortedBySerial, productsSortedBySerial.value!!, productsSortedBySerialModel.value!!)
             }
         }
     }
@@ -58,6 +57,92 @@ class FavoriteProductsScreenViewModel @Inject constructor(
                     isOpen = !newModel[event.index].isOpen
                 )
                 _productsSortedBySerialModel.value = newModel
+            }
+            is FavoriteProductsScreenEvent.ToggleFavoriteGpuProduct -> {
+                if (products.value != null) {
+                    products.value!!.forEach { product ->
+                        if (product.name == event.gpuProduct.name) {
+                            viewModelScope.launch {
+                                favoriteGpuProductUseCases.deleteFavoriteGpuProduct(product)
+                            }
+                            return
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setAll(products: List<GpuProduct>) {
+        _products.value = products
+        _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products)
+        _productsSortedBySerialModel.value = getModels(productsSortedBySerial.value)
+    }
+
+    private fun setModels(
+        productsSortedBySerial: List<List<GpuProduct>>?,
+        nowProductsSortedBySerial: List<List<GpuProduct>>
+    ) {
+        if (productsSortedBySerial != null) {
+            if (productsSortedBySerial.isEmpty()) {
+                _productsSortedBySerialModel.value = getModels(nowProductsSortedBySerial)
+            } else {
+                if (productsSortedBySerial.size > nowProductsSortedBySerial.size) {
+                    for (i in productsSortedBySerial.indices) {
+                        if (i < productsSortedBySerial.size - 1) {
+                            val productName = GpuProductsMethods.getNameBySerial(productsSortedBySerial[i][0].name)
+                            val newProductsName =
+                                GpuProductsMethods.getNameBySerial(nowProductsSortedBySerial[i][0].name)
+                            if (productName != newProductsName) {
+                                val newProductsSortedBySerialModel =
+                                    productsSortedBySerialModel.value?.toMutableList()
+                                newProductsSortedBySerialModel?.removeAt(i)
+                                _productsSortedBySerialModel.value = newProductsSortedBySerialModel
+                                break
+                            }
+                        }
+                        else if (i == productsSortedBySerial.size - 1) {
+                            val newProductsSortedBySerialModel =
+                                productsSortedBySerialModel.value?.toMutableList()
+                            newProductsSortedBySerialModel?.removeAt(i)
+                            _productsSortedBySerialModel.value = newProductsSortedBySerialModel
+                            break
+                        }
+                    }
+                } else if (productsSortedBySerial.size < nowProductsSortedBySerial.size) {
+                    for (i in productsSortedBySerial.indices) {
+                        if (i < productsSortedBySerial.size - 1) {
+                            val productName = GpuProductsMethods.getNameBySerial(productsSortedBySerial[i][0].name)
+                            val newProductsName =
+                                GpuProductsMethods.getNameBySerial(nowProductsSortedBySerial[i][0].name)
+                            if (productName != newProductsName) {
+                                val newProductsSortedBySerialModel =
+                                    productsSortedBySerialModel.value?.toMutableList()
+                                newProductsSortedBySerialModel?.add(
+                                    i,
+                                    ExpandCollapseModel(
+                                        title = GpuProductsMethods.getNameBySerial(nowProductsSortedBySerial[i][0].name)!!,
+                                        isOpen = false
+                                    )
+                                )
+                                _productsSortedBySerialModel.value = newProductsSortedBySerialModel
+                                break
+                            }
+                        }
+                        else if (i == productsSortedBySerial.size - 1) {
+                            val newProductsSortedBySerialModel =
+                                productsSortedBySerialModel.value?.toMutableList()
+                            newProductsSortedBySerialModel?.add(
+                                productsSortedBySerial.size,
+                                ExpandCollapseModel(
+                                    title = GpuProductsMethods.getNameBySerial(nowProductsSortedBySerial[productsSortedBySerial.size][0].name)!!,
+                                    isOpen = false
+                                )
+                            )
+                            _productsSortedBySerialModel.value = newProductsSortedBySerialModel
+                        }
+                    }
+                }
             }
         }
     }
@@ -76,6 +161,6 @@ class FavoriteProductsScreenViewModel @Inject constructor(
     }
 
     sealed class UiEvent {
-        data class OnCollapseColumnStateChanged(val index: Int): UiEvent()
+        data class OnCollapseColumnStateChanged(val index: Int) : UiEvent()
     }
 }

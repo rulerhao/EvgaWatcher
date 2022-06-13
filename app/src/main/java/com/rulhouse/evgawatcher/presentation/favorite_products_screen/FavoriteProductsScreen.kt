@@ -1,6 +1,7 @@
 package com.rulhouse.evgawatcher.presentation.favorite_products_screen
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
@@ -10,6 +11,7 @@ import androidx.navigation.NavController
 import com.google.gson.Gson
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseColumn
+import com.rulhouse.evgawatcher.presentation.products_screen.ProductsScreenEvent
 import com.rulhouse.evgawatcher.presentation.products_screen.ProductsScreenViewModel
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel
@@ -48,6 +50,10 @@ fun FavoriteProductsScreen(
                             Screen.ProductScreen.route + "?gpuProduct=${
                                 Uri.encode(
                             Gson().toJson(it))}")
+                    },
+                    onFavoriteClick = {
+                        Log.d("TestDelete", "onFavoriteClick = ${it.name}")
+                        viewModel.onEvent(FavoriteProductsScreenEvent.ToggleFavoriteGpuProduct(it))
                     }
                 )
             }
