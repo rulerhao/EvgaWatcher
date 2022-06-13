@@ -17,6 +17,7 @@ import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.favorite_products_screen.FavoriteProductsScreen
 import com.rulhouse.evgawatcher.presentation.product_screen.ProductScreen
 import com.rulhouse.evgawatcher.presentation.products_screen.ProductsScreen
+import com.rulhouse.evgawatcher.presentation.reminde_screen.RemindersScreen
 
 @Composable
 fun MainScreen(
@@ -51,6 +52,9 @@ fun MainScreen(
                     }
                     composable(route = Screen.FavoriteProductsScreen.route) {
                         FavoriteProductsScreen(navController = navController)
+                    }
+                    composable(route = Screen.RemindersScreen.route) {
+                        RemindersScreen(navController = navController)
                     }
                     composable(
                         route = Screen.ProductScreen.route + "?" +

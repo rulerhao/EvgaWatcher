@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EvgaWatcher</string>
+    <string name="all_products">全部</string>
+    <string name="favorite_products">最愛</string>
+    <string name="reminders">提醒</string>
+    <string name="product">產品</string>
+    <string name="on_time">指定時間</string>
+    <string name="each_time">固定時間</string>
+</resources>

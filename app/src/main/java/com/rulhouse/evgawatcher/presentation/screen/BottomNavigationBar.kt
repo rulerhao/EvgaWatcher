@@ -41,6 +41,7 @@ private fun getDashTabs(): List<Screen> {
     return mutableListOf<Screen>().apply {
         add(Screen.FavoriteProductsScreen)
         add(Screen.AllProductsScreenScreen)
+        add(Screen.RemindersScreen)
     }
 }
 

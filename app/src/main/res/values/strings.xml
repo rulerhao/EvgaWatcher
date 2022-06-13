@@ -2,5 +2,9 @@
     <string name="app_name">EvgaWatcher</string>
     <string name="all_products">All</string>
     <string name="favorite_products">FAV</string>
+    <string name="reminders">REM</string>
     <string name="product">Pro</string>
+
+    <string name="on_time">On Time</string>
+    <string name="each_time">Each Time</string>
 </resources>
