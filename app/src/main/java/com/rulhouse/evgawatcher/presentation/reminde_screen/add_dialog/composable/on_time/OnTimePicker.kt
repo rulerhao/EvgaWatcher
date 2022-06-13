@@ -2,35 +2,57 @@ package com.rulhouse.evgawatcher.presentation.reminde_screen.add_dialog.composab
 
 import android.app.TimePickerDialog
 import android.content.Context
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import java.util.*
 
+@Preview
 @Composable
 fun OnTimePicker(
 
 ) {
+    val context = LocalContext.current
+
+    val hourState = remember{ mutableStateOf(0)}
+    val minuteState = remember{ mutableStateOf(0)}
+
     val timeSetListener =
-        TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-            val calendar = Calendar.getInstance()
-            calendar.time = Date(nowTime.value)
-            calendar.set(Calendar.HOUR_OF_DAY, hour)
-            calendar.set(Calendar.MINUTE, minute)
-            nowTime.value = calendar.timeInMillis
-            timeStringState.value = TimeMethods.getTimeStringWithoutSec(
-                context = context,
-                timeStamp = nowTime.value
-            )
-            mOnContentChanged()
+        TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            hourState.value = hour
+            minuteState.value = minute
         }
+
+    Row(
+        modifier = Modifier
+            .clickable {
+                invokeTimePicker(
+                    context = context,
+                    timeSetListener = timeSetListener
+                )
+            }
+    ) {
+        Text(
+            text = hourState.value.toString()
+        )
+        Text(
+            text = minuteState.value.toString()
+        )
+    }
 }
 
 fun invokeTimePicker(
     context: Context,
     timeSetListener: TimePickerDialog.OnTimeSetListener,
-    nowTime: Long
 ) {
     val nowCalendar = Calendar.getInstance()
-    nowCalendar.time = Date(nowTime)
+    nowCalendar.time = Date(System.currentTimeMillis())
 
     val hour: Int = nowCalendar.get(Calendar.HOUR_OF_DAY)
     val minute: Int = nowCalendar.get(Calendar.MINUTE)
