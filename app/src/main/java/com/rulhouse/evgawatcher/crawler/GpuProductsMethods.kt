@@ -3,7 +3,7 @@ package com.rulhouse.evgawatcher.crawler
 import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 
 object GpuProductsMethods {
-    private val regex = ".* \\d\\d\\d\\d( Ti)?"
+    private val regex = ".* \\d{4}( Ti)?"
 
     fun getNameBySerial(str: String): String? {
         val pattern = Regex(regex)
