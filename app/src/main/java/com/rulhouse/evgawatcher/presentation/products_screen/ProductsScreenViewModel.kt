@@ -1,14 +1,12 @@
 package com.rulhouse.evgawatcher.presentation.products_screen
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -29,7 +27,7 @@ class ProductsScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            favoriteGpuProductUseCases.getFavoriteGpuProducts().collectLatest {
+            favoriteGpuProductUseCases.getFavoriteGpuProductsFlow().collectLatest {
                 _favoriteProducts.value = it
             }
         }

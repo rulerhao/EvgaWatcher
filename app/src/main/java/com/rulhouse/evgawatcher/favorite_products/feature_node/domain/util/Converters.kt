@@ -1,6 +1,5 @@
-package com.rulhouse.evgawatcher.crawler.feature_node.domain.util
+package com.rulhouse.evgawatcher.favorite_products.feature_node.domain.util
 
-import android.util.Log
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

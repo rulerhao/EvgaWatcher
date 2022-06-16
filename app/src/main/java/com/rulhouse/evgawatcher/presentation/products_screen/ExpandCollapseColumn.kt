@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 
 @Composable
 fun ExpandCollapseColumn(

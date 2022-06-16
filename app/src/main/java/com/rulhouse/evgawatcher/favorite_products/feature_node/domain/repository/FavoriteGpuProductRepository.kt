@@ -1,10 +1,12 @@
-package com.rulhouse.evgawatcher.crawler.feature_node.domain.repository
+package com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository
 
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import kotlinx.coroutines.flow.Flow
 
 interface FavoriteGpuProductRepository {
-    fun getFavoriteGpuProducts(): Flow<List<GpuProduct>>
+    fun getFavoriteGpuProductsFlow(): Flow<List<GpuProduct>>
+
+    suspend fun getFavoriteGpuProducts(): List<GpuProduct>
 
     fun getFavoriteGpuProductFlowByName(name: String): Flow<GpuProduct>
 

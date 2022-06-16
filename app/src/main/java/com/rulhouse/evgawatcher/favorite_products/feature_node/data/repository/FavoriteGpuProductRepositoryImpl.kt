@@ -1,15 +1,19 @@
-package com.rulhouse.ruler.feature_node.data.repository
+package com.rulhouse.evgawatcher.favorite_products.feature_node.data.repository
 
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.crawler.feature_node.data.data_source.FavoriteGpuProductsDao
-import com.rulhouse.evgawatcher.crawler.feature_node.domain.repository.FavoriteGpuProductRepository
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.data_source.FavoriteGpuProductsDao
+import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository.FavoriteGpuProductRepository
 import kotlinx.coroutines.flow.Flow
 
 class FavoriteGpuProductRepositoryImpl (
     private val dao: FavoriteGpuProductsDao
 ) : FavoriteGpuProductRepository {
 
-    override fun getFavoriteGpuProducts(): Flow<List<GpuProduct>> {
+    override fun getFavoriteGpuProductsFlow(): Flow<List<GpuProduct>> {
+        return dao.getFavoriteGpuProductsFlow()
+    }
+
+    override suspend fun getFavoriteGpuProducts(): List<GpuProduct> {
         return dao.getFavoriteGpuProducts()
     }
 

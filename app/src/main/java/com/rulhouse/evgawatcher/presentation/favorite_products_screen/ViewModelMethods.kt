@@ -1,8 +1,7 @@
 package com.rulhouse.evgawatcher.presentation.favorite_products_screen
 
-import android.util.Log
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 
 object ViewModelMethods {

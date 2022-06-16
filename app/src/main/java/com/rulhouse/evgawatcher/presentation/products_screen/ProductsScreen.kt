@@ -1,7 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.products_screen
 
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
@@ -9,7 +8,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.gson.Gson
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
 import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel

@@ -1,14 +1,17 @@
-package com.rulhouse.evgawatcher.crawler.feature_node.data.data_source
+package com.rulhouse.evgawatcher.favorite_products.feature_node.data.data_source
 
 import androidx.room.*
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteGpuProductsDao {
 
     @Query("SELECT * FROM GpuProduct")
-    fun getFavoriteGpuProducts(): Flow<List<GpuProduct>>
+    fun getFavoriteGpuProductsFlow(): Flow<List<GpuProduct>>
+
+    @Query("SELECT * FROM GpuProduct")
+    fun getFavoriteGpuProducts(): List<GpuProduct>
 
     @Query("SELECT * FROM GpuProduct WHERE canBeBought = :canBeBrought")
     fun getFavoriteGpuProductsCanBeBrought(canBeBrought: Boolean): Flow<List<GpuProduct>>

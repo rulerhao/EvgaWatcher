@@ -1,7 +1,6 @@
-package com.rulhouse.evgawatcher.crawler.feature_node.data
+package com.rulhouse.evgawatcher.favorite_products.feature_node.data
 
 import android.os.Bundle
-import android.util.Log
 import androidx.navigation.NavType
 import com.google.gson.Gson
 

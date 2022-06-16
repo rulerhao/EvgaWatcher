@@ -1,6 +1,5 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
@@ -12,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.rulhouse.evgawatcher.crawler.feature_node.data.GpuProductType
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProductType
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.favorite_products_screen.FavoriteProductsScreen
 import com.rulhouse.evgawatcher.presentation.product_screen.ProductScreen

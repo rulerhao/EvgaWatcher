@@ -1,14 +1,12 @@
-package com.rulhouse.evgawatcher.crawler.di
+package com.rulhouse.evgawatcher.favorite_products.feature_node.di
 
 import android.app.Application
 import androidx.room.Room
 import com.oucare.bbt_oucare.feature_node.domain.use_case.*
-import com.rulhouse.evgawatcher.crawler.feature_node.data.data_source.FavoriteGpuProductDataBase
-import com.rulhouse.evgawatcher.crawler.feature_node.domain.repository.FavoriteGpuProductRepository
-import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.FavoriteGpuProductUseCases
-import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.GetFavoriteGpuProductByName
-import com.rulhouse.evgawatcher.crawler.feature_node.domain.use_case.GetFavoriteGpuProductFlowByName
-import com.rulhouse.ruler.feature_node.data.repository.FavoriteGpuProductRepositoryImpl
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.data_source.FavoriteGpuProductDataBase
+import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository.FavoriteGpuProductRepository
+import com.rulhouse.evgawatcher.favorite_products.feature_node.data.repository.FavoriteGpuProductRepositoryImpl
+import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,7 +36,7 @@ object FavoriteGpuProductsModule {
     @Singleton
     fun provideFavoriteGpuProductUseCases(repository: FavoriteGpuProductRepository): FavoriteGpuProductUseCases {
         return FavoriteGpuProductUseCases(
-            getFavoriteGpuProducts = GetFavoriteGpuProducts(repository),
+            getFavoriteGpuProductsFlow = GetFavoriteGpuProductsFlow(repository),
             deleteFavoriteGpuProduct = DeleteFavoriteGpuProduct(repository),
             addFavoriteGpuProduct = AddFavoriteGpuProduct(repository),
             getFavoriteGpuProductFlowByName = GetFavoriteGpuProductFlowByName(repository),
