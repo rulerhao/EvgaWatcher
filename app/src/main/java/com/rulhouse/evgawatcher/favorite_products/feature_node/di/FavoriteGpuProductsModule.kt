@@ -37,6 +37,7 @@ object FavoriteGpuProductsModule {
     fun provideFavoriteGpuProductUseCases(repository: FavoriteGpuProductRepository): FavoriteGpuProductUseCases {
         return FavoriteGpuProductUseCases(
             getFavoriteGpuProductsFlow = GetFavoriteGpuProductsFlow(repository),
+            getFavoriteGpuProducts = GetFavoriteGpuProducts(repository),
             deleteFavoriteGpuProduct = DeleteFavoriteGpuProduct(repository),
             addFavoriteGpuProduct = AddFavoriteGpuProduct(repository),
             getFavoriteGpuProductFlowByName = GetFavoriteGpuProductFlowByName(repository),
