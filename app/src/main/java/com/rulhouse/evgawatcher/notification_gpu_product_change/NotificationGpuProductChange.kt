@@ -8,10 +8,7 @@ import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -31,14 +28,31 @@ class NotificationGpuProductChange @Inject constructor(
             get() = Job()
     }
 
+    val test = MutableStateFlow<List<GpuProduct>?>(null)
+    val test2 = MutableStateFlow<List<GpuProduct>?>(null)
+    val favoriteProductsFlow = flow {
+        getFavoriteProducts()
+        emit(favoriteProducts.value)
+    }
+
+    val crawlerProductsFlow = flow {
+        getFavoriteProducts()
+        emit(favoriteProducts.value)
+    }
+
     init {
+        test.combine(test2) { favoriteProducts, crawlerProducts ->
+
+        }.launchIn(myCoroutineScope)
         myCoroutineScope.launch {
-            Log.d("TestJob", "play")
+            Flow
+            favoriteProductsFlow.merge
             getFavoriteProducts()
-            Log.d("TestJob", "play 1")
+            Log.d("TestJob", "FavoriteProducts = ${favoriteProducts.value}")
+        }
+        myCoroutineScope.launch {
             getCrawlerGpuProducts()
-            Log.d("TestJob", "favoriteProducts = $favoriteProducts")
-            Log.d("TestJob", "crawlerGpuProducts = $crawlerGpuProducts")
+            Log.d("TestJob", "crawlerGpuProducts = ${crawlerGpuProducts.value}")
         }
         Log.d("TestJob", "play outSide")
     }
