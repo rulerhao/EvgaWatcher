@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.notification_gpu_product_change
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +23,7 @@ class NotificationGpuProductChange @Inject constructor(
     private val _crawlerGpuProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
     val crawlerGpuProducts: State<List<GpuProduct>?> = _crawlerGpuProducts
 
-    private val differenceGpuProducts: MutableList<ProductsDifference?> = emptyList<ProductsDifference>().toMutableList()
+    private lateinit var  differenceGpuProducts: List<ProductsDifference?>
 
     val myCoroutineScope = object: CoroutineScope {
         override val coroutineContext: CoroutineContext
@@ -39,9 +40,9 @@ class NotificationGpuProductChange @Inject constructor(
         emit(crawlerGpuProducts.value)
     }
 
-    init {
+    fun getDifferenceProducts(): List<ProductsDifference> {
         getProducts()
-        getDifference()
+        return getDifference()
     }
 
     private fun getProducts() {
@@ -55,21 +56,23 @@ class NotificationGpuProductChange @Inject constructor(
         }
     }
 
-    private fun getDifference() {
+    private fun getDifference(): List<ProductsDifference> {
+        val tempDifferenceGpuProducts = emptyList<ProductsDifference>().toMutableList()
         favoriteProducts.value?.forEachIndexed { fIdx, favoriteProduct ->
             crawlerGpuProducts.value?.forEachIndexed { CIdx, crawlerProduct ->
                 if (favoriteProduct.name == crawlerProduct.name) {
                     val buyableDifference = buyableDifference(favoriteProduct, crawlerProduct)
                     if (buyableDifference != null) {
-                        differenceGpuProducts.add(buyableDifference)
+                        tempDifferenceGpuProducts.add(buyableDifference)
                     }
                     val priceDifference = priceDifference(favoriteProduct, crawlerProduct)
                     if (priceDifference != null) {
-                        differenceGpuProducts.add(priceDifference)
+                        tempDifferenceGpuProducts.add(priceDifference)
                     }
                 }
             }
         }
+        return tempDifferenceGpuProducts
     }
 
     private fun buyableDifference(favoriteProduct: GpuProduct, crawlerProduct: GpuProduct): ProductsDifference? {
