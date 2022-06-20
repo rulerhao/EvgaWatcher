@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.crawler
 
+import android.util.Log
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.StringMethods
 import kotlinx.coroutines.Dispatchers
@@ -100,6 +101,9 @@ class WebCrawler {
                     e.printStackTrace()
                 }
             }
+
+
+            Log.d("TestCrawler", "Items = $ans")
             return ans
         }
 

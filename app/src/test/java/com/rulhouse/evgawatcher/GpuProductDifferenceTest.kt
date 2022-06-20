@@ -9,6 +9,7 @@ import androidx.work.impl.utils.SynchronousExecutor
 import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorkManagerFactory
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorker
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -23,27 +24,32 @@ import javax.inject.Inject
 class GpuProductDifferenceTest {
 
     @get:Rule
-    var hiltRule = HiltAndroidRule(this)
-
-    private lateinit var context: Context
+    var hiltRule = Hilt(this)
 
     @Inject
-    lateinit var crawlerUseCases: CrawlerUseCases
+    lateinit var getDifferentProductsUseCase: GetDifferentProductsUseCase
 
     @Before
     fun setup() {
 
         hiltRule.inject()
+
     }
 
     @Test
-    fun testSleepWorker() {
-        val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
-            .setWorkerFactory(CrawlerWorkManagerFactory(crawlerUseCases))
-            .build()
+    private fun test1() {
         runBlocking {
-            val result = worker.doWork()
-            assertThat(result, Is.`is`(ListenableWorker.Result.success()))
+            val differenceProducts = getDifferentProductsUseCase.getDifferenceProducts()
+            assertThat(differenceProducts, Is.`is`(emptyList()))
         }
     }
+
+    @Test
+    private fun testPriceGoesUp() {
+        runBlocking {
+            val differenceProducts = getDifferentProductsUseCase.getDifferenceProducts()
+            assertThat(differenceProducts, Is.`is`(emptyList()))
+        }
+    }
+
 }
