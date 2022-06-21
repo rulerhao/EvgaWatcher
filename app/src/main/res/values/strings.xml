@@ -7,4 +7,7 @@
 
     <string name="on_time">On Time</string>
     <string name="each_time">Each Time</string>
+
+    <string name="channel_name">Channel name</string>
+    <string name="channel_description">Channel description</string>
 </resources>

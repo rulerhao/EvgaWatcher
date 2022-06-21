@@ -7,4 +7,6 @@
     <string name="product">產品</string>
     <string name="on_time">指定時間</string>
     <string name="each_time">固定時間</string>
+    <string name="channel_name">通道名稱</string>
+    <string name="channel_description">通道描述</string>
 </resources>
