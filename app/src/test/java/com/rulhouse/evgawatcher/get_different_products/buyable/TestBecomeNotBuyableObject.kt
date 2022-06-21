@@ -29,7 +29,7 @@ class TestBecomeNotBuyableObject {
             statement = listOf(),
             url = "https://tw.evga.com/Products/Product.aspx?pn=24G-P5-4988-KR",
             limitedNumber = "",
-            price = 10000,
+            price = 20000,
             warranty = "全球保固： 3 年",
             favorite = false
         )
@@ -45,7 +45,7 @@ class TestBecomeNotBuyableObject {
                 statement = listOf(),
                 url = "https://tw.evga.com/Products/Product.aspx?pn=24G-P5-4988-KR",
                 limitedNumber = "",
-                price = 10000,
+                price = 20000,
                 warranty = "全球保固： 3 年",
                 favorite = false
             ),
