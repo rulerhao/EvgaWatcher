@@ -30,7 +30,7 @@ class NotificationGpuProductChange @Inject constructor(
 
     fun getDifferenceProducts(): List<ProductsDifference> {
         getProducts()
-        return getDifference()
+        return GetGpuProductsDifference().getDifference(favoriteGpuProducts, crawlerGpuProducts)
     }
 
     private fun getProducts() {
@@ -44,45 +44,6 @@ class NotificationGpuProductChange @Inject constructor(
         }
     }
 
-    private fun getDifference(): List<ProductsDifference> {
-        val tempDifferenceGpuProducts = emptyList<ProductsDifference>().toMutableList()
-        favoriteGpuProducts?.forEach { favoriteProduct ->
-            crawlerGpuProducts?.forEach { crawlerProduct ->
-                if (favoriteProduct.name == crawlerProduct.name) {
-                    val buyableDifference = buyableDifference(favoriteProduct, crawlerProduct)
-                    if (buyableDifference != null) {
-                        tempDifferenceGpuProducts.add(buyableDifference)
-                    }
-                    val priceDifference = priceDifference(favoriteProduct, crawlerProduct)
-                    if (priceDifference != null) {
-                        tempDifferenceGpuProducts.add(priceDifference)
-                    }
-                }
-            }
-        }
-        return tempDifferenceGpuProducts
-    }
-
-    private fun buyableDifference(favoriteProduct: GpuProduct, crawlerProduct: GpuProduct): ProductsDifference? {
-        if (favoriteProduct.canBeBought != crawlerProduct.canBeBought) {
-            if (crawlerProduct.canBeBought == true)
-                return ProductsDifference(gpuProduct = crawlerProduct, reason = DifferenceReason.GetBuyable)
-            else if (crawlerProduct.canBeBought == false)
-                return ProductsDifference(gpuProduct = crawlerProduct, reason = DifferenceReason.GetNotBuyable)
-        }
-        return null
-    }
-    
-    private fun priceDifference(favoriteProduct: GpuProduct, crawlerProduct: GpuProduct): ProductsDifference? {
-        if (favoriteProduct.price != crawlerProduct.price) {
-            if (favoriteProduct.price!! > crawlerProduct.price!!)
-                return ProductsDifference(gpuProduct = crawlerProduct, reason = DifferenceReason.PriceGetLower)
-            else 
-                return ProductsDifference(gpuProduct = crawlerProduct, reason = DifferenceReason.PriceGetHigher)
-        }
-        return null
-    }
-    
     private suspend fun getFavoriteProducts() = coroutineScope {
         favoriteGpuProducts = favoriteGpuProductUseCases.getFavoriteGpuProducts()
     }
