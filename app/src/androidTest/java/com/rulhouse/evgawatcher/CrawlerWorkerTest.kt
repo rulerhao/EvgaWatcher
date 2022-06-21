@@ -11,6 +11,7 @@ import androidx.work.impl.utils.SynchronousExecutor
 import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.notification.DifferentProductsNotification
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorkManagerFactory
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorker
 import dagger.hilt.android.testing.HiltAndroidRule
