@@ -18,7 +18,8 @@ class CrawlerWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
 
-        Log.d("TestWorker", "GpuItems = ${crawlerUseCases.getGpuItems()}")
+//        this.applicationContext.
+//        Log.d("TestWorker", "GpuItems = ${crawlerUseCases.getGpuItems()}")
 
         return Result.success()
     }
