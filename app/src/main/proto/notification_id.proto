@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.rulhouse.evgawatcher.datastore";
+option java_multiple_files = true;
+
+message NotificationIDProto {
+  // filter for showing / hiding completed tasks
+  int32 notification_id = 1;
+}

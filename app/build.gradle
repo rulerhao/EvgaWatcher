@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
+    id "com.google.protobuf" version "0.8.17"
 }
 
 android {
@@ -122,4 +123,42 @@ dependencies {
     testImplementation ('androidx.test:runner:1.4.0')
     testImplementation ('androidx.test:rules:1.4.0')
     kaptTest("com.google.dagger:hilt-android-compiler:2.42")
+
+    // Data Store -- Proto Buf
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "com.google.protobuf:protobuf-javalite:3.18.0"
+    implementation "androidx.datastore:datastore:1.0.0"
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+}
+
+//指定原始.proto文件的位置
+android {
+    sourceSets {
+        main {
+            java {
+                srcDirs 'src/main/java'
+            }
+            proto {
+                srcDirs 'src/main/proto'
+            }
+        }
+    }
 }
