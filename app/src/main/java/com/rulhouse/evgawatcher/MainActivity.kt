@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.core.content.ContextCompat
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.notification.DifferentProductsNotification
 import com.rulhouse.evgawatcher.notification_gpu_product_change.impl.NotificationGpuProductChange
 import com.rulhouse.evgawatcher.presentation.screen.MainScreen
 import com.rulhouse.evgawatcher.ui.theme.AppTheme
@@ -22,7 +26,14 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AppTheme {
-                MainScreen()
+                Button(
+                    onClick = {
+                        DifferentProductsNotification(this).doNotify(this)
+                    }
+                ) {
+
+                }
+//                MainScreen()
             }
         }
     }
