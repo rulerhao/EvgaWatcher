@@ -1,14 +1,18 @@
 package com.rulhouse.evgawatcher.notification
 
+import android.app.Notification.EXTRA_NOTIFICATION_ID
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.rulhouse.evgawatcher.R
+import com.rulhouse.evgawatcher.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver
 
 class DifferentProductsNotification(context: Context) {
 
@@ -21,6 +25,14 @@ class DifferentProductsNotification(context: Context) {
 
     val SUMMARY_ID = 0
 
+    val snoozeIntent = Intent(context, RenewFavoriteProductsBroadcastReceiver::class.java).apply {
+        action = ACTION_SNOOZE
+        putExtra(EXTRA_NOTIFICATION_ID, 0)
+    }
+
+    val snoozePendingIntent: PendingIntent =
+        PendingIntent.getBroadcast(context, 0, snoozeIntent, 0)
+
     var builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setContentTitle("有東西改變了")
@@ -31,6 +43,8 @@ class DifferentProductsNotification(context: Context) {
         .setSmallIcon(R.drawable.ic_launcher_foreground)
         .setContentTitle("有東西改變了2")
         .setContentText("改變快樂2")
+        .addAction(R.drawable.ic_launcher_foreground, "SNOOZE",
+            snoozePendingIntent)
         .setGroup(GROUP_KEY_WORK_EMAIL)
 
     val summaryNotification = NotificationCompat.Builder(context, CHANNEL_ID)
