@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class GetNotificationIdDataStoreFlow (
     private val repository: NotificationIdDataStoreRepository
 ) {
-    suspend operator fun invoke(): Flow<NotificationIDProto> {
+    operator fun invoke(): Flow<NotificationIDProto> {
         return repository.getNotificationIdDataStoreFlow()
     }
 }
