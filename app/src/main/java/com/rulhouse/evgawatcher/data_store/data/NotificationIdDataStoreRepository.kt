@@ -4,7 +4,7 @@ import com.rulhouse.evgawatcher.datastore.NotificationIDProto
 import kotlinx.coroutines.flow.Flow
 
 interface NotificationIdDataStoreRepository {
-    suspend fun getNotificationIdDataStoreFlow(): Flow<NotificationIDProto>
+    fun getNotificationIdDataStoreFlow(): Flow<NotificationIDProto>
 
     suspend fun updateNotificationId(id: Int)
 
