@@ -48,11 +48,11 @@ class DifferentProductsNotification {
         }
     }
 
-    fun doNotify(context: Context, id: Int, productsDifference: ProductsDifference) {
+    fun doNotifyProductsDifference(context: Context, id: Int, productsDifference: ProductsDifference) {
         createNotificationChannel(context)
 
         val pendingIntent = getPendingIntent(context, productsDifference)
-        val notification = getNotification(context = context, pendingIntent = pendingIntent)
+        val notification = getNotification(context = context, pendingIntent = pendingIntent, productsDifference = productsDifference)
         val summaryNotification = getSummaryNotification(context = context)
 
         notifyStart(context, id, notification, summaryNotification)
@@ -66,11 +66,11 @@ class DifferentProductsNotification {
         return PendingIntent.getBroadcast(context, 0, snoozeIntent, PendingIntent.FLAG_IMMUTABLE)
     }
 
-    private fun getNotification(context: Context, pendingIntent: PendingIntent): Notification {
+    private fun getNotification(context: Context, pendingIntent: PendingIntent, productsDifference: ProductsDifference): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("有東西改變了2")
-            .setContentText("改變快樂2")
+            .setContentTitle(productsDifference.reason.name)
+            .setContentText(productsDifference.gpuProduct.name)
             .addAction(R.drawable.ic_launcher_foreground, "SNOOZE",
                 pendingIntent)
             .setGroup(GROUP_KEY)
