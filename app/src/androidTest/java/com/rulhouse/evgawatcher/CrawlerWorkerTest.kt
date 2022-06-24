@@ -58,7 +58,7 @@ class CrawlerWorkerTest {
     }
 
     @Test
-    fun testSleepWorker() {
+    fun testCrawlerWorker() {
         val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
             .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
             .build()
