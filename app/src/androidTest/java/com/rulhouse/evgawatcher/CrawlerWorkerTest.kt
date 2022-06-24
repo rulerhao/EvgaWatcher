@@ -11,6 +11,8 @@ import androidx.work.impl.utils.SynchronousExecutor
 import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.notification.use_case.NotificationUseCase
+import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorkManagerFactory
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorker
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -35,6 +37,11 @@ class CrawlerWorkerTest {
     @Inject
     lateinit var crawlerUseCases: CrawlerUseCases
 
+    @Inject
+    lateinit var getDifferentProductsUseCase: GetDifferentProductsUseCase
+    @Inject
+    lateinit var notificationUseCase: NotificationUseCase
+
     @Before
     fun setup() {
         hiltRule.inject()
@@ -53,7 +60,7 @@ class CrawlerWorkerTest {
     @Test
     fun testSleepWorker() {
         val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
-            .setWorkerFactory(CrawlerWorkManagerFactory(crawlerUseCases))
+            .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
             .build()
         runBlocking {
             val result = worker.doWork()

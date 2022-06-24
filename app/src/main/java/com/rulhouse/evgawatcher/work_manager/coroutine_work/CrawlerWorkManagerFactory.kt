@@ -5,9 +5,12 @@ import androidx.work.ListenableWorker
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.notification.use_case.NotificationUseCase
+import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 
 class CrawlerWorkManagerFactory(
-    private val crawlerUseCases: CrawlerUseCases
+    private val getDifferentProductsUseCase: GetDifferentProductsUseCase,
+    private val notificationUseCase: NotificationUseCase
 ) : WorkerFactory() {
 
     override fun createWorker(
@@ -15,6 +18,6 @@ class CrawlerWorkManagerFactory(
         workerClassName: String,
         workerParameters: WorkerParameters
     ): ListenableWorker {
-        return CrawlerWorker(appContext, workerParameters, crawlerUseCases)
+        return CrawlerWorker(appContext, workerParameters, getDifferentProductsUseCase, notificationUseCase)
     }
 }

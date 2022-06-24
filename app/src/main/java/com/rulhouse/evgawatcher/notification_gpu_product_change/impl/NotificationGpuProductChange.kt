@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class NotificationGpuProductChange @Inject constructor(
+class NotificationGpuProductChange (
     private val crawlerUseCases: CrawlerUseCases,
     private val favoriteGpuProductUseCases: FavoriteGpuProductUseCases
 ) {

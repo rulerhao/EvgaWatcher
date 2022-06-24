@@ -1,5 +1,7 @@
 package com.rulhouse.evgawatcher.notification_gpu_product_change.di
 
+import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.notification_gpu_product_change.impl.GetDifferentProductsImpl
 import com.rulhouse.evgawatcher.notification_gpu_product_change.repository.GetDifferentProductsRepository
 import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferenceProducts
@@ -16,8 +18,8 @@ object GetDifferentProductsModule {
 
     @Provides
     @Singleton
-    fun provideGetDifferenceProductsRepository(): GetDifferentProductsRepository {
-        return GetDifferentProductsImpl()
+    fun provideGetDifferenceProductsRepository(crawlerUseCases: CrawlerUseCases, favoriteGpuProductUseCases: FavoriteGpuProductUseCases): GetDifferentProductsRepository {
+        return GetDifferentProductsImpl(crawlerUseCases, favoriteGpuProductUseCases)
     }
 
     @Provides
