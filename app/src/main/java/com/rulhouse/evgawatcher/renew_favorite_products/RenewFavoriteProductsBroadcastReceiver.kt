@@ -3,6 +3,8 @@ package com.rulhouse.evgawatcher.renew_favorite_products
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
+import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
 
 class RenewFavoriteProductsBroadcastReceiver: BroadcastReceiver() {
     companion object {
@@ -12,7 +14,7 @@ class RenewFavoriteProductsBroadcastReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent != null) {
             if (intent.extras != null) {
-                val products = intent.extras!!.get(DIFFERENT_FAVORITE_PRODUCTS)
+                val productsDifference = intent.getParcelableExtra<ProductsDifference>(DIFFERENT_FAVORITE_PRODUCTS)
             }
         }
     }

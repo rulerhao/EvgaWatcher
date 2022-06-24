@@ -8,6 +8,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.rulhouse.evgawatcher.R
@@ -60,10 +61,10 @@ class DifferentProductsNotification {
 
     private fun getPendingIntent(context: Context, productsDifference: ProductsDifference): PendingIntent {
         val snoozeIntent = Intent(context, RenewFavoriteProductsBroadcastReceiver::class.java).apply {
-            putExtra(EXTRA_NOTIFICATION_ID, productsDifference)
+            putExtra(RenewFavoriteProductsBroadcastReceiver.DIFFERENT_FAVORITE_PRODUCTS, productsDifference)
         }
 
-        return PendingIntent.getBroadcast(context, 0, snoozeIntent, PendingIntent.FLAG_IMMUTABLE)
+        return PendingIntent.getBroadcast(context, 0, snoozeIntent, Intent.FILL_IN_DATA or PendingIntent.FLAG_IMMUTABLE)
     }
 
     private fun getNotification(context: Context, pendingIntent: PendingIntent, productsDifference: ProductsDifference): Notification {
