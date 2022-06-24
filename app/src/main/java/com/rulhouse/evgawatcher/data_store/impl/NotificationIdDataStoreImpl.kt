@@ -1,5 +1,6 @@
 package com.rulhouse.protobufdatastore.impl
 
+import android.util.Log
 import androidx.datastore.core.DataStore
 import com.rulhouse.evgawatcher.data_store.data.NotificationIdDataStoreRepository
 import com.rulhouse.evgawatcher.datastore.NotificationIDProto

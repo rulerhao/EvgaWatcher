@@ -12,7 +12,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.notification.NotificationID
+import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver
+import java.io.Serializable
 
 class DifferentProductsNotification {
 
@@ -39,26 +41,26 @@ class DifferentProductsNotification {
         }
     }
 
-    private fun notifyStart(context: Context, notification: Notification, sumNotification: Notification) {
+    private fun notifyStart(context: Context, notifyId: Int, notification: Notification, sumNotification: Notification) {
         with(NotificationManagerCompat.from(context)) {
-            notify(NotificationID.getID(), notification)
+            notify(notifyId, notification)
             notify(SUMMARY_ID, sumNotification)
         }
     }
 
-    fun doNotify(context: Context) {
+    fun doNotify(context: Context, id: Int, productsDifference: ProductsDifference) {
         createNotificationChannel(context)
 
-        val pendingIntent = getPendingIntent(context)
+        val pendingIntent = getPendingIntent(context, productsDifference)
         val notification = getNotification(context = context, pendingIntent = pendingIntent)
         val summaryNotification = getSummaryNotification(context = context)
 
-        notifyStart(context, notification, summaryNotification)
+        notifyStart(context, id, notification, summaryNotification)
     }
 
-    private fun getPendingIntent(context: Context): PendingIntent {
+    private fun getPendingIntent(context: Context, productsDifference: ProductsDifference): PendingIntent {
         val snoozeIntent = Intent(context, RenewFavoriteProductsBroadcastReceiver::class.java).apply {
-            putExtra(EXTRA_NOTIFICATION_ID, 0)
+            putExtra(EXTRA_NOTIFICATION_ID, productsDifference)
         }
 
         return PendingIntent.getBroadcast(context, 0, snoozeIntent, PendingIntent.FLAG_IMMUTABLE)
