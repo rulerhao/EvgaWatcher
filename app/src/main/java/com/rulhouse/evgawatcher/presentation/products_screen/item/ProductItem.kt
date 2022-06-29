@@ -37,7 +37,7 @@ fun ProductItem(
 
     Card(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.surface),
+            .background(color = MaterialTheme.colorScheme.primary),
         shape = MaterialTheme.shapes.extraLarge
     ) {
         GpuImage(
