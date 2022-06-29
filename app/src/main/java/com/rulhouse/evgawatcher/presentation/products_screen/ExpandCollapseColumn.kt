@@ -84,6 +84,7 @@ private fun ProductsList(
         ) {
             repeat(products.size) { index ->
                 val item = products[index]
+                Spacer(modifier = Modifier.size(8.dp))
                 ProductItem(
                     gpuProduct = item,
                     onClick = {
@@ -98,6 +99,7 @@ private fun ProductsList(
                         }
                     }
                 )
+                Spacer(modifier = Modifier.size(8.dp))
             }
         }
     }
