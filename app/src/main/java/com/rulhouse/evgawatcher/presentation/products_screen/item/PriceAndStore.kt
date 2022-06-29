@@ -47,7 +47,7 @@ private fun Store(buyable: Boolean?) {
         } else {
             MaterialTheme.colorScheme.onPrimaryContainer
         }
-        Button(
+        FloatingActionButton(
             onClick = {
 
             }
