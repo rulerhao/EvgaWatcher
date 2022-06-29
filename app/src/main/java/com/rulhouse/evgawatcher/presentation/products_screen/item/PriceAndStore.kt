@@ -7,6 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.rulhouse.evgawatcher.methods.StringMethods
 import java.text.NumberFormat
 import java.util.*
 
@@ -30,7 +31,7 @@ private fun Price(price: Int?) {
     if (price != null) {
         if (price != 0) {
             Text(
-                text = getNTFormat(price),
+                text = StringMethods.getNTFormat(price),
                 color = MaterialTheme.colorScheme.secondary,
                 style = MaterialTheme.typography.titleLarge
             )
@@ -52,13 +53,5 @@ private fun Store(buyable: Boolean?) {
                 contentDescription = null
             )
         }
-    }
-}
-
-private fun getNTFormat(price: Int): String {
-    NumberFormat.getCurrencyInstance().apply {
-        maximumFractionDigits = 0
-        currency = Currency.getInstance("NTD")
-        return format(price)
     }
 }
