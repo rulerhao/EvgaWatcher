@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,28 +30,21 @@ fun ProductItem(
 ) {
     Card(
         modifier = Modifier
-//            .fillMaxWidth(0.5f)
-//            .fillMaxHeight(0.5f)
-            .background(color = MaterialTheme.colorScheme.surfaceVariant),
+            .background(color = MaterialTheme.colorScheme.surface)
+            .fillMaxHeight(0.5f),
         shape = MaterialTheme.shapes.extraLarge
     ) {
         Image(imgUrl = gpuProduct.imgUrl)
-        Title(text = gpuProduct.name)
-        PriceAndStore(
-            modifier = Modifier.align(Alignment.End),
-            price = gpuProduct.price,
-            buyable = gpuProduct.canBeBought
-        )
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+        ) {
+            Title(text = gpuProduct.name)
+            PriceAndStore(
+                modifier = Modifier.align(Alignment.End),
+                price = gpuProduct.price,
+                buyable = gpuProduct.canBeBought
+            )
+        }
     }
-}
-
-@Composable
-private fun Title(
-    text: String
-) {
-    Text(
-        text = text,
-        color = MaterialTheme.colorScheme.primary,
-        style = MaterialTheme.typography.bodyMedium
-    )
 }
