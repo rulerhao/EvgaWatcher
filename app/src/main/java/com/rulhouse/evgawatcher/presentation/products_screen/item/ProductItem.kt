@@ -1,6 +1,7 @@
 package com.rulhouse.evgawatcher.presentation.products_screen.item
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,7 +40,10 @@ fun ProductItem(
     val imageHeight = remember { mutableStateOf(IntSize(0, 0)) }
 
     Card(
-        modifier = Modifier,
+        modifier = Modifier
+            .clickable {
+                onClick(gpuProduct)
+            },
         shape = MaterialTheme.shapes.extraLarge
     ) {
         GpuImage(
