@@ -7,8 +7,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 
@@ -28,16 +32,24 @@ fun ProductItem(
         favorite = false
     )
 ) {
+
+    val imageHeight = remember { mutableStateOf(IntSize(0, 0)) }
+
     Card(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.surface)
-            .fillMaxHeight(0.5f),
+            .background(color = MaterialTheme.colorScheme.surface),
         shape = MaterialTheme.shapes.extraLarge
     ) {
-        Image(imgUrl = gpuProduct.imgUrl)
+        GpuImage(
+            imgUrl = gpuProduct.imgUrl,
+            size = imageHeight.value
+        )
         Column(
             modifier = Modifier
                 .padding(8.dp)
+                .onSizeChanged {
+                    imageHeight.value = it
+                }
         ) {
             Title(text = gpuProduct.name)
             PriceAndStore(
