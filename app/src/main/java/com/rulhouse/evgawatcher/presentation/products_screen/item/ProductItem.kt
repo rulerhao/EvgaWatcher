@@ -39,8 +39,7 @@ fun ProductItem(
     val imageHeight = remember { mutableStateOf(IntSize(0, 0)) }
 
     Card(
-        modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.primary),
+        modifier = Modifier,
         shape = MaterialTheme.shapes.extraLarge
     ) {
         GpuImage(
