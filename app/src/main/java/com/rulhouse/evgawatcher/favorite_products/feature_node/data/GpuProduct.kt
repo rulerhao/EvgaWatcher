@@ -4,7 +4,6 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
 @Entity
 @Parcelize
@@ -17,7 +16,7 @@ data class GpuProduct(
     val price: Int?,
     val canBeBought: Boolean?,
     val imgUrl: String?,
-    val url: String?,
+    val uri: String?,
     val favorite: Boolean,
     @PrimaryKey val id: Int? = null
 ) : Parcelable {
@@ -27,7 +26,7 @@ data class GpuProduct(
         serial = "",
         canBeBought = false,
         statement = listOf(),
-        url = "",
+        uri = "",
         limitedNumber = "",
         price = 0,
         warranty = "",

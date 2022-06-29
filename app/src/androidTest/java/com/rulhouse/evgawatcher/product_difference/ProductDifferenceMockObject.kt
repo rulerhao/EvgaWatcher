@@ -13,7 +13,7 @@ object ProductDifferenceMockObject {
                 serial = "24G-P5-4988-KR",
                 canBeBought = true,
                 statement = listOf(),
-                url = "https://tw.evga.com/Products/Product.aspx?pn=24G-P5-4988-KR",
+                uri = "https://tw.evga.com/Products/Product.aspx?pn=24G-P5-4988-KR",
                 limitedNumber = "",
                 price = 10000,
                 warranty = "全球保固： 3 年",
