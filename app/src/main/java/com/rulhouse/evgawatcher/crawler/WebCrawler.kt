@@ -138,7 +138,7 @@ class WebCrawler {
                         serial = serial,
                         canBeBought = canBuy,
                         statement = details,
-                        url = url,
+                        uri = url,
                         limitedNumber = limit,
                         price = price,
                         warranty = warranty,

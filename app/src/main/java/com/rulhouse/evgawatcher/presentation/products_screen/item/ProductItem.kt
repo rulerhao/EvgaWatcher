@@ -2,7 +2,6 @@ package com.rulhouse.evgawatcher.presentation.products_screen.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -11,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -25,12 +25,15 @@ fun ProductItem(
         serial = "24G-P5-4988-KR",
         canBeBought = false,
         statement = listOf(),
-        url = "https://tw.evga.com/Products/Product.aspx?pn=24G-P5-4988-KR",
+        uri = "https://tw.evga.com/Products/Product.aspx?pn=24G-P5-4988-KR",
         limitedNumber = "",
         price = 20000,
         warranty = "全球保固： 3 年",
         favorite = false
-    )
+    ),
+    onClick: (GpuProduct) -> Unit,
+    onFavoriteClick: (GpuProduct) -> Unit,
+    onStoreClick: (GpuProduct) -> Unit
 ) {
 
     val imageHeight = remember { mutableStateOf(IntSize(0, 0)) }
@@ -52,11 +55,23 @@ fun ProductItem(
                 }
         ) {
             Title(text = gpuProduct.name)
-            PriceAndStore(
-                modifier = Modifier.align(Alignment.End),
-                price = gpuProduct.price,
-                buyable = gpuProduct.canBeBought
-            )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.End),
+                horizontalAlignment = Alignment.End,
+            ) {
+                Price(price = gpuProduct.price)
+                StoreAndFavorite(
+                    favorite = gpuProduct.favorite,
+                    onFavoriteClick = {
+                        onFavoriteClick(gpuProduct)
+                    },
+                    buyable = gpuProduct.canBeBought,
+                    onStoreClick = {
+                        onStoreClick(gpuProduct)
+                    }
+                )
+            }
         }
     }
 }

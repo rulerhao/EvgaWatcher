@@ -11,8 +11,10 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.presentation.products_screen.item.ProductItem
 
 @Composable
 fun ExpandCollapseColumn(
@@ -73,19 +75,27 @@ private fun ProductsList(
     onClick: (GpuProduct) -> Unit,
     onFavoriteClick: (GpuProduct) -> Unit
 ) {
+
+    val uriHandler = LocalUriHandler.current
+
     AnimatedVisibility(visible = expandCollapseModel.isOpen) {
         Column(
 
         ) {
             repeat(products.size) { index ->
                 val item = products[index]
-                GpuProductItem(
-                    item = item,
+                ProductItem(
+                    gpuProduct = item,
                     onClick = {
                         onClick(it)
                     },
                     onFavoriteClick = {
                         onFavoriteClick(it)
+                    },
+                    onStoreClick = {
+                        it.uri?.let { uri ->
+                            uriHandler.openUri(uri)
+                        }
                     }
                 )
             }
