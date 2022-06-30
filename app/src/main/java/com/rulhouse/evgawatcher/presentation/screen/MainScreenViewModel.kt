@@ -9,6 +9,7 @@ import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.F
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -17,9 +18,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    crawlerUseCases: CrawlerUseCases,
-    favoriteGpuProductUseCases: FavoriteGpuProductUseCases
+    private val crawlerUseCases: CrawlerUseCases,
+    private val favoriteGpuProductUseCases: FavoriteGpuProductUseCases,
+    private val userPreferencesDataStoreUseCases: UserPreferencesDataStoreUseCases,
 ) : ViewModel() {
+
+    private val _showingOutOfStock: MutableState<Boolean> = mutableStateOf(false)
+    val showingOutOfStock: State<Boolean> = _showingOutOfStock
+
+    private val _priceAscending: MutableState<Boolean> = mutableStateOf(false)
+    val priceAscending: State<Boolean> = _priceAscending
+
     private val _products: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
     val products: State<List<GpuProduct>?> = _products
 
@@ -47,6 +56,16 @@ class MainScreenViewModel @Inject constructor(
                 )
                 _productsSortedBySerialModel.value = newModel
             }
+            is MainScreenEvent.OnShowingOutOfStockChanged -> {
+                viewModelScope.launch {
+                    userPreferencesDataStoreUseCases.updateShowingOutOfStock(!showingOutOfStock.value)
+                }
+            }
+            is MainScreenEvent.OnPriceAscendingChanged -> {
+                viewModelScope.launch {
+                    userPreferencesDataStoreUseCases.updatePriceAscending(!priceAscending.value)
+                }
+            }
         }
     }
 
@@ -61,6 +80,12 @@ class MainScreenViewModel @Inject constructor(
             favoriteGpuProductUseCases.getFavoriteGpuProductsFlow().collectLatest {
                 _favoriteProducts.value = it
                 setFavoriteValue(it)
+            }
+        }
+        viewModelScope.launch {
+            userPreferencesDataStoreUseCases.getUserPreferencesDataStoreFlow().collect {
+                _showingOutOfStock.value = it.showingOutOfStock
+                _priceAscending.value = it.priceAscending
             }
         }
     }
