@@ -6,4 +6,6 @@ option java_multiple_files = true;
 message NotificationIDProto {
   // filter for showing / hiding completed tasks
   int32 notification_id = 1;
+  bool showing_out_of_stock = 2;
+  bool price_ascending = 3;
 }

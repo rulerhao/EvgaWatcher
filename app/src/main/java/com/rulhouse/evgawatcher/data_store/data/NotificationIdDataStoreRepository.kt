@@ -7,6 +7,8 @@ interface NotificationIdDataStoreRepository {
     fun getNotificationIdDataStoreFlow(): Flow<NotificationIDProto>
 
     suspend fun updateNotificationId(id: Int)
+    suspend fun updateShowingOutOfStock(isOn: Boolean)
+    suspend fun updatePriceAscending(isOn: Boolean)
 
     suspend fun fetchInitialPreferences(): NotificationIDProto
 }

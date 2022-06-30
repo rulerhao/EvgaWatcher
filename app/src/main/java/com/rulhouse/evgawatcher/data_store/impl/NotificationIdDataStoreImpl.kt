@@ -31,5 +31,17 @@ class NotificationIdDataStoreImpl(
         }
     }
 
+    override suspend fun updateShowingOutOfStock(isOn: Boolean) {
+        notificationIdDataStore.updateData { preferences ->
+            preferences.toBuilder().setShowingOutOfStock(isOn).build()
+        }
+    }
+
+    override suspend fun updatePriceAscending(isOn: Boolean) {
+        notificationIdDataStore.updateData { preferences ->
+            preferences.toBuilder().setPriceAscending(isOn).build()
+        }
+    }
+
     override suspend fun fetchInitialPreferences() = notificationIdDataStore.data.first()
 }
