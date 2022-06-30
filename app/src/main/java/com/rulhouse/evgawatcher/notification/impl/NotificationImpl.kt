@@ -1,7 +1,7 @@
 package com.rulhouse.evgawatcher.notification.impl
 
 import android.content.Context
-import com.rulhouse.evgawatcher.data_store.use_cases.NotificationIdDataStoreUseCases
+import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.NotificationIdDataStoreUseCases
 import com.rulhouse.evgawatcher.notification.repository.NotificationRepository
 import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
 import kotlinx.coroutines.cancel

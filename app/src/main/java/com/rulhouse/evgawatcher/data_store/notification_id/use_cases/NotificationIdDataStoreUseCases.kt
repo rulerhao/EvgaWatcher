@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.data_store.use_cases
+package com.rulhouse.evgawatcher.data_store.notification_id.use_cases
 
 data class NotificationIdDataStoreUseCases (
     val getNotificationIdDataStoreFlow: GetNotificationIdDataStoreFlow,

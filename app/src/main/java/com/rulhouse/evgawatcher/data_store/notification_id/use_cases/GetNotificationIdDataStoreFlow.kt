@@ -1,6 +1,6 @@
-package com.rulhouse.evgawatcher.data_store.use_cases
+package com.rulhouse.evgawatcher.data_store.notification_id.use_cases
 
-import com.rulhouse.evgawatcher.data_store.data.NotificationIdDataStoreRepository
+import com.rulhouse.evgawatcher.data_store.notification_id.data.NotificationIdDataStoreRepository
 import com.rulhouse.evgawatcher.datastore.NotificationIDProto
 import kotlinx.coroutines.flow.Flow
 

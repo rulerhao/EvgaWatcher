@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.data_store.data
+package com.rulhouse.evgawatcher.data_store.notification_id.data
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer

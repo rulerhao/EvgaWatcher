@@ -1,14 +1,14 @@
-package com.rulhouse.evgawatcher.data_store.di
+package com.rulhouse.evgawatcher.data_store.notification_id.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import com.rulhouse.evgawatcher.data_store.notification_id.data.NotificationIdDataStoreFactory
+import com.rulhouse.evgawatcher.data_store.notification_id.data.NotificationIdDataStoreRepository
+import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.GetNotificationIdDataStoreFlow
+import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.NotificationIdDataStoreUseCases
+import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.UpdateNotificationId
 import com.rulhouse.evgawatcher.datastore.NotificationIDProto
-import com.rulhouse.evgawatcher.data_store.data.UserPreferencesDataStoreFactory
-import com.rulhouse.evgawatcher.data_store.data.NotificationIdDataStoreRepository
 import com.rulhouse.protobufdatastore.impl.NotificationIdDataStoreImpl
-import com.rulhouse.evgawatcher.data_store.use_cases.GetNotificationIdDataStoreFlow
-import com.rulhouse.evgawatcher.data_store.use_cases.UpdateNotificationId
-import com.rulhouse.evgawatcher.data_store.use_cases.NotificationIdDataStoreUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +18,12 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataStoreModule {
+object NotificationIdDataStoreModule {
 
     @Singleton
     @Provides
     fun provideProtoDataStore(@ApplicationContext appContext: Context): DataStore<NotificationIDProto> {
-        return UserPreferencesDataStoreFactory.create(appContext)
+        return NotificationIdDataStoreFactory().create(appContext)
     }
 
     @Provides

@@ -1,8 +1,7 @@
 package com.rulhouse.protobufdatastore.impl
 
-import android.util.Log
 import androidx.datastore.core.DataStore
-import com.rulhouse.evgawatcher.data_store.data.NotificationIdDataStoreRepository
+import com.rulhouse.evgawatcher.data_store.notification_id.data.NotificationIdDataStoreRepository
 import com.rulhouse.evgawatcher.datastore.NotificationIDProto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -28,18 +27,6 @@ class NotificationIdDataStoreImpl(
     override suspend fun updateNotificationId(id: Int) {
         notificationIdDataStore.updateData { preferences ->
             preferences.toBuilder().setNotificationId(id).build()
-        }
-    }
-
-    override suspend fun updateShowingOutOfStock(isOn: Boolean) {
-        notificationIdDataStore.updateData { preferences ->
-            preferences.toBuilder().setShowingOutOfStock(isOn).build()
-        }
-    }
-
-    override suspend fun updatePriceAscending(isOn: Boolean) {
-        notificationIdDataStore.updateData { preferences ->
-            preferences.toBuilder().setPriceAscending(isOn).build()
         }
     }
 
