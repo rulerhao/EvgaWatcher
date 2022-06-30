@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.EvgaWatcher" parent="android:Theme.Material.NoActionBar.TranslucentDecor">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-<!--        <item name="android:statusBarColor">@color/purple_700</item>-->
-    </style>
-
     <style name="Theme.EvgaWatcher.PreviewWallpaper">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -19,5 +14,4 @@
         <item name="android:immersive">true</item>
         <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">always</item>
     </style>
-
 </resources>
