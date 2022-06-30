@@ -9,6 +9,7 @@ import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.F
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,11 +24,8 @@ class MainScreenViewModel @Inject constructor(
     private val userPreferencesDataStoreUseCases: UserPreferencesDataStoreUseCases,
 ) : ViewModel() {
 
-    private val _showingOutOfStock: MutableState<Boolean> = mutableStateOf(false)
-    val showingOutOfStock: State<Boolean> = _showingOutOfStock
-
-    private val _priceAscending: MutableState<Boolean> = mutableStateOf(false)
-    val priceAscending: State<Boolean> = _priceAscending
+    private val _userPreferencesState: MutableState<UserPreferencesState> = mutableStateOf(UserPreferencesState())
+    val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
 
     private val _products: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
     val products: State<List<GpuProduct>?> = _products
@@ -50,20 +48,16 @@ class MainScreenViewModel @Inject constructor(
     fun onEvent(event: MainScreenEvent) {
         when (event) {
             is MainScreenEvent.OnCollapseColumnStateChanged -> {
-                val newModel = productsSortedBySerialModel.value?.toMutableList()
-                newModel!![event.index] = newModel[event.index].copy(
-                    isOpen = !newModel[event.index].isOpen
-                )
-                _productsSortedBySerialModel.value = newModel
+                onCollapseColumnStateChanged(event.index)
             }
             is MainScreenEvent.OnShowingOutOfStockChanged -> {
                 viewModelScope.launch {
-                    userPreferencesDataStoreUseCases.updateShowingOutOfStock(!showingOutOfStock.value)
+                    userPreferencesDataStoreUseCases.updateShowingOutOfStock(!userPreferencesState.value.showingOutOfStock)
                 }
             }
             is MainScreenEvent.OnPriceAscendingChanged -> {
                 viewModelScope.launch {
-                    userPreferencesDataStoreUseCases.updatePriceAscending(!priceAscending.value)
+                    userPreferencesDataStoreUseCases.updatePriceAscending(!userPreferencesState.value.priceAscending)
                 }
             }
         }
@@ -84,8 +78,10 @@ class MainScreenViewModel @Inject constructor(
         }
         viewModelScope.launch {
             userPreferencesDataStoreUseCases.getUserPreferencesDataStoreFlow().collect {
-                _showingOutOfStock.value = it.showingOutOfStock
-                _priceAscending.value = it.priceAscending
+                _userPreferencesState.value = userPreferencesState.value.copy(
+                    showingOutOfStock = it.showingOutOfStock,
+                    priceAscending = it.priceAscending
+                )
             }
         }
     }
@@ -120,5 +116,13 @@ class MainScreenViewModel @Inject constructor(
         }
         _products.value = newProducts
         _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
+    }
+
+    private fun onCollapseColumnStateChanged(index: Int) {
+        val newModel = productsSortedBySerialModel.value?.toMutableList()
+        newModel!![index] = newModel[index].copy(
+            isOpen = !newModel[index].isOpen
+        )
+        _productsSortedBySerialModel.value = newModel
     }
 }

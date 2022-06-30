@@ -41,12 +41,16 @@ fun ProductsScreen(
             }
         }
     }
+
+    val showingOutOfStock = mainScreenViewModel.userPreferencesState.value.showingOutOfStock
+    val priceAscending = mainScreenViewModel.userPreferencesState.value.priceAscending
+
     Column() {
         Row(
 
         ) {
             BooleanFilterChip(
-                isOn = mainScreenViewModel.showingOutOfStock.value,
+                isOn =showingOutOfStock,
                 onClick = {
                     mainScreenViewModel.onEvent(MainScreenEvent.OnShowingOutOfStockChanged)
                 },
@@ -55,7 +59,7 @@ fun ProductsScreen(
                 }
             )
             BooleanFilterChip(
-                isOn = mainScreenViewModel.priceAscending.value,
+                isOn = priceAscending,
                 onClick = {
                     mainScreenViewModel.onEvent(MainScreenEvent.OnPriceAscendingChanged)
                 },
