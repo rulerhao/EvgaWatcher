@@ -1,4 +1,4 @@
-package com.rulhouse.protobufdatastore.impl
+package com.rulhouse.evgawatcher.data_store.notification_id.impl
 
 import androidx.datastore.core.DataStore
 import com.rulhouse.evgawatcher.data_store.notification_id.data.NotificationIdDataStoreRepository

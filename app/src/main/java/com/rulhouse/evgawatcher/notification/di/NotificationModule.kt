@@ -1,7 +1,7 @@
 package com.rulhouse.evgawatcher.notification.di
 
 import android.content.Context
-import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.NotificationIdDataStoreUseCases
+import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.NotificationIdDataStoreUseCases
 import com.rulhouse.evgawatcher.notification.impl.NotificationImpl
 import com.rulhouse.evgawatcher.notification.repository.NotificationRepository
 import com.rulhouse.evgawatcher.notification.use_case.NotificationDifferentProducts

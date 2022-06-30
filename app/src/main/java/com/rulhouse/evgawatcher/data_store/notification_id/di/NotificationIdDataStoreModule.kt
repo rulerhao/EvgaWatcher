@@ -8,7 +8,7 @@ import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.GetNotifica
 import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.NotificationIdDataStoreUseCases
 import com.rulhouse.evgawatcher.data_store.notification_id.use_cases.UpdateNotificationId
 import com.rulhouse.evgawatcher.datastore.NotificationIDProto
-import com.rulhouse.protobufdatastore.impl.NotificationIdDataStoreImpl
+import com.rulhouse.evgawatcher.data_store.notification_id.impl.NotificationIdDataStoreImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
