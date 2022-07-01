@@ -1,7 +1,5 @@
 package com.rulhouse.evgawatcher.crawler
 
-import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UpdatePriceAscending
-import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UpdateShowingOutOfStock
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 
 object GpuProductsMethods {
@@ -25,7 +23,9 @@ object GpuProductsMethods {
                     nameList.add(str)
                     nameList = nameList.sortedBy { it.lowercase() }.toMutableList()
                     gpuProductsNameList.add(mutableListOf(product))
-                    gpuProductsNameList = gpuProductsNameList.sortedBy { pattern.find(it[0].name)?.value?.lowercase() }.toMutableList()
+                    gpuProductsNameList =
+                        gpuProductsNameList.sortedBy { pattern.find(it[0].name)?.value?.lowercase() }
+                            .toMutableList()
                 } else {
                     val index = nameList.indexOf(str)
                     gpuProductsNameList[index].add(product)
@@ -35,13 +35,22 @@ object GpuProductsMethods {
         return gpuProductsNameList
     }
 
-    fun sortProducts(products: List<GpuProduct>, showingOutOfStock: Boolean, priceAscending: Boolean): List<GpuProduct> {
-        val newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+    fun sortProducts(
+        products: List<GpuProduct>,
+        showingOutOfStock: Boolean,
+        priceAscending: Boolean
+    ): List<GpuProduct> {
+        var newProducts: List<GpuProduct> = emptyList<GpuProduct>().toMutableList()
 
-        if ()
+        newProducts = getProducts(products = products, showingOutOfStock = showingOutOfStock)
+        newProducts = sortProducts(products = newProducts, priceAscending = priceAscending)
+        return newProducts
     }
 
-    private fun getOutOfStockProducts(products: List<GpuProduct>?, showingOutOfStock: Boolean): List<GpuProduct> {
+    private fun getProducts(
+        products: List<GpuProduct>?,
+        showingOutOfStock: Boolean
+    ): List<GpuProduct> {
         if (products == null)
             return emptyList()
         if (products.isEmpty())
@@ -60,18 +69,35 @@ object GpuProductsMethods {
         }
     }
 
-    private fun sortProducts(products: List<GpuProduct>?, priceAscending: Boolean): List<GpuProduct> {
-        val outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
-        var noOutOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
-        val newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+    private fun sortProducts(
+        products: List<GpuProduct>?,
+        priceAscending: Boolean
+    ): List<GpuProduct> {
+        var outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        var nonOutOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        var newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
 
-        noOutOfStockProducts = getOutOfStockProducts(products, false).toMutableList()
+        outOfStockProducts = getOutOfStockProducts(products).toMutableList()
+        nonOutOfStockProducts = getProducts(products, false).toMutableList()
+        newProducts =
+            if (priceAscending) nonOutOfStockProducts.sortedBy { it.price }.toMutableList()
+            else nonOutOfStockProducts.sortedByDescending { it.price }.toMutableList()
+        newProducts.addAll(outOfStockProducts)
 
+        return newProducts
     }
 
     private fun getOutOfStockProducts(products: List<GpuProduct>?): List<GpuProduct> {
         if (products == null)
             return emptyList()
         val outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        products.forEach {
+            if (it.canBeBought == null)
+                outOfStockProducts.add(it)
+            else if (it.canBeBought == false)
+                outOfStockProducts.add(it)
+        }
+
+        return outOfStockProducts
     }
 }
