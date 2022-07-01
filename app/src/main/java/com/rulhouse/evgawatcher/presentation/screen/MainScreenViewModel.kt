@@ -125,4 +125,8 @@ class MainScreenViewModel @Inject constructor(
         )
         _productsSortedBySerialModel.value = newModel
     }
+
+    private fun changeFilter() {
+
+    }
 }

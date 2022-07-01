@@ -1,5 +1,7 @@
 package com.rulhouse.evgawatcher.crawler
 
+import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UpdatePriceAscending
+import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UpdateShowingOutOfStock
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 
 object GpuProductsMethods {
@@ -31,5 +33,30 @@ object GpuProductsMethods {
             }
         }
         return gpuProductsNameList
+    }
+
+    fun sortProducts(products: List<GpuProduct>, showingOutOfStock: Boolean, priceAscending: Boolean): List<GpuProduct> {
+        val newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+
+        if ()
+    }
+
+    private fun getOutOfStockProducts(products: List<GpuProduct>?, showingOutOfStock: Boolean): List<GpuProduct> {
+        if (products == null)
+            return emptyList()
+        if (products.isEmpty())
+            return emptyList()
+
+        if (showingOutOfStock) {
+            return products
+        } else {
+            val newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+            products.forEach {
+                if (it.price != null && it.price != 0) {
+                    newProducts.add(it)
+                }
+            }
+            return newProducts
+        }
     }
 }
