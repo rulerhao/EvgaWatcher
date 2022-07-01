@@ -52,11 +52,26 @@ object GpuProductsMethods {
         } else {
             val newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
             products.forEach {
-                if (it.price != null && it.price != 0) {
+                if (it.canBeBought != null && it.canBeBought) {
                     newProducts.add(it)
                 }
             }
             return newProducts
         }
+    }
+
+    private fun sortProducts(products: List<GpuProduct>?, priceAscending: Boolean): List<GpuProduct> {
+        val outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        var noOutOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        val newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+
+        noOutOfStockProducts = getOutOfStockProducts(products, false).toMutableList()
+
+    }
+
+    private fun getOutOfStockProducts(products: List<GpuProduct>?): List<GpuProduct> {
+        if (products == null)
+            return emptyList()
+        val outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
     }
 }
