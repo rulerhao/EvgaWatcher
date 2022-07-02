@@ -66,9 +66,7 @@ class MainScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _products.value = crawlerUseCases.getGpuItems()
-            _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
-            setCollapsedModels(productsSortedBySerial.value)
-            setFavoriteValue(favoriteProducts = favoriteProducts.value)
+            resetProducts()
         }
         viewModelScope.launch {
             favoriteGpuProductUseCases.getFavoriteGpuProductsFlow().collectLatest {
@@ -82,7 +80,21 @@ class MainScreenViewModel @Inject constructor(
                     showingOutOfStock = it.showingOutOfStock,
                     priceAscending = it.priceAscending
                 )
+                resetProducts()
             }
+        }
+    }
+
+    private fun resetProducts() {
+        products.value?.let {
+            _products.value = GpuProductsMethods.sortProducts(
+                it,
+                userPreferencesState.value.showingOutOfStock,
+                userPreferencesState.value.priceAscending
+            )
+            _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
+            setCollapsedModels(productsSortedBySerial.value)
+            setFavoriteValue(favoriteProducts = favoriteProducts.value)
         }
     }
 
