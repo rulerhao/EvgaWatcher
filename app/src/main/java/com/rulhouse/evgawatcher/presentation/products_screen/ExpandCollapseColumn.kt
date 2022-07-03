@@ -62,7 +62,6 @@ fun ExpandCollapseColumn(
                 onFavoriteClick(it)
             }
         )
-        Divider(thickness = 0.5.dp)
     }
 }
 
