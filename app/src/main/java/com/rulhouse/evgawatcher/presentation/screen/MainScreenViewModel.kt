@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -79,11 +80,18 @@ class MainScreenViewModel @Inject constructor(
         }
         viewModelScope.launch {
             userPreferencesDataStoreUseCases.getUserPreferencesDataStoreFlow().collect {
-                _userPreferencesState.value = userPreferencesState.value.copy(
-                    showingOutOfStock = it.showingOutOfStock,
-                    priceAscending = it.priceAscending
-                )
-                setProducts()
+                if (userPreferencesState.value.showingOutOfStock != it.showingOutOfStock) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        showingOutOfStock = it.showingOutOfStock,
+                    )
+                    setProducts()
+                }
+                if (userPreferencesState.value.priceAscending != it.priceAscending) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        priceAscending = it.priceAscending
+                    )
+                    setFavoriteProducts()
+                }
             }
         }
     }
