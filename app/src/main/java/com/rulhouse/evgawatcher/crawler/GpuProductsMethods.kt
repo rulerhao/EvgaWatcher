@@ -1,6 +1,7 @@
 package com.rulhouse.evgawatcher.crawler
 
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 
 object GpuProductsMethods {
     private val regex = ".* \\d{4}( Ti)?"
@@ -134,14 +135,31 @@ object GpuProductsMethods {
             productsName.add(it.name)
         }
         favoriteProducts?.let {
-            it.forEach { thisFavoriteProducts ->
-                if (thisFavoriteProducts.favorite) {
-                    val indexInProducts = productsName.indexOf(thisFavoriteProducts.name)
-                    newProducts[indexInProducts] = products[indexInProducts].copy(favorite = true)
+            it.forEach { thisFavoriteProduct ->
+                if (thisFavoriteProduct.favorite) {
+                    val indexInProducts = productsName.indexOf(thisFavoriteProduct.name)
+                    if (indexInProducts != -1)
+                        newProducts[indexInProducts] = products[indexInProducts].copy(favorite = true)
                 }
             }
         }
 
         return newProducts
+    }
+
+    fun getCollapsedModels(productsSortedBySerial: List<List<GpuProduct>>?): List<ExpandCollapseModel> {
+        if (productsSortedBySerial == null) return emptyList()
+
+        val models: MutableList<ExpandCollapseModel> = emptyList<ExpandCollapseModel>().toMutableList()
+        productsSortedBySerial.forEach { item ->
+            models.add(
+                ExpandCollapseModel(
+                    title = getNameBySerial(item[0].name)!!,
+                    isOpen = false
+                )
+            )
+        }
+
+        return models
     }
 }

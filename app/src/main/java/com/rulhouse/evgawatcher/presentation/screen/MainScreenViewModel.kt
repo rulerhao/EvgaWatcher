@@ -27,13 +27,16 @@ class MainScreenViewModel @Inject constructor(
     private val _userPreferencesState: MutableState<UserPreferencesState> = mutableStateOf(UserPreferencesState())
     val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
 
-    private val _products: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
-    val products: State<List<GpuProduct>?> = _products
+    private val _crawlerProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
+    val crawlerProducts: State<List<GpuProduct>?> = _crawlerProducts
 
-    private val _productsSortedBySerial: MutableState<List<List<GpuProduct>>?> = mutableStateOf(
+    private val _showingProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
+    val showingProducts: State<List<GpuProduct>?> = _showingProducts
+
+    private val _showingGpuProductsSortedBySerial: MutableState<List<List<GpuProduct>>?> = mutableStateOf(
         emptyList()
     )
-    val productsSortedBySerial: State<List<List<GpuProduct>>?> = _productsSortedBySerial
+    val showingGpuProductsSortedBySerial: State<List<List<GpuProduct>>?> = _showingGpuProductsSortedBySerial
 
     private val _productsSortedBySerialModel: MutableState<List<ExpandCollapseModel>?> =
         mutableStateOf(
@@ -65,13 +68,13 @@ class MainScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _products.value = crawlerUseCases.getGpuItems()
-            resetProducts()
+            _crawlerProducts.value = crawlerUseCases.getGpuItems()
+            setProducts()
         }
         viewModelScope.launch {
-            favoriteGpuProductUseCases.getFavoriteGpuProductsFlow().collectLatest {
+            favoriteGpuProductUseCases.getFavoriteGpuProductsFlow().collect {
                 _favoriteProducts.value = it
-                setFavoriteValue(it)
+                setProducts()
             }
         }
         viewModelScope.launch {
@@ -80,54 +83,26 @@ class MainScreenViewModel @Inject constructor(
                     showingOutOfStock = it.showingOutOfStock,
                     priceAscending = it.priceAscending
                 )
-                resetProducts()
+                setProducts()
             }
         }
     }
 
-    private fun resetProducts() {
-        products.value?.let {
-            _products.value = GpuProductsMethods.sortProducts(
-                it,
-                userPreferencesState.value.showingOutOfStock,
-                userPreferencesState.value.priceAscending
+    private fun setProducts() {
+        crawlerProducts.value?.let {
+            var tempProducts: List<GpuProduct> = emptyList()
+            tempProducts = GpuProductsMethods.getProductsWithFavorites(
+                products = crawlerProducts.value,
+                favoriteProducts = favoriteProducts.value
             )
-            _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
-            setCollapsedModels(productsSortedBySerial.value)
-            setFavoriteValue(favoriteProducts = favoriteProducts.value)
-        }
-    }
-
-    private fun setCollapsedModels(productsSortedBySerial: List<List<GpuProduct>>?) {
-        if (productsSortedBySerial == null) return
-        val models: MutableList<ExpandCollapseModel> = mutableListOf()
-        productsSortedBySerial.forEach { item ->
-            models.add(
-                ExpandCollapseModel(
-                    title = GpuProductsMethods.getNameBySerial(item[0].name)!!,
-                    isOpen = false
-                )
+            _showingProducts.value = GpuProductsMethods.sortProducts(
+                products = tempProducts,
+                showingOutOfStock = userPreferencesState.value.showingOutOfStock,
+                priceAscending = userPreferencesState.value.priceAscending
             )
+            _showingGpuProductsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(showingProducts.value)
+            _productsSortedBySerialModel.value = GpuProductsMethods.getCollapsedModels(showingGpuProductsSortedBySerial.value)
         }
-        _productsSortedBySerialModel.value = models
-    }
-
-    private fun setFavoriteValue(favoriteProducts: List<GpuProduct>?) {
-        if (favoriteProducts == null) return
-        val newProducts = mutableListOf<GpuProduct>()
-        products.value?.forEach { product ->
-            var newProduct = product.copy(favorite = false)
-            favoriteProducts.forEach { favoriteProduct ->
-                if (favoriteProduct.name == product.name) {
-                    newProduct = newProduct.copy(
-                        favorite = favoriteProduct.favorite
-                    )
-                }
-            }
-            newProducts.add(newProduct)
-        }
-        _products.value = newProducts
-        _productsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(products.value)
     }
 
     private fun onCollapseColumnStateChanged(index: Int) {
@@ -136,9 +111,5 @@ class MainScreenViewModel @Inject constructor(
             isOpen = !newModel[index].isOpen
         )
         _productsSortedBySerialModel.value = newModel
-    }
-
-    private fun changeFilter() {
-
     }
 }
