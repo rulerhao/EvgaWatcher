@@ -100,4 +100,26 @@ object GpuProductsMethods {
 
         return outOfStockProducts
     }
+
+    fun getFavoriteProducts(
+        products: List<GpuProduct>?,
+        favoriteProducts: List<GpuProduct>?
+    ): List<GpuProduct> {
+        if (products == null || favoriteProducts == null) return emptyList()
+
+        val newProducts = emptyList<GpuProduct>().toMutableList()
+        val productsName = emptyList<String>().toMutableList()
+        products.forEach {
+            productsName.add(it.name)
+        }
+        favoriteProducts.forEach { thisFavoriteProducts ->
+            if (thisFavoriteProducts.favorite) {
+                val indexInProducts = productsName.indexOf(thisFavoriteProducts.name)
+                newProducts.add(products[indexInProducts].copy(favorite = true))
+            }
+        }
+
+        return newProducts
+    }
+
 }
