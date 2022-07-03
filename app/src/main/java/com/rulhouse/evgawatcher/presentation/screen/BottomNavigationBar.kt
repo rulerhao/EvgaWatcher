@@ -22,6 +22,10 @@ fun BottomNavigationBar (
     navController: NavController
 ) {
     Column(Modifier.background(color = MaterialTheme.colors.surface)) {
+        Divider(
+            color = MaterialTheme.colors.secondary.copy(alpha = 0.2f),
+            thickness = 0.5.dp
+        )
         BottomNavigation(backgroundColor = MaterialTheme.colors.surface) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
