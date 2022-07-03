@@ -122,4 +122,26 @@ object GpuProductsMethods {
         return newProducts
     }
 
+    fun getProductsWithFavorites(
+        products: List<GpuProduct>?,
+        favoriteProducts: List<GpuProduct>?
+    ): List<GpuProduct> {
+        if (products == null) return emptyList()
+
+        val newProducts = products.toMutableList()
+        val productsName = emptyList<String>().toMutableList()
+        products.forEach {
+            productsName.add(it.name)
+        }
+        favoriteProducts?.let {
+            it.forEach { thisFavoriteProducts ->
+                if (thisFavoriteProducts.favorite) {
+                    val indexInProducts = productsName.indexOf(thisFavoriteProducts.name)
+                    newProducts[indexInProducts] = products[indexInProducts].copy(favorite = true)
+                }
+            }
+        }
+
+        return newProducts
+    }
 }
