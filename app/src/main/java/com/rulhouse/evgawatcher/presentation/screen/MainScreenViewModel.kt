@@ -23,24 +23,23 @@ class MainScreenViewModel @Inject constructor(
     private val userPreferencesDataStoreUseCases: UserPreferencesDataStoreUseCases,
 ) : ViewModel() {
 
-    private val _userPreferencesState: MutableState<UserPreferencesState> = mutableStateOf(UserPreferencesState())
+    private val _userPreferencesState: MutableState<UserPreferencesState> =
+        mutableStateOf(UserPreferencesState())
     val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
 
     private val _crawlerProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
-    val crawlerProducts: State<List<GpuProduct>?> = _crawlerProducts
+    private val crawlerProducts: State<List<GpuProduct>?> = _crawlerProducts
 
     private val _showingProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
-    val showingProducts: State<List<GpuProduct>?> = _showingProducts
+    private val showingProducts: State<List<GpuProduct>?> = _showingProducts
 
-    private val _showingGpuProductsSortedBySerial: MutableState<List<List<GpuProduct>>?> = mutableStateOf(
-        emptyList()
-    )
-    val showingGpuProductsSortedBySerial: State<List<List<GpuProduct>>?> = _showingGpuProductsSortedBySerial
+    private val _showingGpuProductsSortedBySerial: MutableState<List<List<GpuProduct>>?> =
+        mutableStateOf(emptyList())
+    val showingGpuProductsSortedBySerial: State<List<List<GpuProduct>>?> =
+        _showingGpuProductsSortedBySerial
 
     private val _productsSortedBySerialModel: MutableState<List<ExpandCollapseModel>?> =
-        mutableStateOf(
-            emptyList()
-        )
+        mutableStateOf(emptyList())
     val productsSortedBySerialModel: State<List<ExpandCollapseModel>?> =
         _productsSortedBySerialModel
 
@@ -107,8 +106,7 @@ class MainScreenViewModel @Inject constructor(
 
     private fun setProducts() {
         crawlerProducts.value?.let {
-            var tempProducts: List<GpuProduct> = emptyList()
-            tempProducts = GpuProductsMethods.getProductsWithFavorites(
+            val tempProducts: List<GpuProduct> = GpuProductsMethods.getProductsWithFavorites(
                 products = crawlerProducts.value,
                 favoriteProducts = favoriteProducts.value
             )
@@ -118,15 +116,16 @@ class MainScreenViewModel @Inject constructor(
                 priceAscending = userPreferencesState.value.priceAscending,
                 showingNoPrice = userPreferencesState.value.showingNoPrice
             )
-            _showingGpuProductsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(showingProducts.value)
-            _productsSortedBySerialModel.value = GpuProductsMethods.getCollapsedModels(showingGpuProductsSortedBySerial.value)
+            _showingGpuProductsSortedBySerial.value =
+                GpuProductsMethods.getNamesBySerial(showingProducts.value)
+            _productsSortedBySerialModel.value =
+                GpuProductsMethods.getCollapsedModels(showingGpuProductsSortedBySerial.value)
         }
     }
 
     private fun setFavoriteProducts() {
         crawlerProducts.value?.let {
-            var tempProducts: List<GpuProduct> = emptyList()
-            tempProducts = GpuProductsMethods.getProductsWithFavorites(
+            val tempProducts: List<GpuProduct> = GpuProductsMethods.getProductsWithFavorites(
                 products = crawlerProducts.value,
                 favoriteProducts = favoriteProducts.value
             )
