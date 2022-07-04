@@ -93,9 +93,7 @@ object GpuProductsMethods {
             return emptyList()
         val outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
         products.forEach {
-            if (it.canBeBought == null)
-                outOfStockProducts.add(it)
-            else if (it.canBeBought == false)
+            if (it.canBeBought == null || it.canBeBought == false)
                 outOfStockProducts.add(it)
         }
 
