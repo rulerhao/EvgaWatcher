@@ -60,6 +60,7 @@ fun ProductItem(
             Title(text = gpuProduct.name)
             Column(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .align(Alignment.End),
                 horizontalAlignment = Alignment.End,
             ) {
