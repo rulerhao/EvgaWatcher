@@ -28,8 +28,6 @@ fun GpuImage(
             .background(MaterialTheme.colorScheme.tertiary)
             .height(ScreenMethods.convertPixelToDp(size.height.toFloat(), LocalContext.current).dp),
         imageModel = imgUrl,
-        // shows an image with the circular reveal animation.
-        circularReveal = CircularReveal(duration = 2000),
         contentScale = ContentScale.Fit,
         loading = {
             Box {
