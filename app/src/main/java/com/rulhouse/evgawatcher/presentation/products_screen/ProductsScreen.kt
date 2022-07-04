@@ -37,6 +37,7 @@ fun ProductsScreen(
 
     val showingOutOfStock = mainScreenViewModel.userPreferencesState.value.showingOutOfStock
     val priceAscending = mainScreenViewModel.userPreferencesState.value.priceAscending
+    val showingNoPrice = mainScreenViewModel.userPreferencesState.value.showingNoPrice
 
     Column() {
         Row(
@@ -58,6 +59,15 @@ fun ProductsScreen(
                 },
                 Content = {
                     Text(text = "Price")
+                }
+            )
+            BooleanFilterChip(
+                isOn = showingNoPrice,
+                onClick = {
+                    mainScreenViewModel.onEvent(MainScreenEvent.OnShowingNoPriceChanged)
+                },
+                Content = {
+                    Text(text = "Show No Price")
                 }
             )
         }
