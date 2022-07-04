@@ -12,6 +12,7 @@ import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
+import com.rulhouse.evgawatcher.presentation.products_screen.boolean_filter_chip.BooleanFilterChipEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -51,17 +52,22 @@ class MainScreenViewModel @Inject constructor(
             is MainScreenEvent.OnCollapseColumnStateChanged -> {
                 onCollapseColumnStateChanged(event.index)
             }
-            is MainScreenEvent.OnShowingOutOfStockChanged -> {
+        }
+    }
+
+    fun onEvent(event: BooleanFilterChipEvent) {
+        when (event) {
+            is BooleanFilterChipEvent.OnShowingOutOfStockChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updateShowingOutOfStock(!userPreferencesState.value.showingOutOfStock)
                 }
             }
-            is MainScreenEvent.OnPriceAscendingChanged -> {
+            is BooleanFilterChipEvent.OnPriceAscendingChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updatePriceAscending(!userPreferencesState.value.priceAscending)
                 }
             }
-            is MainScreenEvent.OnShowingNoPriceChanged -> {
+            is BooleanFilterChipEvent.OnShowingNoPriceChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updateShowingNoPriceProduct(!userPreferencesState.value.showingNoPrice)
                 }

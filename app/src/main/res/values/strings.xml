@@ -10,4 +10,8 @@
 
     <string name="channel_name">Channel name</string>
     <string name="channel_description">Channel description</string>
+
+    <string name="show_unbuyable">Show out of stock</string>
+    <string name="price_ascending">Price ascending</string>
+    <string name="show_no_price">Show no price</string>
 </resources>

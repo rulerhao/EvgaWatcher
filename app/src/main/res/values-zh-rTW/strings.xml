@@ -9,4 +9,8 @@
     <string name="each_time">固定時間</string>
     <string name="channel_name">通道名稱</string>
     <string name="channel_description">通道描述</string>
+
+    <string name="show_unbuyable">顯示缺貨產品</string>
+    <string name="price_ascending">價格升冪</string>
+    <string name="show_no_price">顯示無價格產品</string>
 </resources>
