@@ -100,6 +100,22 @@ object GpuProductsMethods {
         return outOfStockProducts
     }
 
+    fun getWithPriceProducts(products: List<GpuProduct>?, excludingNoPrice: Boolean): List<GpuProduct> {
+        if (products == null)
+            return emptyList()
+        val ans: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        if (excludingNoPrice) {
+            products.forEach {
+                if (it.price != null && it.price != 0) {
+                    ans.add(it)
+                }
+            }
+            return ans
+        } else {
+            return products
+        }
+    }
+
     fun getFavoriteProducts(
         products: List<GpuProduct>?,
         favoriteProducts: List<GpuProduct>?
