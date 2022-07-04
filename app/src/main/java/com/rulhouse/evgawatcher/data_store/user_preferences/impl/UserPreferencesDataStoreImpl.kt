@@ -38,5 +38,11 @@ class UserPreferencesDataStoreImpl(
         }
     }
 
+    override suspend fun updateShowingNoPrice(isOn: Boolean) {
+        userPreferencesDataStore.updateData { preferences ->
+            preferences.toBuilder().setShowingNoPrice(isOn).build()
+        }
+    }
+
     override suspend fun fetchInitialPreferences() = userPreferencesDataStore.data.first()
 }
