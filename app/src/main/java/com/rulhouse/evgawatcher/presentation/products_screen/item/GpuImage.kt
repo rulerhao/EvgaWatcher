@@ -23,23 +23,29 @@ fun GpuImage(
     imgUrl: String?,
     size: IntSize
 ) {
-    GlideImage(
+    Box(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.tertiary)
-            .height(ScreenMethods.convertPixelToDp(size.height.toFloat(), LocalContext.current).dp),
-        imageModel = imgUrl,
-        contentScale = ContentScale.Fit,
-        loading = {
-            Box {
-                CircularProgressIndicator(
-                    modifier = Modifier.align(Alignment.Center)
+    ) {
+        GlideImage(
+            modifier = Modifier
+                .padding(24.dp)
+                .background(MaterialTheme.colorScheme.tertiary)
+                .height(ScreenMethods.convertPixelToDp(size.height.toFloat(), LocalContext.current).dp),
+            imageModel = imgUrl,
+            contentScale = ContentScale.Fit,
+            loading = {
+                Box {
+                    CircularProgressIndicator(
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            },
+            failure = {
+                Text(
+                    text = "image request failed."
                 )
             }
-        },
-        failure = {
-            Text(
-                text = "image request failed."
-            )
-        }
-    )
+        )
+    }
 }
