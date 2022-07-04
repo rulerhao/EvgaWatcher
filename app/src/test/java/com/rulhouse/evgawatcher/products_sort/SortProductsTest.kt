@@ -11,7 +11,7 @@ class SortProductsTest {
     fun testNotShowUnbuyableAndPriceAscending() {
         val mockProducts = NotShowUnbuyableAndPriceAscendingMock()
         val sortedMethods = GpuProductsMethods
-        val ans = GpuProductsMethods.sortProducts(mockProducts.mock1, showingOutOfStock = false, priceAscending = true)
+        val ans = GpuProductsMethods.sortProductsWithPrice(mockProducts.mock1, showingOutOfStock = false, priceAscending = true)
 
         assertEquals(mockProducts.mock1Ans, ans)
     }
@@ -20,7 +20,7 @@ class SortProductsTest {
     fun testNotShowUnbuyableAndPriceDescending() {
         val mockProducts = NotShowUnbuyableAndPriceDescendingMock()
         val sortedMethods = GpuProductsMethods
-        val ans = GpuProductsMethods.sortProducts(mockProducts.mock1, showingOutOfStock = false, priceAscending = false)
+        val ans = GpuProductsMethods.sortProductsWithPrice(mockProducts.mock1, showingOutOfStock = false, priceAscending = false)
 
         assertEquals(mockProducts.mock1Ans, ans)
     }
@@ -29,7 +29,7 @@ class SortProductsTest {
     fun testShowUnbuyableAndPriceAscending() {
         val mockProducts = ShowUnbuyableAndPriceAscendingMock()
         val sortedMethods = GpuProductsMethods
-        val ans = GpuProductsMethods.sortProducts(mockProducts.mock1, showingOutOfStock = true, priceAscending = true)
+        val ans = GpuProductsMethods.sortProductsWithPrice(mockProducts.mock1, showingOutOfStock = true, priceAscending = true)
 
         assertEquals(mockProducts.mock1Ans, ans)
     }
@@ -38,7 +38,7 @@ class SortProductsTest {
     fun testShowUnbuyableAndPriceDescendingMock() {
         val mockProducts = ShowUnbuyableAndPriceDescendingMock()
         val sortedMethods = GpuProductsMethods
-        val ans = GpuProductsMethods.sortProducts(mockProducts.mock1, showingOutOfStock = true, priceAscending = false)
+        val ans = GpuProductsMethods.sortProductsWithPrice(mockProducts.mock1, showingOutOfStock = true, priceAscending = false)
 
         assertEquals(mockProducts.mock1Ans, ans)
     }

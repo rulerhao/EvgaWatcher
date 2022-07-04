@@ -1,6 +1,5 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -14,7 +13,6 @@ import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferences
 import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -64,6 +62,11 @@ class MainScreenViewModel @Inject constructor(
                     userPreferencesDataStoreUseCases.updatePriceAscending(!userPreferencesState.value.priceAscending)
                 }
             }
+            is MainScreenEvent.OnShowingNoPriceChanged -> {
+                viewModelScope.launch {
+                    userPreferencesDataStoreUseCases.updateShowingNoPriceProduct(!userPreferencesState.value.showingNoPrice)
+                }
+            }
         }
     }
 
@@ -92,6 +95,12 @@ class MainScreenViewModel @Inject constructor(
                     )
                     setFavoriteProducts()
                 }
+                if (userPreferencesState.value.showingNoPrice != it.showingNoPrice) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        showingNoPrice = it.showingNoPrice
+                    )
+                    setFavoriteProducts()
+                }
             }
         }
     }
@@ -103,10 +112,11 @@ class MainScreenViewModel @Inject constructor(
                 products = crawlerProducts.value,
                 favoriteProducts = favoriteProducts.value
             )
-            _showingProducts.value = GpuProductsMethods.sortProducts(
+            _showingProducts.value = GpuProductsMethods.sortProductsWithPrice(
                 products = tempProducts,
                 showingOutOfStock = userPreferencesState.value.showingOutOfStock,
-                priceAscending = userPreferencesState.value.priceAscending
+                priceAscending = userPreferencesState.value.priceAscending,
+                showingNoPrice = userPreferencesState.value.showingNoPrice
             )
             _showingGpuProductsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(showingProducts.value)
             _productsSortedBySerialModel.value = GpuProductsMethods.getCollapsedModels(showingGpuProductsSortedBySerial.value)
@@ -120,10 +130,11 @@ class MainScreenViewModel @Inject constructor(
                 products = crawlerProducts.value,
                 favoriteProducts = favoriteProducts.value
             )
-            _showingProducts.value = GpuProductsMethods.sortProducts(
+            _showingProducts.value = GpuProductsMethods.sortProductsWithPrice(
                 products = tempProducts,
                 showingOutOfStock = userPreferencesState.value.showingOutOfStock,
-                priceAscending = userPreferencesState.value.priceAscending
+                priceAscending = userPreferencesState.value.priceAscending,
+                showingNoPrice = userPreferencesState.value.showingNoPrice
             )
             _showingGpuProductsSortedBySerial.value =
                 GpuProductsMethods.getNamesBySerial(showingProducts.value)

@@ -1,5 +1,7 @@
 package com.rulhouse.evgawatcher.crawler
 
+import android.util.Log
+import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UpdateShowingNoPriceProduct
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
 import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
 
@@ -36,19 +38,22 @@ object GpuProductsMethods {
         return gpuProductsNameList
     }
 
-    fun sortProducts(
+    fun sortProductsWithPrice(
         products: List<GpuProduct>,
         showingOutOfStock: Boolean,
-        priceAscending: Boolean
+        priceAscending: Boolean,
+        showingNoPrice: Boolean,
     ): List<GpuProduct> {
         var newProducts: List<GpuProduct> = emptyList<GpuProduct>().toMutableList()
 
-        newProducts = getProducts(products = products, showingOutOfStock = showingOutOfStock)
-        newProducts = sortProducts(products = newProducts, priceAscending = priceAscending)
+        newProducts = getProductsWithOOS(products = products, showingOutOfStock = showingOutOfStock)
+        newProducts =
+            getShowingPriceProducts(products = newProducts, excludingNoPrice = showingNoPrice)
+        newProducts = sortProductsWithPrice(products = newProducts, priceAscending = priceAscending)
         return newProducts
     }
 
-    private fun getProducts(
+    private fun getProductsWithOOS(
         products: List<GpuProduct>?,
         showingOutOfStock: Boolean
     ): List<GpuProduct> {
@@ -70,21 +75,22 @@ object GpuProductsMethods {
         }
     }
 
-    private fun sortProducts(
+    private fun sortProductsWithPrice(
         products: List<GpuProduct>?,
-        priceAscending: Boolean
+        priceAscending: Boolean,
     ): List<GpuProduct> {
-        var outOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
-        var nonOutOfStockProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
-        var newProducts: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        val newProducts: MutableList<GpuProduct>
 
-        outOfStockProducts = getOutOfStockProducts(products).toMutableList()
-        nonOutOfStockProducts = getProducts(products, false).toMutableList()
+        val noPriceProducts = getNoPriceProducts(products)
+        val withPriceProducts = getShowingPriceProducts(products, true)
         newProducts =
-            if (priceAscending) nonOutOfStockProducts.sortedBy { it.price }.toMutableList()
-            else nonOutOfStockProducts.sortedByDescending { it.price }.toMutableList()
-        newProducts.addAll(outOfStockProducts)
+            if (priceAscending) withPriceProducts.sortedBy { it.price }.toMutableList()
+            else withPriceProducts.sortedByDescending { it.price }.toMutableList()
+        newProducts.addAll(noPriceProducts)
 
+        newProducts.forEach {
+            Log.d("TestProductsPrice", "Price = ${it.price}, name = ${it.name}")
+        }
         return newProducts
     }
 
@@ -100,7 +106,10 @@ object GpuProductsMethods {
         return outOfStockProducts
     }
 
-    fun getWithPriceProducts(products: List<GpuProduct>?, excludingNoPrice: Boolean): List<GpuProduct> {
+    fun getShowingPriceProducts(
+        products: List<GpuProduct>?,
+        excludingNoPrice: Boolean
+    ): List<GpuProduct> {
         if (products == null)
             return emptyList()
         val ans: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
@@ -114,6 +123,19 @@ object GpuProductsMethods {
         } else {
             return products
         }
+    }
+
+    fun getNoPriceProducts(products: List<GpuProduct>?): List<GpuProduct> {
+        if (products == null)
+            return emptyList()
+
+        val ans: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        products.forEach {
+            if (it.price == null || it.price == 0) {
+                ans.add(it)
+            }
+        }
+        return ans
     }
 
     fun getFavoriteProducts(
@@ -153,7 +175,8 @@ object GpuProductsMethods {
                 if (thisFavoriteProduct.favorite) {
                     val indexInProducts = productsName.indexOf(thisFavoriteProduct.name)
                     if (indexInProducts != -1)
-                        newProducts[indexInProducts] = products[indexInProducts].copy(favorite = true)
+                        newProducts[indexInProducts] =
+                            products[indexInProducts].copy(favorite = true)
                 }
             }
         }
@@ -164,7 +187,8 @@ object GpuProductsMethods {
     fun getCollapsedModels(productsSortedBySerial: List<List<GpuProduct>>?): List<ExpandCollapseModel> {
         if (productsSortedBySerial == null) return emptyList()
 
-        val models: MutableList<ExpandCollapseModel> = emptyList<ExpandCollapseModel>().toMutableList()
+        val models: MutableList<ExpandCollapseModel> =
+            emptyList<ExpandCollapseModel>().toMutableList()
         productsSortedBySerial.forEach { item ->
             models.add(
                 ExpandCollapseModel(
