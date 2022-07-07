@@ -1,7 +1,5 @@
-package com.rulhouse.evgawatcher.presentation.products_screen.item
+package com.rulhouse.evgawatcher.presentation.crawler_products_screen.item
 
-import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -9,10 +7,7 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import com.rulhouse.evgawatcher.methods.StringMethods
 
 @Composable
 fun StoreAndFavorite(

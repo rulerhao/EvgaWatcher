@@ -15,14 +15,15 @@ import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProductTy
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.favorite_products_screen.FavoriteProductsScreen
 import com.rulhouse.evgawatcher.presentation.product_screen.ProductScreen
-import com.rulhouse.evgawatcher.presentation.products_screen.ProductsScreen
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen.CrawlerProductsScreen
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model.CrawlerProductsScreenViewModel
 import com.rulhouse.evgawatcher.presentation.reminde_screen.RemindersScreen
 
 @Composable
 fun MainScreen(
-    viewModel: MainScreenViewModel = hiltViewModel(),
+//    viewModel: CrawlerProductsScreenViewModel = hiltViewModel(),
 ) {
-    val mainScreenViewModel: MainScreenViewModel = hiltViewModel()
+    val viewModel: CrawlerProductsScreenViewModel = hiltViewModel()
 
     val navController = rememberNavController()
 
@@ -44,7 +45,7 @@ fun MainScreen(
                     startDestination = Screen.AllProductsScreenScreen.route
                 ) {
                     composable(route = Screen.AllProductsScreenScreen.route) {
-                        ProductsScreen(
+                        CrawlerProductsScreen(
                             viewModel,
                             navController = navController
                         )

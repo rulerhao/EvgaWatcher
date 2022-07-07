@@ -12,7 +12,7 @@ class GetProductsWithPriceTest {
     fun testProductsExcludingNoPrice() {
         val mockProducts = GetProductsExcludingNoPriceTestMock()
         val gpuProductsMethods = GpuProductsMethods
-        val ans = gpuProductsMethods.getShowingPriceProducts(mockProducts.mockProducts, excludingNoPrice = true)
+        val ans = gpuProductsMethods.getShowingPriceProducts(mockProducts.mockProducts, showingNoPrice = true)
 
         assertEquals(mockProducts.expectedResult, ans)
     }
@@ -21,7 +21,7 @@ class GetProductsWithPriceTest {
     fun testProductsIncludingNoPrice() {
         val mockProducts = GetProductsIncludingNoPriceTestMock()
         val gpuProductsMethods = GpuProductsMethods
-        val ans = gpuProductsMethods.getShowingPriceProducts(mockProducts.mockProducts, excludingNoPrice = false)
+        val ans = gpuProductsMethods.getShowingPriceProducts(mockProducts.mockProducts, showingNoPrice = false)
 
         assertEquals(mockProducts.expectedResult, ans)
     }

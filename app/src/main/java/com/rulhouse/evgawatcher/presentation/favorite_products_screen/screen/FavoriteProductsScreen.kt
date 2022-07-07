@@ -1,7 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.favorite_products_screen
 
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -15,14 +14,10 @@ import androidx.navigation.NavController
 import com.google.gson.Gson
 import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.presentation.Screen
-import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseColumn
-import com.rulhouse.evgawatcher.presentation.products_screen.ProductsScreenEvent
-import com.rulhouse.evgawatcher.presentation.products_screen.ProductsScreenViewModel
-import com.rulhouse.evgawatcher.presentation.products_screen.boolean_filter_chip.BooleanFilterChipEvent
-import com.rulhouse.evgawatcher.presentation.products_screen.boolean_filter_chip.BooleanFilterChipModel
-import com.rulhouse.evgawatcher.presentation.products_screen.boolean_filter_chip.BooleanFilterChipsRow
-import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
-import com.rulhouse.evgawatcher.presentation.screen.MainScreenViewModel
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen.ExpandCollapseColumn
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipEvent
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipModel
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipsRow
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable

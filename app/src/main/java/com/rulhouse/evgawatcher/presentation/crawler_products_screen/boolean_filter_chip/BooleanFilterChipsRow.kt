@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.products_screen.boolean_filter_chip
+package com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip
 
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed

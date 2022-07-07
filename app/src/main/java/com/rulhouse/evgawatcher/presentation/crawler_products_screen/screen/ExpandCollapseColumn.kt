@@ -1,7 +1,6 @@
-package com.rulhouse.evgawatcher.presentation.products_screen
+package com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -14,7 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.presentation.products_screen.item.ProductItem
+import com.rulhouse.evgawatcher.presentation.products_screen.model.ExpandCollapseModel
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.item.ProductItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

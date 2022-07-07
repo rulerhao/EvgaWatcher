@@ -1,6 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.products_screen.boolean_filter_chip
-
-import com.rulhouse.evgawatcher.presentation.screen.MainScreenEvent
+package com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip
 
 sealed class BooleanFilterChipEvent {
     object OnShowingOutOfStockChanged: BooleanFilterChipEvent()

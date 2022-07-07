@@ -1,9 +1,7 @@
 package com.rulhouse.evgawatcher.crawler
 
-import android.util.Log
-import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UpdateShowingNoPriceProduct
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
+import com.rulhouse.evgawatcher.presentation.products_screen.model.ExpandCollapseModel
 
 object GpuProductsMethods {
     private val regex = ".* \\d{4}( Ti)?"
@@ -38,6 +36,53 @@ object GpuProductsMethods {
         return gpuProductsNameList
     }
 
+    fun getToggledSortedModels(
+        index: Int,
+        modelList: List<ExpandCollapseModel>?
+    ): List<ExpandCollapseModel> {
+        if (modelList == null) return emptyList()
+
+        val newModel = modelList.toMutableList()
+        newModel[index] = newModel[index].copy(
+            isOpen = !newModel[index].isOpen
+        )
+        return newModel
+    }
+
+    fun getToggledAllModels(
+        index: Int,
+        allModels: List<ExpandCollapseModel>?,
+        sortedModels: List<ExpandCollapseModel>?
+    ): List<ExpandCollapseModel> {
+        if (allModels == null) return emptyList()
+        if (sortedModels == null) return allModels
+
+        allModels.forEachIndexed { itIndex, it ->
+            if (it.title == sortedModels[index].title) {
+                allModels[itIndex].isOpen = sortedModels[index].isOpen
+            }
+        }
+
+        return allModels
+    }
+
+    fun getNewModelsBySerial(models: List<ExpandCollapseModel>?, allModels: List<ExpandCollapseModel>?): List<ExpandCollapseModel> {
+        if (models == null || models.isEmpty()) return emptyList()
+        if (allModels == null || allModels.isEmpty()) return models
+
+        val newModels = models.toMutableList()
+        allModels.forEach { modelOfAllModels ->
+            newModels.forEach { modelOfNewModels ->
+                if (modelOfNewModels.title == modelOfAllModels.title) {
+                    if (modelOfNewModels.isOpen != modelOfAllModels.isOpen) {
+                        modelOfNewModels.isOpen = modelOfAllModels.isOpen
+                    }
+                }
+            }
+        }
+        return newModels
+    }
+
     fun sortProductsWithPrice(
         products: List<GpuProduct>,
         showingOutOfStock: Boolean,
@@ -48,9 +93,33 @@ object GpuProductsMethods {
 
         newProducts = getProductsWithOOS(products = products, showingOutOfStock = showingOutOfStock)
         newProducts =
-            getShowingPriceProducts(products = newProducts, excludingNoPrice = showingNoPrice)
+            getShowingPriceProducts(products = newProducts, showingNoPrice = showingNoPrice)
         newProducts = sortProductsWithPrice(products = newProducts, priceAscending = priceAscending)
         return newProducts
+    }
+
+    private fun getRegexName(name: String): String? {
+        return Regex(regex).find(name)?.value
+    }
+
+    fun getModels(productsSortedBySerial: List<List<GpuProduct>>?, models: List<ExpandCollapseModel>?): List<ExpandCollapseModel> {
+        if (productsSortedBySerial == null) return emptyList()
+        if (models == null) {
+            return getCollapsedModels(productsSortedBySerial)
+        }
+
+        val sortedModels = emptyList<ExpandCollapseModel>().toMutableList()
+        productsSortedBySerial.forEach {
+            val name = getRegexName(it[0].name)
+            if (name != null) {
+                models.forEach { model ->
+                    if (model.title == name) {
+                        sortedModels.add(model)
+                    }
+                }
+            }
+        }
+        return sortedModels
     }
 
     private fun getProductsWithOOS(
@@ -82,15 +151,11 @@ object GpuProductsMethods {
         val newProducts: MutableList<GpuProduct>
 
         val noPriceProducts = getNoPriceProducts(products)
-        val withPriceProducts = getShowingPriceProducts(products, true)
+        val withPriceProducts = getShowingPriceProducts(products, false)
         newProducts =
             if (priceAscending) withPriceProducts.sortedBy { it.price }.toMutableList()
             else withPriceProducts.sortedByDescending { it.price }.toMutableList()
         newProducts.addAll(noPriceProducts)
-
-        newProducts.forEach {
-            Log.d("TestProductsPrice", "Price = ${it.price}, name = ${it.name}")
-        }
         return newProducts
     }
 
@@ -108,12 +173,12 @@ object GpuProductsMethods {
 
     fun getShowingPriceProducts(
         products: List<GpuProduct>?,
-        excludingNoPrice: Boolean
+        showingNoPrice: Boolean
     ): List<GpuProduct> {
         if (products == null)
             return emptyList()
         val ans: MutableList<GpuProduct> = emptyList<GpuProduct>().toMutableList()
-        if (excludingNoPrice) {
+        if (!showingNoPrice) {
             products.forEach {
                 if (it.price != null && it.price != 0) {
                     ans.add(it)

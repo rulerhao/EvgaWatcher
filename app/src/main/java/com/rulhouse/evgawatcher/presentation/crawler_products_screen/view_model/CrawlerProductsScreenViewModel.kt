@@ -1,6 +1,7 @@
-package com.rulhouse.evgawatcher.presentation.favorite_products_screen
+package com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model
 
 import androidx.lifecycle.viewModelScope
+import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
 import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.presentation.products_screen.view_model.ProductsScreenViewModel
@@ -9,7 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteProductsScreenViewModel @Inject constructor(
+class CrawlerProductsScreenViewModel @Inject constructor(
+    private val crawlerUseCases: CrawlerUseCases,
     private val favoriteGpuProductUseCases: FavoriteGpuProductUseCases,
     private val userPreferencesDataStoreUseCases: UserPreferencesDataStoreUseCases,
 ): ProductsScreenViewModel(
@@ -19,7 +21,7 @@ class FavoriteProductsScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            setProducts(favoriteGpuProductUseCases.getFavoriteGpuProducts())
+            setProducts(crawlerUseCases.getGpuItems())
         }
     }
 

@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.products_screen.item
+package com.rulhouse.evgawatcher.presentation.crawler_products_screen.item
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
