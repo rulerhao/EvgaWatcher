@@ -37,7 +37,8 @@ object UserPreferencesDataStoreModule {
             getUserPreferencesDataStoreFlow = GetUserPreferencesDataStoreFlow(repository),
             updateShowingOutOfStock = UpdateShowingOutOfStock(repository),
             updatePriceAscending = UpdatePriceAscending(repository),
-            updateShowingNoPriceProduct = UpdateShowingNoPriceProduct(repository)
+            updateShowingNoPriceProduct = UpdateShowingNoPriceProduct(repository),
+            updateFilterState = UpdateFilterState(repository)
         )
     }
 }

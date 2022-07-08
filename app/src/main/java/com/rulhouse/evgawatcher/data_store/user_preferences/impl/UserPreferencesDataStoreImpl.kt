@@ -44,5 +44,11 @@ class UserPreferencesDataStoreImpl(
         }
     }
 
+    override suspend fun updateFilterState(isOn: Boolean) {
+        userPreferencesDataStore.updateData { preferences ->
+            preferences.toBuilder().setFilterState(isOn).build()
+        }
+    }
+
     override suspend fun fetchInitialPreferences() = userPreferencesDataStore.data.first()
 }

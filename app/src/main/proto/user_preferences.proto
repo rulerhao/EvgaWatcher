@@ -8,4 +8,5 @@ message UserPreferencesProto {
   bool showing_out_of_stock = 1;
   bool price_ascending = 2;
   bool showing_no_price = 3;
+  bool filter_state = 4;
 }

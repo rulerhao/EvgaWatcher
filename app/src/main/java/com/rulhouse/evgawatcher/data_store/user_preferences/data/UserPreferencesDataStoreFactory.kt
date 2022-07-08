@@ -31,6 +31,7 @@ class UserPreferencesDataStoreFactory {
                         it.showingOutOfStock = sharedPrefs.getBoolean("showing_out_of_stock", false)
                         it.priceAscending = sharedPrefs.getBoolean("price_ascending", false)
                         it.showingNoPrice = sharedPrefs.getBoolean("showing_no_price", false)
+                        it.filterState = sharedPrefs.getBoolean("filter_state", false)
                     }
                     currentData
                 }

@@ -10,6 +10,7 @@ interface UserPreferencesDataStoreRepository {
     suspend fun updateShowingOutOfStock(isOn: Boolean)
     suspend fun updatePriceAscending(isOn: Boolean)
     suspend fun updateShowingNoPrice(isOn: Boolean)
+    suspend fun updateFilterState(isOn: Boolean)
 
     suspend fun fetchInitialPreferences(): UserPreferencesProto
 }
