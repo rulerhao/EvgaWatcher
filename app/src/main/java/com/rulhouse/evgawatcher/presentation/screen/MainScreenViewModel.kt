@@ -11,7 +11,7 @@ import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
-import com.rulhouse.evgawatcher.presentation.products_screen.model.ExpandCollapseModel
+import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collapse_column.model.ExpandCollapseModel
 import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.event.BooleanFilterChipEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
