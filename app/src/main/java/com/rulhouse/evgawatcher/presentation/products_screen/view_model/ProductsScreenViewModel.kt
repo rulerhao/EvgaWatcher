@@ -30,9 +30,6 @@ open class ProductsScreenViewModel @Inject constructor(
     private var allProductsModels: List<ExpandCollapseModel>? =
         emptyList<ExpandCollapseModel>().toMutableList()
 
-    private val _filterState: MutableState<Boolean> = mutableStateOf(false)
-    val filterState: State<Boolean> = _filterState
-
     private val _userPreferencesState: MutableState<UserPreferencesState> =
         mutableStateOf(UserPreferencesState())
     val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
@@ -57,9 +54,6 @@ open class ProductsScreenViewModel @Inject constructor(
             is ProductsScreenEvent.OnCollapseColumnStateChanged -> {
                 onCollapseColumnStateChanged(event.index)
             }
-            is ProductsScreenEvent.OnFilterStateChanged -> {
-                _filterState.value = !filterState.value
-            }
             is ProductsScreenEvent.OnShowingOutOfStockChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updateShowingOutOfStock(!userPreferencesState.value.showingOutOfStock)
@@ -70,9 +64,19 @@ open class ProductsScreenViewModel @Inject constructor(
                     userPreferencesDataStoreUseCases.updatePriceAscending(!userPreferencesState.value.priceAscending)
                 }
             }
+            is ProductsScreenEvent.OnPriceSortedChanged -> {
+                viewModelScope.launch {
+                    userPreferencesDataStoreUseCases.updatePriceAscending(event.isOn)
+                }
+            }
             is ProductsScreenEvent.OnShowingNoPriceChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updateShowingNoPriceProduct(!userPreferencesState.value.showingNoPrice)
+                }
+            }
+            is ProductsScreenEvent.OnFilterStateChanged -> {
+                viewModelScope.launch {
+                    userPreferencesDataStoreUseCases.updateFilterState(!userPreferencesState.value.filterState)
                 }
             }
         }
@@ -105,6 +109,11 @@ open class ProductsScreenViewModel @Inject constructor(
                         showingNoPrice = it.showingNoPrice
                     )
                     setAllProducts(products)
+                }
+                if (userPreferencesState.value.filterState != it.filterState) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        filterState = it.filterState
+                    )
                 }
             }
         }

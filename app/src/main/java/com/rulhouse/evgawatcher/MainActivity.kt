@@ -24,9 +24,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activitySetting.hindSystemBar(this)
-
-        activitySetting.addSystemUIListener(this)
+//        activitySetting.hindSystemBar(this)
+//
+//        activitySetting.addSystemUIListener(this)
 
         setContent {
             AppTheme {
@@ -39,6 +39,6 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
 
-        activitySetting.hideSystemBar(this)
+//        activitySetting.hideSystemBar(this)
     }
 }

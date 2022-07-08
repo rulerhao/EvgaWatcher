@@ -18,8 +18,7 @@ fun BooleanFilterChip(
 ) {
     AnimatedContent(targetState = isOn) {
         FilterChip(
-            modifier = Modifier
-                .padding(8.dp),
+            modifier = Modifier,
             selected = isOn,
             onClick = {
                 onClick()

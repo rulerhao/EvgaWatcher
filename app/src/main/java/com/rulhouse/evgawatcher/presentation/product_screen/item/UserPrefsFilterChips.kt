@@ -11,7 +11,7 @@ import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter
 import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent
 
 @Composable
-fun BooleanFilterChipsImpl(
+fun UserPrefsFilterChips(
     filters: UserPreferencesState,
     onEvent: (ProductsScreenEvent) -> Unit
 ) {
