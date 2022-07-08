@@ -20,7 +20,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:fitsSystemWindows="true"
-            android:theme="@style/Theme.EvgaWatcher.PreviewWallpaper">
+            android:theme="@style/Theme.EvgaWatcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

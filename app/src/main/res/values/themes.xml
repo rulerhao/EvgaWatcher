@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.EvgaWatcher" parent="android:Theme.Material.NoActionBar.TranslucentDecor">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-<!--        <item name="android:statusBarColor">@color/purple_700</item>-->
+    <!--    <style name="Theme.EvgaWatcher" parent="Theme.Material3.*.NoActionBar">-->
+    <!--        <item name="android:windowTranslucentStatus">true</item>-->
+    <!--    </style>-->
+
+    <style name="Theme.EvgaWatcher" parent="Theme.Material3.Dark.NoActionBar">
     </style>
 
-    <style name="Theme.EvgaWatcher.PreviewWallpaper">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowShowWallpaper">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:immersive">true</item>
-        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">always</item>
-    </style>
+<!--    <style name="Theme.EvgaWatcher" parent="Theme.Material3.Dark.NoActionBar">-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:windowActionBar">false</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+<!--        &lt;!&ndash;        <item name="toolbarStyle">@style/Theme.EvgaWatcher.Toolbar</item>&ndash;&gt;-->
+<!--    </style>-->
+
+<!--    <style name="Theme.EvgaWatcher.Toolbar" parent="Widget.Material3.Toolbar">-->
+<!--        &lt;!&ndash;        <item name="android:background">@color/material_dynamic_primary0</item>&ndash;&gt;-->
+<!--    </style>-->
+
+<!--    <style name="Widget.App.AppBarLayout" parent="Widget.Material3.AppBarLayout">-->
+<!--        <item name="android:outlineAmbientShadowColor" ns1:ignore="NewApi">@android:color/black</item>-->
+<!--        <item name="android:outlineSpotShadowColor" ns1:ignore="NewApi">@android:color/black</item>-->
+<!--    </style>-->
+
+    <!--    <style name="Theme.EvgaWatcher.PreviewWallpaper">-->
+    <!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+    <!--        <item name="android:colorBackgroundCacheHint">@null</item>-->
+    <!--        <item name="android:windowShowWallpaper">true</item>-->
+    <!--        <item name="android:windowTranslucentNavigation">true</item>-->
+    <!--        <item name="android:windowTranslucentStatus">true</item>-->
+    <!--        <item name="android:windowActionBar">false</item>-->
+    <!--        <item name="android:windowNoTitle">true</item>-->
+    <!--        <item name="windowActionBar">false</item>-->
+    <!--        <item name="windowNoTitle">true</item>-->
+    <!--        <item name="android:immersive">true</item>-->
+    <!--        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">always</item>-->
+    <!--    </style>-->
 
 </resources>
