@@ -48,6 +48,11 @@ open class ProductsScreenViewModel @Inject constructor(
 
     open fun onEvent(event: ProductsScreenEvent) {
         when (event) {
+            is ProductsScreenEvent.ToggleFavoriteGpuProduct -> {
+                viewModelScope.launch {
+                    toggleFavoriteProducts(favoriteGpuProductUseCases, event.gpuProduct)
+                }
+            }
             is ProductsScreenEvent.OnCollapseColumnStateChanged -> {
                 onCollapseColumnStateChanged(event.index)
             }
@@ -135,5 +140,14 @@ open class ProductsScreenViewModel @Inject constructor(
             allModels = allProductsModels,
             sortedModels = productsSortedBySerialModel.value
         )
+    }
+
+    private suspend fun toggleFavoriteProducts(favoriteGpuProductUseCases: FavoriteGpuProductUseCases, product: GpuProduct) {
+        val favoriteGpuProduct = favoriteGpuProductUseCases.getFavoriteGpuProductByName(product.name)
+        if (favoriteGpuProduct != null) {
+            favoriteGpuProductUseCases.deleteFavoriteGpuProduct(favoriteGpuProduct)
+        } else {
+            favoriteGpuProductUseCases.addFavoriteGpuProduct(product.copy(favorite = true))
+        }
     }
 }
