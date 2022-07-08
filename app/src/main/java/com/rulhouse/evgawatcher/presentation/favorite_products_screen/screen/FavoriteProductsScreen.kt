@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.favorite_products_screen
+package com.rulhouse.evgawatcher.presentation.favorite_products_screen.screen
 
 import android.net.Uri
 import androidx.compose.foundation.layout.Column
@@ -18,58 +18,23 @@ import com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen.Expa
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipEvent
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipModel
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipsRow
+import com.rulhouse.evgawatcher.presentation.favorite_products_screen.FavoriteProductsScreenEvent
+import com.rulhouse.evgawatcher.presentation.favorite_products_screen.FavoriteProductsScreenViewModel
+import com.rulhouse.evgawatcher.presentation.favorite_products_screen.view_model.FavoriteProductsViewModel
+import com.rulhouse.evgawatcher.presentation.product_screen.item.BooleanFilterChipsImpl
+import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun FavoriteProductsScreen(
-    viewModel: FavoriteProductsScreenViewModel = hiltViewModel(),
+    viewModel: FavoriteProductsViewModel = hiltViewModel(),
     navController: NavController
 ) {
 
-    val context = LocalContext.current
-
-    LaunchedEffect(key1 = true) {
-        viewModel.eventFlow.collectLatest { event ->
-            when (event) {
-                is FavoriteProductsScreenViewModel.UiEvent.OnCollapseColumnStateChanged -> {
-                    viewModel.onEvent(FavoriteProductsScreenEvent.OnCollapseColumnStateChanged(event.index))
-                }
-            }
-        }
-    }
-
-    val showingOutOfStock = viewModel.userPreferencesState.value.showingOutOfStock
-    val priceAscending = viewModel.userPreferencesState.value.priceAscending
-    val showingNoPrice = viewModel.userPreferencesState.value.showingNoPrice
-
-    val eventList = remember{ mutableStateOf(
-        listOf(
-            BooleanFilterChipEvent.OnShowingOutOfStockChanged,
-            BooleanFilterChipEvent.OnPriceAscendingChanged,
-            BooleanFilterChipEvent.OnShowingNoPriceChanged
-        )
-    )
-    }
-
     Column() {
-        BooleanFilterChipsRow(
-            list = listOf(
-                BooleanFilterChipModel(
-                    isOn = showingOutOfStock,
-                    text = context.getString(R.string.show_unbuyable)
-                ),
-                BooleanFilterChipModel(
-                    isOn = priceAscending,
-                    text = context.getString(R.string.price_ascending)
-                ),
-                BooleanFilterChipModel(
-                    isOn = showingNoPrice,
-                    text = context.getString(R.string.show_no_price)
-                ),
-            ),
-            onClick = {
-                viewModel.onEvent(eventList.value[it])
-            }
+        BooleanFilterChipsImpl(
+            viewModel.userPreferencesState.value,
+            onEvent = { viewModel.onEvent(it) }
         )
         LazyColumn(
 
@@ -81,7 +46,7 @@ fun FavoriteProductsScreen(
                         products = item,
                         onCollapsedStateChanged = {
                             viewModel.onEvent(
-                                FavoriteProductsScreenEvent.OnCollapseColumnStateChanged(index)
+                                ProductsScreenEvent.OnCollapseColumnStateChanged(index)
                             )
                         },
                         onClick = {
@@ -91,7 +56,11 @@ fun FavoriteProductsScreen(
                                         Gson().toJson(it))}")
                         },
                         onFavoriteClick = {
-                            viewModel.onEvent(FavoriteProductsScreenEvent.ToggleFavoriteGpuProduct(it))
+                            viewModel.onEvent(
+                                ProductsScreenEvent.ToggleFavoriteGpuProduct(
+                                    it
+                                )
+                            )
                         }
                     )
                 }

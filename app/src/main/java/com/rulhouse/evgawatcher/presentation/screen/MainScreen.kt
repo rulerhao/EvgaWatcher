@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProductType
 import com.rulhouse.evgawatcher.presentation.Screen
-import com.rulhouse.evgawatcher.presentation.favorite_products_screen.FavoriteProductsScreen
+import com.rulhouse.evgawatcher.presentation.favorite_products_screen.screen.FavoriteProductsScreen
 import com.rulhouse.evgawatcher.presentation.product_screen.ProductScreen
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen.CrawlerProductsScreen
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model.CrawlerProductsScreenViewModel

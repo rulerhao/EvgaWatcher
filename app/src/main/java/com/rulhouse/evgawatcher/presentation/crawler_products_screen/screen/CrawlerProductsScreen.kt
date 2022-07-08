@@ -16,6 +16,7 @@ import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_fil
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipsRow
 import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model.CrawlerProductsScreenViewModel
+import com.rulhouse.evgawatcher.presentation.product_screen.item.BooleanFilterChipsImpl
 
 @Composable
 fun CrawlerProductsScreen(
@@ -23,39 +24,10 @@ fun CrawlerProductsScreen(
     navController: NavController
 ) {
 
-    val context = LocalContext.current
-
-    val showingOutOfStock = viewModel.userPreferencesState.value.showingOutOfStock
-    val priceAscending = viewModel.userPreferencesState.value.priceAscending
-    val showingNoPrice = viewModel.userPreferencesState.value.showingNoPrice
-
-    val eventList = remember{ mutableStateOf(
-        listOf(
-            ProductsScreenEvent.OnShowingOutOfStockChanged,
-            ProductsScreenEvent.OnPriceAscendingChanged,
-            ProductsScreenEvent.OnShowingNoPriceChanged
-        )
-    )
-    }
     Column() {
-        BooleanFilterChipsRow(
-            list = listOf(
-                BooleanFilterChipModel(
-                    isOn = showingOutOfStock,
-                    text = context.getString(R.string.show_unbuyable)
-                ),
-                BooleanFilterChipModel(
-                    isOn = priceAscending,
-                    text = context.getString(R.string.price_ascending)
-                ),
-                BooleanFilterChipModel(
-                    isOn = showingNoPrice,
-                    text = context.getString(R.string.show_no_price)
-                ),
-            ),
-            onClick = {
-                viewModel.onEvent(eventList.value[it])
-            }
+        BooleanFilterChipsImpl(
+            viewModel.userPreferencesState.value,
+            onEvent = { viewModel.onEvent(it) }
         )
         LazyColumn(
 
