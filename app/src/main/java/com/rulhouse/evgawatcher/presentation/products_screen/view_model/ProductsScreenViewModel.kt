@@ -26,21 +26,19 @@ open class ProductsScreenViewModel @Inject constructor(
 
     private var favoriteProducts: List<GpuProduct>? = emptyList()
 
+    private var allProductsSerialList: List<List<GpuProduct>>? = emptyList()
+    private var allProductsModels: List<ExpandCollapseModel>? =
+        emptyList<ExpandCollapseModel>().toMutableList()
+
     private val _userPreferencesState: MutableState<UserPreferencesState> =
         mutableStateOf(UserPreferencesState())
     val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
 
-    private val _showingProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
-    private val showingProducts: State<List<GpuProduct>?> = _showingProducts
-
-    private var allProductsSerialList: List<List<GpuProduct>>? = emptyList()
     private val _showingGpuProductsSortedBySerial: MutableState<List<List<GpuProduct>>?> =
         mutableStateOf(emptyList())
     val showingGpuProductsSortedBySerial: State<List<List<GpuProduct>>?> =
         _showingGpuProductsSortedBySerial
 
-    private var allProductsModels: List<ExpandCollapseModel>? =
-        emptyList<ExpandCollapseModel>().toMutableList()
     private val _productsSortedBySerialModel: MutableState<List<ExpandCollapseModel>?> =
         mutableStateOf(emptyList())
     val productsSortedBySerialModel: State<List<ExpandCollapseModel>?> =
@@ -119,14 +117,14 @@ open class ProductsScreenViewModel @Inject constructor(
                 products = it,
                 favoriteProducts = favoriteProducts
             )
-            _showingProducts.value = GpuProductsMethods.sortProductsWithPrice(
+            val showingProducts = GpuProductsMethods.sortProductsWithPrice(
                 products = tempProducts,
                 showingOutOfStock = userPreferencesState.value.showingOutOfStock,
                 priceAscending = userPreferencesState.value.priceAscending,
                 showingNoPrice = userPreferencesState.value.showingNoPrice
             )
             _showingGpuProductsSortedBySerial.value =
-                GpuProductsMethods.getNamesBySerial(showingProducts.value)
+                GpuProductsMethods.getNamesBySerial(showingProducts)
             _productsSortedBySerialModel.value =
                 GpuProductsMethods.getModels(showingGpuProductsSortedBySerial.value, allProductsModels)
         }
