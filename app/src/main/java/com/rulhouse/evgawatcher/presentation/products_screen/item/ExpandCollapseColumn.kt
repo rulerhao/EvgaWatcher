@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen
+package com.rulhouse.evgawatcher.presentation.products_screen.item
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.clickable
