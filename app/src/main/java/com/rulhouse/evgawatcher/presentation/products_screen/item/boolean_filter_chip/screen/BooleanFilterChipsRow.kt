@@ -1,9 +1,10 @@
-package com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip
+package com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.screen
 
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.model.BooleanFilterChipModel
 
 @Composable
 fun BooleanFilterChipsRow(

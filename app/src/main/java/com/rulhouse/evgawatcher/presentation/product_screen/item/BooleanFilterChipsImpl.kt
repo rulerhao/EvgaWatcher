@@ -6,8 +6,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
-import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipModel
-import com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip.BooleanFilterChipsRow
+import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.model.BooleanFilterChipModel
+import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.screen.BooleanFilterChipsRow
 import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent
 
 @Composable

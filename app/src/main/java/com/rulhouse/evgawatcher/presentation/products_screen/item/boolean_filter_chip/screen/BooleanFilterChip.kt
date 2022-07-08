@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.crawler_products_screen.boolean_filter_chip
+package com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.screen
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
