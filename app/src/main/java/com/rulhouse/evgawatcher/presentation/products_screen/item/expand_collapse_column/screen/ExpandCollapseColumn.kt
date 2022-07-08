@@ -75,7 +75,11 @@ private fun ProductsList(
 
     val uriHandler = LocalUriHandler.current
 
-    AnimatedVisibility(visible = expandCollapseModel.isOpen) {
+    AnimatedVisibility(
+        visible = expandCollapseModel.isOpen,
+        enter = fadeIn() + expandVertically(),
+        exit = fadeOut() + shrinkVertically(),
+    ) {
         Column(
 
         ) {
