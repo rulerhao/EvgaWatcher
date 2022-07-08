@@ -30,6 +30,9 @@ open class ProductsScreenViewModel @Inject constructor(
     private var allProductsModels: List<ExpandCollapseModel>? =
         emptyList<ExpandCollapseModel>().toMutableList()
 
+    private val _filterState: MutableState<Boolean> = mutableStateOf(false)
+    val filterState: State<Boolean> = _filterState
+
     private val _userPreferencesState: MutableState<UserPreferencesState> =
         mutableStateOf(UserPreferencesState())
     val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
@@ -53,6 +56,9 @@ open class ProductsScreenViewModel @Inject constructor(
             }
             is ProductsScreenEvent.OnCollapseColumnStateChanged -> {
                 onCollapseColumnStateChanged(event.index)
+            }
+            is ProductsScreenEvent.OnFilterStateChanged -> {
+                _filterState.value = !filterState.value
             }
             is ProductsScreenEvent.OnShowingOutOfStockChanged -> {
                 viewModelScope.launch {
