@@ -1,16 +1,19 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProductType
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.favorite_products_screen.screen.FavoriteProductsScreen
