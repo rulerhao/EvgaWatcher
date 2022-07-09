@@ -20,49 +20,18 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-//    @Inject
-//    lateinit var notification: NotificationUseCase
-//
-//    @Inject
-//    lateinit var notificationUseCase:NotificationUseCase
-
-//    @Inject
-//    lateinit var workManagerUseCases: WorkManagerUseCases
-
-    val activitySetting = ActivitySetting()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         installSplashScreen()
-//        activitySetting.hindSystemBar(this)
-//
-//        activitySetting.addSystemUIListener(this)
 
         setContent {
             AppTheme {
                 MainScreen()
-
-                val systemUiController = rememberSystemUiController()
-
-                val backgroundColor = androidx.compose.material3.MaterialTheme.colorScheme.background
-                val useDarkIcons = isSystemInDarkTheme()
-
-                SideEffect {
-                    systemUiController.setSystemBarsColor(
-                        color = backgroundColor,
-                        darkIcons = !useDarkIcons
-                    )
-                }
-//                ProductItem()
+                SystemBarTheme()
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-//        activitySetting.hideSystemBar(this)
     }
 }
