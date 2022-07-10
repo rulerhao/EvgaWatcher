@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.rulhouse.evgawatcher.favorite_products.data.GpuProductType
+import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProductType
 import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.favorite_products_screen.screen.FavoriteProductsScreen
 import com.rulhouse.evgawatcher.presentation.product_screen.ProductScreen

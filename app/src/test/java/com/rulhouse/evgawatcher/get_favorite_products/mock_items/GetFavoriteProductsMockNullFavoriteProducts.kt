@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.get_favorite_products.mock_items
 
-import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 
 class GetFavoriteProductsMockNullFavoriteProducts {
 

@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.products_with_price
 
-import com.rulhouse.evgawatcher.crawler.crawler.util.GpuProductsMethods
+import com.rulhouse.evgawatcher.methods.crawler.crawler.util.GpuProductsMethods
 import com.rulhouse.evgawatcher.products_with_price.mock_items.GetProductsExcludingNoPriceTestMock
 import com.rulhouse.evgawatcher.products_with_price.mock_items.GetProductsIncludingNoPriceTestMock
 import org.junit.Test

@@ -32,7 +32,7 @@
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove">
         </provider>
-        <receiver android:name=".renew_favorite_products.RenewFavoriteProductsBroadcastReceiver"
+        <receiver android:name="com.rulhouse.evgawatcher.methods.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver"
             android:exported="false">
         </receiver>
     </application>

@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.products_with_price.mock_items
 
-import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 
 class GetProductsExcludingNoPriceTestMock {
 

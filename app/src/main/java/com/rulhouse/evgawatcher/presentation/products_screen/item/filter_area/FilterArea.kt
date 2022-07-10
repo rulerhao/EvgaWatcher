@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.R
-import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
+import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.presentation.product_screen.item.UserPrefsFilterChipsV2
 import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent
 

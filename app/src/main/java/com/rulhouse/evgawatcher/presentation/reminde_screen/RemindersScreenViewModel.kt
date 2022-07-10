@@ -7,10 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.work.WorkInfo
-import androidx.work.WorkManager
-import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.RemindersScreenEvent
-import com.rulhouse.evgawatcher.work_manager.use_cases.WorkManagerUseCases
+import com.rulhouse.evgawatcher.methods.work_manager.use_cases.WorkManagerUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.concurrent.ExecutionException
 import javax.inject.Inject

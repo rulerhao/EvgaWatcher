@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.rulhouse.evgawatcher.R
-import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
+import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.model.BooleanFilterChipModel
 import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.screen.BooleanFilterChipsRow
 import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent

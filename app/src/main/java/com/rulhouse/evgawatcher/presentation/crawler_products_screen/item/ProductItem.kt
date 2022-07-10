@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

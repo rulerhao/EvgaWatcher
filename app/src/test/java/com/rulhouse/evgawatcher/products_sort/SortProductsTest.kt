@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.products_sort
 
-import com.rulhouse.evgawatcher.crawler.crawler.util.GpuProductsMethods
+import com.rulhouse.evgawatcher.methods.crawler.crawler.util.GpuProductsMethods
 import com.rulhouse.evgawatcher.products_sort.mock_products.*
 import junit.framework.Assert.assertEquals
 import org.junit.Test

@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.get_products_with_favorite
 
-import com.rulhouse.evgawatcher.crawler.crawler.util.GpuProductsMethods
+import com.rulhouse.evgawatcher.methods.crawler.crawler.util.GpuProductsMethods
 import com.rulhouse.evgawatcher.get_products_with_favorite.mock_items.GetProductsWithFavoriteMockNullAllProducts
 import com.rulhouse.evgawatcher.get_products_with_favorite.mock_items.GetProductsWithFavoriteMockNullFavoriteProducts
 import com.rulhouse.evgawatcher.get_products_with_favorite.mock_items.GetProductsWithFavoriteMockNullProducts
