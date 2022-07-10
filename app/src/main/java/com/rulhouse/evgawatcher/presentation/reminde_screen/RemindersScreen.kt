@@ -1,19 +1,16 @@
 package com.rulhouse.evgawatcher.presentation.reminde_screen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.RemindersScreenEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,24 +20,24 @@ fun RemindersScreen(
     navController: NavController = rememberNavController(),
     viewModel: RemindersScreenViewModel = hiltViewModel()
 ) {
+
+    val context = LocalContext.current
+
     Scaffold(
-        floatingActionButton = {
-            floatingAddButton(
-                onClick = {
+        topBar = {
+            SmallTopAppBar(
+                title = {
+                    Text(text = context.getString(R.string.reminder_top_app_bar))
                 }
             )
         }
     ) {
-        Column(
-
-        ) {
-            RepeatedRemindItem(
-                reminderState = viewModel.workScheduled.value,
-                onCheckedChange = {
-                    viewModel.onEvent(RemindersScreenEvent.OnWorkManagerSwitchClick)
-                }
-            )
-        }
+        RemindItem(
+            reminderState = viewModel.workScheduled.value,
+            onCheckedChange = {
+                viewModel.onEvent(RemindersScreenEvent.OnWorkManagerSwitchClick)
+            }
+        )
     }
 }
 
@@ -51,8 +48,7 @@ private fun floatingAddButton(
     FloatingActionButton(
         onClick = {
             onClick()
-        },
-        backgroundColor = Color.White
+        }
     ) {
         Icon(
             imageVector = Icons.Default.Add,

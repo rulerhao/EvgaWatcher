@@ -10,6 +10,9 @@
     <string name="channel_name">通道名稱</string>
     <string name="channel_description">通道描述</string>
 
+    <string name="reminder">通知開啟</string>
+    <string name="reminder_top_app_bar">通知</string>
+
     <string name="price">價格</string>
     <string name="ascending">升冪</string>
     <string name="descending">降冪</string>
