@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.oucare.bbt_oucare.feature_node.domain.use_case.*
 import com.rulhouse.evgawatcher.favorite_products.feature_node.data.data_source.FavoriteGpuProductDataBase
 import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository.FavoriteGpuProductRepository
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.repository.FavoriteGpuProductRepositoryImpl
+import com.rulhouse.evgawatcher.favorite_products.feature_node.impl.FavoriteGpuProductImpl
 import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.*
 import dagger.Module
 import dagger.Provides
@@ -29,7 +29,7 @@ object FavoriteGpuProductsModule {
     @Provides
     @Singleton
     fun provideFavoriteGpuProductRepository(db: FavoriteGpuProductDataBase): FavoriteGpuProductRepository {
-        return FavoriteGpuProductRepositoryImpl(db.measurementDao)
+        return FavoriteGpuProductImpl(db.measurementDao)
     }
 
     @Provides
