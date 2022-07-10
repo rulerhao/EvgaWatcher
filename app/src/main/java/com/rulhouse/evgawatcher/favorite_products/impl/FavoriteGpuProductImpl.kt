@@ -1,8 +1,8 @@
-package com.rulhouse.evgawatcher.favorite_products.feature_node.impl
+package com.rulhouse.evgawatcher.favorite_products.impl
 
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.data_source.FavoriteGpuProductsDao
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository.FavoriteGpuProductRepository
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.data.data_source.FavoriteGpuProductsDao
+import com.rulhouse.evgawatcher.favorite_products.domain.repository.FavoriteGpuProductRepository
 import kotlinx.coroutines.flow.Flow
 
 class FavoriteGpuProductImpl (

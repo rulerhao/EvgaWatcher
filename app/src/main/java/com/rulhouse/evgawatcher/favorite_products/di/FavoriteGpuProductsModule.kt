@@ -1,12 +1,12 @@
-package com.rulhouse.evgawatcher.favorite_products.feature_node.di
+package com.rulhouse.evgawatcher.favorite_products.di
 
 import android.app.Application
 import androidx.room.Room
 import com.oucare.bbt_oucare.feature_node.domain.use_case.*
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.data_source.FavoriteGpuProductDataBase
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository.FavoriteGpuProductRepository
-import com.rulhouse.evgawatcher.favorite_products.feature_node.impl.FavoriteGpuProductImpl
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.*
+import com.rulhouse.evgawatcher.favorite_products.data.data_source.FavoriteGpuProductDataBase
+import com.rulhouse.evgawatcher.favorite_products.domain.repository.FavoriteGpuProductRepository
+import com.rulhouse.evgawatcher.favorite_products.impl.FavoriteGpuProductImpl
+import com.rulhouse.evgawatcher.favorite_products.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

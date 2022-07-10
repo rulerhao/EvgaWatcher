@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.favorite_products.feature_node.domain.util
+package com.rulhouse.evgawatcher.favorite_products.domain.util
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

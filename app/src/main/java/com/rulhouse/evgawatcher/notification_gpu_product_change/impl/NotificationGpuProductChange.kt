@@ -1,13 +1,11 @@
 package com.rulhouse.evgawatcher.notification_gpu_product_change.impl
 
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
-import com.rulhouse.evgawatcher.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import javax.inject.Inject
 
 class NotificationGpuProductChange (
     private val crawlerUseCases: CrawlerUseCases,

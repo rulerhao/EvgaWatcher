@@ -3,12 +3,9 @@ package com.rulhouse.evgawatcher.renew_favorite_products
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
-import com.rulhouse.evgawatcher.notification.impl.DifferentProductsNotification
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject

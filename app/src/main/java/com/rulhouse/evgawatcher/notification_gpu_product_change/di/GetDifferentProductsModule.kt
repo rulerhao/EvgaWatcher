@@ -1,7 +1,7 @@
 package com.rulhouse.evgawatcher.notification_gpu_product_change.di
 
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.notification_gpu_product_change.impl.GetDifferentProductsImpl
 import com.rulhouse.evgawatcher.notification_gpu_product_change.repository.GetDifferentProductsRepository
 import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferenceProducts

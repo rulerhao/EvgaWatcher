@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.crawler
 
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collapse_column.model.ExpandCollapseModel
 
 object GpuProductsMethods {

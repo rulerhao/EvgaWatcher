@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.favorite_products.feature_node.data
+package com.rulhouse.evgawatcher.favorite_products.data
 
 import android.os.Parcelable
 import androidx.room.Entity

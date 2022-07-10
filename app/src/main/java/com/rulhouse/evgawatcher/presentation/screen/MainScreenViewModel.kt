@@ -5,8 +5,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
 import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState

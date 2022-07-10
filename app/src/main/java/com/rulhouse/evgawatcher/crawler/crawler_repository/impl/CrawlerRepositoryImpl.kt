@@ -2,8 +2,7 @@ package com.rulhouse.evgawatcher.crawler.crawler_repository.impl
 
 import com.rulhouse.evgawatcher.crawler.crawler_repository.data.data_source.CrawlerRepositoryDao
 import com.rulhouse.evgawatcher.crawler.crawler_repository.domain.repository.CrawlerRepositoryRepository
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.repository.FavoriteGpuProductRepository
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import kotlinx.coroutines.flow.Flow
 
 class CrawlerRepositoryImpl (

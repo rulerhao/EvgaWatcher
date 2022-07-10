@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case
+package com.rulhouse.evgawatcher.favorite_products.domain.use_case
 
 import com.oucare.bbt_oucare.feature_node.domain.use_case.GetFavoriteGpuProduct
 

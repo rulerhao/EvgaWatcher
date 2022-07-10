@@ -1,7 +1,7 @@
 package com.rulhouse.evgawatcher.crawler.crawler_repository.data.data_source
 
 import androidx.room.*
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import kotlinx.coroutines.flow.Flow
 
 @Dao

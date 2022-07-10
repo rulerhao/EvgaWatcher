@@ -1,7 +1,7 @@
 package com.rulhouse.evgawatcher.crawler
 
 import android.util.Log
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.util.StringMethods
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

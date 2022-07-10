@@ -1,6 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.products_screen.event
 
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
+import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 
 sealed class ProductsScreenEvent {
     data class OnCollapseColumnStateChanged(val index: Int): ProductsScreenEvent()
