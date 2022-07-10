@@ -5,5 +5,6 @@ data class WorkManagerUseCases (
     val setPeriodicWork: SetPeriodicWork,
     val cancelPeriodicWork: CancelPeriodicWork,
     val setCrawlerWork: SetCrawlerWork,
-    val cancelCrawlerWork: CancelCrawlerWork
+    val cancelCrawlerWork: CancelCrawlerWork,
+    val getPeriodWorkStateLiveData: GetPeriodWorkState
 )

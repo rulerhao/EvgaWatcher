@@ -36,7 +36,8 @@ object WorkManagerModule {
             setPeriodicWork = SetPeriodicWork(repository),
             cancelPeriodicWork = CancelPeriodicWork(repository),
             setCrawlerWork = SetCrawlerWork(repository),
-            cancelCrawlerWork = CancelCrawlerWork(repository)
+            cancelCrawlerWork = CancelCrawlerWork(repository),
+            getPeriodWorkStateLiveData = GetPeriodWorkState(repository)
         )
     }
 

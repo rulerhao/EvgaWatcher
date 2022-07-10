@@ -8,24 +8,25 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.rulhouse.evgawatcher.presentation.reminde_screen.event.RemindersScreenEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun RemindersScreen(
     navController: NavController = rememberNavController(),
-    remindersScreenViewModel: RemindersScreenViewModel = hiltViewModel()
+    viewModel: RemindersScreenViewModel = hiltViewModel()
 ) {
     Scaffold(
         floatingActionButton = {
             floatingAddButton(
                 onClick = {
-                    RemindersScreenEvent.OnAddClick
                 }
             )
         }
@@ -33,7 +34,12 @@ fun RemindersScreen(
         Column(
 
         ) {
-            RepeatedRemindItem()
+            RepeatedRemindItem(
+                reminderState = viewModel.workScheduled.value,
+                onCheckedChange = {
+                    viewModel.onEvent(RemindersScreenEvent.OnWorkManagerSwitchClick)
+                }
+            )
         }
     }
 }

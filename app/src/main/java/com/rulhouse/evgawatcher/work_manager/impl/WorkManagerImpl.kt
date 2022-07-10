@@ -1,12 +1,14 @@
 package com.rulhouse.evgawatcher.work_manager.impl
 
 import android.content.Context
-import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.work.*
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorker
 import com.rulhouse.evgawatcher.work_manager.factory.WorkManagerFactory
 import com.rulhouse.evgawatcher.work_manager.repository.WorkManagerRepository
+import java.util.*
 import java.util.concurrent.TimeUnit
+
 
 class WorkManagerImpl(
     private val context: Context,
@@ -73,4 +75,18 @@ class WorkManagerImpl(
         )
     }
 
+    override fun getPeriodWorkState(): LiveData<List<WorkInfo>> {
+        return WorkManager.getInstance(context).getWorkInfosForUniqueWorkLiveData(
+            workManagerFactory.workManagerUniqueName
+        )
+
+//        workInfoLiveData.observe(context, Observer{})
+//        var running = false
+//        for (workInfo in workInfoList) {
+//            val state = workInfo.state
+//            running = state == WorkInfo.State.RUNNING || state == WorkInfo.State.ENQUEUED
+//        }
+//
+//        return running
+    }
 }
