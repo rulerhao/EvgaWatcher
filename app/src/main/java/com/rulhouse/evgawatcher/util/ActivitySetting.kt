@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.methods
+package com.rulhouse.evgawatcher.util
 
 import android.app.Activity
 import android.content.pm.ActivityInfo

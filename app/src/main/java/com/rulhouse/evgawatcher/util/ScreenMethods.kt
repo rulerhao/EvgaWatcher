@@ -1,16 +1,12 @@
-package com.rulhouse.evgawatcher.methods
+package com.rulhouse.evgawatcher.util
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Point
 import android.os.Build
 import android.util.DisplayMetrics
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import kotlin.math.pow
-import kotlin.math.sqrt
 
 object ScreenMethods {
     /**

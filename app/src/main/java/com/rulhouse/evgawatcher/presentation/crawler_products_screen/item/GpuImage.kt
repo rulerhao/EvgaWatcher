@@ -12,7 +12,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import com.rulhouse.evgawatcher.methods.ScreenMethods
+import com.rulhouse.evgawatcher.util.ScreenMethods
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable

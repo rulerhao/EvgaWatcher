@@ -1,6 +1,17 @@
-package com.rulhouse.evgawatcher
+package com.rulhouse.evgawatcher.util
+
+import java.text.NumberFormat
+import java.util.*
 
 object StringMethods {
+    fun getNTFormat(price: Int): String {
+        NumberFormat.getCurrencyInstance().apply {
+            maximumFractionDigits = 0
+            currency = Currency.getInstance("NTD")
+            return format(price)
+        }
+    }
+
     fun removeStringCharacter(str: String, charList: List<Char>): String {
         if (str.isEmpty())
             return ""
