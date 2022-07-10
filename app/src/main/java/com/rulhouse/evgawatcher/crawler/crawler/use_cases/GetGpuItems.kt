@@ -1,7 +1,7 @@
-package com.rulhouse.evgawatcher.crawler.use_cases
+package com.rulhouse.evgawatcher.crawler.crawler.use_cases
 
 import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
-import com.rulhouse.evgawatcher.crawler.repository.CrawlerRepository
+import com.rulhouse.evgawatcher.crawler.crawler.repository.CrawlerRepository
 
 class GetGpuItems(
     private val repository: CrawlerRepository

@@ -10,7 +10,7 @@ import androidx.work.ListenableWorker
 import androidx.work.impl.utils.SynchronousExecutor
 import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
-import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.crawler.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.notification.use_case.NotificationUseCase
 import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorkManagerFactory

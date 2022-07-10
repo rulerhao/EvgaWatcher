@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.work.ListenableWorker
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
-import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.notification.use_case.NotificationUseCase
 import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 

@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.crawler
+package com.rulhouse.evgawatcher.crawler.crawler.util
 
 import android.util.Log
 import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
@@ -10,7 +10,7 @@ import org.jsoup.nodes.Document
 
 class WebCrawler {
     companion object {
-        suspend fun test(): List<GpuProduct>? {
+        suspend fun getCrawlerProducts(): List<GpuProduct>? {
             var ans: List<GpuProduct>? = null
             withContext(Dispatchers.IO) {
                 try {

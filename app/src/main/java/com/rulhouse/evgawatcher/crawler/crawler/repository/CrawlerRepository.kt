@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.crawler.repository
+package com.rulhouse.evgawatcher.crawler.crawler.repository
 
 import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 

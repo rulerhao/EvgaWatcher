@@ -2,7 +2,7 @@ package com.rulhouse.evgawatcher.notification_gpu_product_change.impl
 
 import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.favorite_products.domain.use_case.FavoriteGpuProductUseCases
-import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.crawler.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*

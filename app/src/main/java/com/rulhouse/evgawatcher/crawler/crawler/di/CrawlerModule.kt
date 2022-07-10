@@ -1,9 +1,9 @@
-package com.rulhouse.evgawatcher.crawler.di
+package com.rulhouse.evgawatcher.crawler.crawler.di
 
-import com.rulhouse.evgawatcher.crawler.impl.CrawlerImpl
-import com.rulhouse.evgawatcher.crawler.repository.CrawlerRepository
-import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
-import com.rulhouse.evgawatcher.crawler.use_cases.GetGpuItems
+import com.rulhouse.evgawatcher.crawler.crawler.impl.CrawlerImpl
+import com.rulhouse.evgawatcher.crawler.crawler.repository.CrawlerRepository
+import com.rulhouse.evgawatcher.crawler.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.crawler.crawler.use_cases.GetGpuItems
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

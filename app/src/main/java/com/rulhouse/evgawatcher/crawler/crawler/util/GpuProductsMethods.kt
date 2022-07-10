@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.crawler
+package com.rulhouse.evgawatcher.crawler.crawler.util
 
 import com.rulhouse.evgawatcher.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collapse_column.model.ExpandCollapseModel
