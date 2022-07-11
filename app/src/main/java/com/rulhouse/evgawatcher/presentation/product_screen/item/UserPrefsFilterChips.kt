@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.model.BooleanFilterChipModel
@@ -30,15 +31,15 @@ fun UserPrefsFilterChips(
         list = listOf(
             BooleanFilterChipModel(
                 isOn = filters.showingOutOfStock,
-                text = context.getString(R.string.show_unbuyable)
+                text = stringResource(id = R.string.show_unbuyable)
             ),
             BooleanFilterChipModel(
                 isOn = filters.priceAscending,
-                text = context.getString(R.string.price_ascending)
+                text = stringResource(id = R.string.price_ascending)
             ),
             BooleanFilterChipModel(
                 isOn = filters.showingNoPrice,
-                text = context.getString(R.string.show_no_price)
+                text = stringResource(id = R.string.show_no_price)
             ),
         ),
         onClick = {

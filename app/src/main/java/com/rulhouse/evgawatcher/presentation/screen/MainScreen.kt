@@ -27,15 +27,15 @@ fun MainScreen(
 
     val navController = rememberNavController()
 
-    Scaffold(
-        modifier = Modifier
-            .statusBarsPadding()
-            .navigationBarsPadding(),
-        bottomBar = {
-            BottomNavigationBar(navController)
-        },
-    ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)) {
+//    Scaffold(
+//        modifier = Modifier
+//            .statusBarsPadding()
+//            .navigationBarsPadding(),
+//        bottomBar = {
+//            BottomNavigationBar(navController)
+//        },
+//    ) { innerPadding ->
+//        Box(modifier = Modifier.padding(innerPadding)) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
@@ -73,6 +73,6 @@ fun MainScreen(
                     }
                 }
             }
-        }
-    }
+//        }
+//    }
 }

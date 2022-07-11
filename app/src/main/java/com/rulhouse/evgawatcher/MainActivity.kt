@@ -8,6 +8,7 @@ import androidx.core.view.WindowCompat
 import com.rulhouse.evgawatcher.presentation.screen.MainScreen
 import com.rulhouse.evgawatcher.ui.theme.AppTheme
 import com.rulhouse.evgawatcher.methods.work_manager.use_cases.WorkManagerUseCases
+import com.rulhouse.evgawatcher.util.SystemBarTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

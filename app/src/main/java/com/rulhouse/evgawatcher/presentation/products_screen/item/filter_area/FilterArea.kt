@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
@@ -39,7 +40,7 @@ fun FilterArea(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = context.getString(R.string.price),
+                    text = stringResource(id = R.string.price),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Spacer(
@@ -49,7 +50,7 @@ fun FilterArea(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = context.getString(R.string.ascending),
+                        text = stringResource(id = R.string.ascending),
                         style = MaterialTheme.typography.titleSmall
                     )
                     RadioButton(
@@ -63,7 +64,7 @@ fun FilterArea(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = context.getString(R.string.descending),
+                        text = stringResource(id = R.string.descending),
                         style = MaterialTheme.typography.titleSmall
                     )
                     RadioButton(

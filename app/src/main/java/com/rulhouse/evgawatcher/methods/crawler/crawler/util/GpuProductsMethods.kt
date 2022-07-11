@@ -6,10 +6,11 @@ import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collaps
 object GpuProductsMethods {
     private val regex = ".* \\d{4}( Ti)?"
 
-    fun getNameBySerial(str: String): String? {
+    fun getNameBySerial(str: String?): String {
+        if (str == null) return ""
         val pattern = Regex(regex)
-        val found = pattern.find(str)
-        return found?.value
+        val found = pattern.find(str) ?: return ""
+        return found.value
     }
 
     fun getNamesBySerial(gpuProducts: List<GpuProduct>?): List<List<GpuProduct>> {

@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
@@ -31,7 +32,7 @@ fun UserPrefsFilterChipsV2(
                 onEvent(ProductsScreenEvent.OnShowingOutOfStockChanged)
             },
             Content = {
-                Text(text = context.getString(R.string.show_unbuyable))
+                Text(text = stringResource(id = R.string.show_unbuyable))
             }
         )
         Spacer(
@@ -44,7 +45,7 @@ fun UserPrefsFilterChipsV2(
                     onEvent(ProductsScreenEvent.OnShowingNoPriceChanged)
                 },
                 Content = {
-                    Text(text = context.getString(R.string.show_no_price))
+                    Text(text = stringResource(id = R.string.show_no_price))
                 }
             )
         }

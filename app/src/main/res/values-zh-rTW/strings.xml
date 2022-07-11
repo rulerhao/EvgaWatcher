@@ -14,6 +14,8 @@
     <string name="reminder_top_app_bar">通知</string>
 
     <string name="price">價格</string>
+    <string name="serial">產品型號</string>
+    <string name="buy_button_description">購買</string>
     <string name="ascending">升冪</string>
     <string name="descending">降冪</string>
 

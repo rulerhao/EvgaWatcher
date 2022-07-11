@@ -8,15 +8,20 @@ import androidx.compose.material.icons.filled.Storefront
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
+@Preview
 @Composable
 fun StoreAndFavorite(
-    favorite: Boolean?,
-    onFavoriteClick: () -> Unit,
-    buyable: Boolean?,
-    onStoreClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    favorite: Boolean? = true,
+    buyable: Boolean? = true,
+    onFavoriteClick: () -> Unit = {},
+    onStoreClick: () -> Unit = {},
 ) {
-    Row() {
+    Row(
+        modifier = modifier
+    ) {
         Store(
             buyable = buyable,
             onClick = {
