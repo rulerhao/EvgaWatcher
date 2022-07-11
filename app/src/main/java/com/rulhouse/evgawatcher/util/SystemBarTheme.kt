@@ -1,7 +1,7 @@
-package com.rulhouse.evgawatcher
+package com.rulhouse.evgawatcher.util
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -12,7 +12,7 @@ fun SystemBarTheme(
 ) {
     val systemUiController = rememberSystemUiController()
 
-    val backgroundColor = MaterialTheme.colors.background
+    val backgroundColor = MaterialTheme.colorScheme.background
     val useDarkIcons = isSystemInDarkTheme()
 
     SideEffect {
