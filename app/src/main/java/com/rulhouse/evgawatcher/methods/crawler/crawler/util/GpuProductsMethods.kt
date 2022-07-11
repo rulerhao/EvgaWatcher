@@ -89,7 +89,7 @@ object GpuProductsMethods {
         priceAscending: Boolean,
         showingNoPrice: Boolean,
     ): List<GpuProduct> {
-        var newProducts: List<GpuProduct> = emptyList<GpuProduct>().toMutableList()
+        var newProducts: List<GpuProduct>
 
         newProducts = getProductsWithOOS(products = products, showingOutOfStock = showingOutOfStock)
         newProducts =
@@ -103,12 +103,12 @@ object GpuProductsMethods {
     }
 
     fun getModels(productsSortedBySerial: List<List<GpuProduct>>?, models: List<ExpandCollapseModel>?): List<ExpandCollapseModel> {
-        if (productsSortedBySerial == null) return emptyList()
-        if (models == null) {
+        if (productsSortedBySerial == null || productsSortedBySerial.isEmpty()) return emptyList()
+        if (models == null || models.isEmpty()) {
             return getCollapsedModels(productsSortedBySerial)
         }
 
-        val sortedModels = emptyList<ExpandCollapseModel>().toMutableList()
+        var sortedModels = emptyList<ExpandCollapseModel>().toMutableList()
         productsSortedBySerial.forEach {
             val name = getRegexName(it[0].name)
             if (name != null) {
@@ -117,9 +117,20 @@ object GpuProductsMethods {
                         sortedModels.add(model)
                     }
                 }
+                sortedModels = getModelsWithLeaked(name, sortedModels).toMutableList()
             }
         }
         return sortedModels
+    }
+
+    private fun getModelsWithLeaked(name: String, models: List<ExpandCollapseModel>): List<ExpandCollapseModel> {
+        val mutableModels = models.toMutableList()
+        val tempTitleOfModels = mutableListOf<String>()
+        models.forEach { model ->
+            tempTitleOfModels.add(model.title)
+        }
+        if (!tempTitleOfModels.contains(name)) mutableModels.add(ExpandCollapseModel(title = name, isOpen = false))
+        return mutableModels
     }
 
     private fun getProductsWithOOS(

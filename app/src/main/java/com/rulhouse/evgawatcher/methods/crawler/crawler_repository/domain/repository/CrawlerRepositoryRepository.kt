@@ -7,4 +7,8 @@ interface CrawlerRepositoryRepository {
     suspend fun getProductsFlow(): Flow<List<GpuProduct>>
 
     suspend fun insertProducts(products: List<GpuProduct>)
+
+    suspend fun insertProduct(product: GpuProduct)
+
+    suspend fun getProductByName(name: String): GpuProduct?
 }

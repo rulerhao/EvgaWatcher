@@ -122,7 +122,8 @@ open class ProductsScreenViewModel @Inject constructor(
     protected fun setProducts(products: List<GpuProduct>?) {
         this.products = products
         allProductsSerialList = GpuProductsMethods.getNamesBySerial(this.products)
-        allProductsModels = GpuProductsMethods.getCollapsedModels(allProductsSerialList)
+//        allProductsModels = GpuProductsMethods.getCollapsedModels(allProductsSerialList)
+        allProductsModels = GpuProductsMethods.getModels(allProductsSerialList, allProductsModels)
         setAllProducts(products)
     }
 

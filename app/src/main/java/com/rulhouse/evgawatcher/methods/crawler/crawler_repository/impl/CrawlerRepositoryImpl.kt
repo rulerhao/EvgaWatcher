@@ -15,4 +15,12 @@ class CrawlerRepositoryImpl (
     override suspend fun insertProducts(products: List<GpuProduct>) {
         dao.insertProducts(products)
     }
+
+    override suspend fun insertProduct(product: GpuProduct) {
+        dao.insertProduct(product)
+    }
+
+    override suspend fun getProductByName(name: String): GpuProduct? {
+        return dao.getProductByName(name)
+    }
 }

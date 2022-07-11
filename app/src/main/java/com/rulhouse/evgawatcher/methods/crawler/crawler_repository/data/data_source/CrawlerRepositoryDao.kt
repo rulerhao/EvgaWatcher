@@ -11,4 +11,10 @@ interface CrawlerRepositoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProducts(products: List<GpuProduct>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertProduct(products: GpuProduct)
+
+    @Query("SELECT * FROM GpuProduct WHERE name = :name")
+    suspend fun getProductByName(name: String): GpuProduct?
 }

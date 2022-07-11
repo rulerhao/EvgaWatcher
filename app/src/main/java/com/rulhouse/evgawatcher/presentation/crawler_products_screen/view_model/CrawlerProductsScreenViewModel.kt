@@ -46,7 +46,14 @@ class CrawlerProductsScreenViewModel @Inject constructor(
 
     private suspend fun setRepository(products: List<GpuProduct>?, crawlerRepositoryUseCase: CrawlerRepositoryUseCase) {
         products?.let {
-            crawlerRepositoryUseCase.insertCrawlerRepository(it)
+            products.forEach { product ->
+                val repositoryProduct = crawlerRepositoryUseCase.getCrawlerRepositoryProductByName(product.name)
+                if (repositoryProduct != null) {
+                    crawlerRepositoryUseCase.insertCrawlerRepositoryProduct(product.copy(id = repositoryProduct.id))
+                } else {
+                    crawlerRepositoryUseCase.insertCrawlerRepositoryProduct(product)
+                }
+            }
         }
     }
 }
