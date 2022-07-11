@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CrawlerRepositoryDao {
     @Query("SELECT * FROM GpuProduct")
-    suspend fun getProductsFlow(): Flow<List<GpuProduct>>
+    fun getProductsFlow(): Flow<List<GpuProduct>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProducts(products: List<GpuProduct>)
