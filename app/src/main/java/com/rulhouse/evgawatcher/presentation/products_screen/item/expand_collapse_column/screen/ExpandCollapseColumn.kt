@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +31,7 @@ fun ExpandCollapseColumn(
             .fillMaxWidth()
             .padding(start = 8.dp, top = 4.dp, end = 8.dp, bottom = 4.dp)
     ) {
-        Card(
+        OutlinedCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {

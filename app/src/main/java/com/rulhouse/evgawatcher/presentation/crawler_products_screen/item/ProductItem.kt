@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,7 +38,7 @@ fun ProductItem(
 
     val imageHeight = remember { mutableStateOf(IntSize(0, 0)) }
 
-    Card(
+    OutlinedCard(
         modifier = Modifier
             .clickable {
                 onClick(gpuProduct)
