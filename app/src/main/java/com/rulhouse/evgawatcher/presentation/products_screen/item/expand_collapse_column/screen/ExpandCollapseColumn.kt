@@ -6,15 +6,19 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
-import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collapse_column.model.ExpandCollapseModel
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.item.ProductItem
+import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collapse_column.model.ExpandCollapseModel
+import com.rulhouse.evgawatcher.util.UriHandler
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,7 +77,7 @@ private fun ProductsList(
     onFavoriteClick: (GpuProduct) -> Unit
 ) {
 
-    val uriHandler = LocalUriHandler.current
+    val context = LocalContext.current
 
     AnimatedVisibility(
         visible = expandCollapseModel.isOpen,
@@ -95,9 +99,7 @@ private fun ProductsList(
                         onFavoriteClick(it)
                     },
                     onStoreClick = {
-                        it.uri?.let { uri ->
-                            uriHandler.openUri(uri)
-                        }
+                        UriHandler().openStore(context, it.uri)
                     }
                 )
                 Spacer(modifier = Modifier.size(8.dp))

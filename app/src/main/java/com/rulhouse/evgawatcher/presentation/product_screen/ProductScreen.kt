@@ -1,28 +1,37 @@
 package com.rulhouse.evgawatcher.presentation.product_screen
 
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.gson.Gson
 import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.presentation.Screen
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.item.StoreAndFavorite
+import com.rulhouse.evgawatcher.util.UriHandler
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ProductScreen(
-//    mainScreenViewModel: MainScreenViewModel,
     viewModel: ProductScreenViewModel = hiltViewModel(),
-    navController: NavController
 ) {
+
+    val context = LocalContext.current
+
     val gpuProduct = viewModel.gpuProduct.value
+
     LazyColumn() {
         items(listOf(gpuProduct)) { item ->
             ProductItem(
@@ -30,6 +39,9 @@ fun ProductScreen(
                 gpuProduct = item,
                 onFavoriteClick = {
                     viewModel.onEvent(ProductScreenEvent.ToggleFavoriteButton)
+                },
+                onStoreClick = {
+                    UriHandler().openStore(context, gpuProduct.uri)
                 }
             )
         }
@@ -40,12 +52,22 @@ fun ProductScreen(
 private fun ProductItem(
     isFavorite: Boolean,
     gpuProduct: GpuProduct,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: () -> Unit,
+    onStoreClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
     ) {
-        FavoriteButton(isFavorite = isFavorite, onFavoriteClick = { onFavoriteClick() })
+        StoreAndFavorite(
+            favorite = isFavorite,
+            onFavoriteClick = {
+                onFavoriteClick()
+            },
+            buyable = gpuProduct.canBeBought,
+            onStoreClick = {
+                onStoreClick()
+            }
+        )
         Serial(gpuProduct.serial)
         Picture(gpuProduct.imgUrl!!)
         Name(gpuProduct.name)
@@ -57,26 +79,22 @@ private fun ProductItem(
 }
 @Composable
 private fun FavoriteButton(
+    modifier: Modifier = Modifier,
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
     ) {
-        IconButton(
+        FavoriteButton(
             modifier = Modifier
                 .align(Alignment.CenterEnd),
-            onClick = {
+            isFavorite = isFavorite,
+            onFavoriteClick = {
                 onFavoriteClick()
             }
-        ) {
-            Icon(
-                imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                contentDescription = "Favorite",
-                tint = MaterialTheme.colors.primary
-            )
-        }
+        )
     }
 }
 
@@ -105,7 +123,7 @@ private fun Picture(imgUrl: String) {
 private fun Name(name: String) {
     Text(
         text = name,
-        color = MaterialTheme.colors.primary
+        color = MaterialTheme.colorScheme.primary
     )
 }
 
@@ -119,7 +137,7 @@ private fun Serial(serial: String) {
             modifier = Modifier
                 .align(Alignment.CenterEnd),
             text = serial,
-            color = MaterialTheme.colors.primary
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -164,8 +182,8 @@ private fun Price(
                 modifier = Modifier
                     .align(Alignment.CenterEnd),
                 text = price.toString(),
-                color = MaterialTheme.colors.onBackground,
-                style = MaterialTheme.typography.h5
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.titleLarge
             )
     }
 }

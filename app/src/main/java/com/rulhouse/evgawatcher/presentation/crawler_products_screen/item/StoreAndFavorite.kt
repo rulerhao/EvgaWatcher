@@ -33,7 +33,7 @@ fun StoreAndFavorite(
 }
 
 @Composable
-private fun Favorite(
+fun Favorite(
     favorite: Boolean?,
     onClick: () -> Unit
 ) {
