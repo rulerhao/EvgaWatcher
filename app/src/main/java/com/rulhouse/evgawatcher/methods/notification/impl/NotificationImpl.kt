@@ -6,8 +6,10 @@ import com.rulhouse.evgawatcher.methods.notification.repository.NotificationRepo
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.cancellable
+import kotlinx.coroutines.yield
 
-class NotificationImpl (
+class NotificationImpl(
     private val context: Context,
     private val notificationIdDataStoreUseCases: NotificationIdDataStoreUseCases
 ) : NotificationRepository {
@@ -20,12 +22,16 @@ class NotificationImpl (
             return
         }
         coroutineScope {
-            notificationIdDataStoreUseCases.getNotificationIdDataStoreFlow().collect {
-                val notifyId = it.notificationId
+            notificationIdDataStoreUseCases.getNotificationIdDataStoreFlow().cancellable().collect {
+                var notifyId = it.notificationId
                 differentProducts.forEach { productDifference ->
-                    DifferentProductsNotification().doNotifyProductsDifference(context, notifyId, productDifference)
-                    notificationIdDataStoreUseCases.updateNotificationId(notifyId + 1)
+                    DifferentProductsNotification().doNotifyProductsDifference(
+                        context,
+                        ++notifyId,
+                        productDifference
+                    )
                 }
+                notificationIdDataStoreUseCases.updateNotificationId(notifyId + 1)
                 this@coroutineScope.cancel()
             }
         }

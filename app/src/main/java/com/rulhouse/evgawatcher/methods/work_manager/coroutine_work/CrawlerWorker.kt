@@ -8,6 +8,7 @@ import com.rulhouse.evgawatcher.methods.notification.use_case.NotificationUseCas
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.CancellationException
 
 @HiltWorker
 class CrawlerWorker @AssistedInject constructor(
@@ -20,7 +21,14 @@ class CrawlerWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
 
         val productsDifference = getDifferentProductsUseCase.getDifferenceProducts()
-        notificationUseCase.notificationDifferentProducts(productsDifference)
+        try {
+            notificationUseCase.notificationDifferentProducts(productsDifference)
+        } catch (e: CancellationException) {
+            return Result.success()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return Result.failure()
+        }
 
         return Result.success()
     }

@@ -17,7 +17,10 @@ import com.rulhouse.evgawatcher.methods.work_manager.coroutine_work.CrawlerWorkM
 import com.rulhouse.evgawatcher.methods.work_manager.coroutine_work.CrawlerWorker
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.hamcrest.core.Is.`is`
 import org.junit.Before
 import org.junit.Rule
@@ -39,6 +42,7 @@ class CrawlerWorkerTest {
 
     @Inject
     lateinit var getDifferentProductsUseCase: GetDifferentProductsUseCase
+
     @Inject
     lateinit var notificationUseCase: NotificationUseCase
 
@@ -57,14 +61,29 @@ class CrawlerWorkerTest {
         WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun testCrawlerWorker() {
+    fun testCrawlerWorker() = runTest {
         val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
-            .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
+            .setWorkerFactory(
+                CrawlerWorkManagerFactory(
+                    getDifferentProductsUseCase,
+                    notificationUseCase
+                )
+            )
             .build()
-        runBlocking {
-            val result = worker.doWork()
-            assertThat(result, `is`(ListenableWorker.Result.success()))
-        }
+        val result = worker.doWork()
+        assertThat(result, `is`(ListenableWorker.Result.success()))
     }
+
+//    @Test
+//    fun testCrawlerWorker() {
+//        val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
+//            .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
+//            .build()
+//        runBlocking {
+//            val result = worker.doWork()
+//            assertThat(result, `is`(ListenableWorker.Result.success()))
+//        }
+//    }
 }
