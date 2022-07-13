@@ -4,7 +4,7 @@ import com.rulhouse.evgawatcher.get_different_products.buyable.TestBecomeBuyable
 import com.rulhouse.evgawatcher.get_different_products.buyable.TestBecomeNotBuyableObject
 import com.rulhouse.evgawatcher.get_different_products.price.TestPriceGoesDownObject
 import com.rulhouse.evgawatcher.get_different_products.price.TestPriceGoesUpObject
-import com.rulhouse.evgawatcher.notification_gpu_product_change.impl.GetGpuProductsDifference
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.impl.GetGpuProductsDifference
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

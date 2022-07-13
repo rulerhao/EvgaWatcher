@@ -5,15 +5,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rulhouse.evgawatcher.favorite_products.feature_node.domain.use_case.FavoriteGpuProductUseCases
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.crawler.GpuProductsMethods
-import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
-import com.rulhouse.evgawatcher.data_store.user_preferences.data.UserPreferencesState
-import com.rulhouse.evgawatcher.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
-import com.rulhouse.evgawatcher.presentation.products_screen.ExpandCollapseModel
+import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
+import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.methods.crawler.crawler.util.GpuProductsMethods
+import com.rulhouse.evgawatcher.methods.crawler.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
+import com.rulhouse.evgawatcher.methods.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
+import com.rulhouse.evgawatcher.presentation.products_screen.item.expand_collapse_column.model.ExpandCollapseModel
+import com.rulhouse.evgawatcher.presentation.products_screen.item.boolean_filter_chip.event.BooleanFilterChipEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,24 +24,23 @@ class MainScreenViewModel @Inject constructor(
     private val userPreferencesDataStoreUseCases: UserPreferencesDataStoreUseCases,
 ) : ViewModel() {
 
-    private val _userPreferencesState: MutableState<UserPreferencesState> = mutableStateOf(UserPreferencesState())
+    private val _userPreferencesState: MutableState<UserPreferencesState> =
+        mutableStateOf(UserPreferencesState())
     val userPreferencesState: State<UserPreferencesState> = _userPreferencesState
 
     private val _crawlerProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
-    val crawlerProducts: State<List<GpuProduct>?> = _crawlerProducts
+    private val crawlerProducts: State<List<GpuProduct>?> = _crawlerProducts
 
     private val _showingProducts: MutableState<List<GpuProduct>?> = mutableStateOf(emptyList())
-    val showingProducts: State<List<GpuProduct>?> = _showingProducts
+    private val showingProducts: State<List<GpuProduct>?> = _showingProducts
 
-    private val _showingGpuProductsSortedBySerial: MutableState<List<List<GpuProduct>>?> = mutableStateOf(
-        emptyList()
-    )
-    val showingGpuProductsSortedBySerial: State<List<List<GpuProduct>>?> = _showingGpuProductsSortedBySerial
+    private val _showingGpuProductsSortedBySerial: MutableState<List<List<GpuProduct>>?> =
+        mutableStateOf(emptyList())
+    val showingGpuProductsSortedBySerial: State<List<List<GpuProduct>>?> =
+        _showingGpuProductsSortedBySerial
 
     private val _productsSortedBySerialModel: MutableState<List<ExpandCollapseModel>?> =
-        mutableStateOf(
-            emptyList()
-        )
+        mutableStateOf(emptyList())
     val productsSortedBySerialModel: State<List<ExpandCollapseModel>?> =
         _productsSortedBySerialModel
 
@@ -53,14 +52,24 @@ class MainScreenViewModel @Inject constructor(
             is MainScreenEvent.OnCollapseColumnStateChanged -> {
                 onCollapseColumnStateChanged(event.index)
             }
-            is MainScreenEvent.OnShowingOutOfStockChanged -> {
+        }
+    }
+
+    fun onEvent(event: BooleanFilterChipEvent) {
+        when (event) {
+            is BooleanFilterChipEvent.OnShowingOutOfStockChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updateShowingOutOfStock(!userPreferencesState.value.showingOutOfStock)
                 }
             }
-            is MainScreenEvent.OnPriceAscendingChanged -> {
+            is BooleanFilterChipEvent.OnPriceAscendingChanged -> {
                 viewModelScope.launch {
                     userPreferencesDataStoreUseCases.updatePriceAscending(!userPreferencesState.value.priceAscending)
+                }
+            }
+            is BooleanFilterChipEvent.OnShowingNoPriceChanged -> {
+                viewModelScope.launch {
+                    userPreferencesDataStoreUseCases.updateShowingNoPriceProduct(!userPreferencesState.value.showingNoPrice)
                 }
             }
         }
@@ -74,34 +83,66 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             favoriteGpuProductUseCases.getFavoriteGpuProductsFlow().collect {
                 _favoriteProducts.value = it
-                setProducts()
+                setFavoriteProducts()
             }
         }
         viewModelScope.launch {
             userPreferencesDataStoreUseCases.getUserPreferencesDataStoreFlow().collect {
-                _userPreferencesState.value = userPreferencesState.value.copy(
-                    showingOutOfStock = it.showingOutOfStock,
-                    priceAscending = it.priceAscending
-                )
-                setProducts()
+                if (userPreferencesState.value.showingOutOfStock != it.showingOutOfStock) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        showingOutOfStock = it.showingOutOfStock,
+                    )
+                    setProducts()
+                }
+                if (userPreferencesState.value.priceAscending != it.priceAscending) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        priceAscending = it.priceAscending
+                    )
+                    setFavoriteProducts()
+                }
+                if (userPreferencesState.value.showingNoPrice != it.showingNoPrice) {
+                    _userPreferencesState.value = userPreferencesState.value.copy(
+                        showingNoPrice = it.showingNoPrice
+                    )
+                    setFavoriteProducts()
+                }
             }
         }
     }
 
     private fun setProducts() {
         crawlerProducts.value?.let {
-            var tempProducts: List<GpuProduct> = emptyList()
-            tempProducts = GpuProductsMethods.getProductsWithFavorites(
+            val tempProducts: List<GpuProduct> = GpuProductsMethods.getProductsWithFavorites(
                 products = crawlerProducts.value,
                 favoriteProducts = favoriteProducts.value
             )
-            _showingProducts.value = GpuProductsMethods.sortProducts(
+            _showingProducts.value = GpuProductsMethods.sortProductsWithPrice(
                 products = tempProducts,
                 showingOutOfStock = userPreferencesState.value.showingOutOfStock,
-                priceAscending = userPreferencesState.value.priceAscending
+                priceAscending = userPreferencesState.value.priceAscending,
+                showingNoPrice = userPreferencesState.value.showingNoPrice
             )
-            _showingGpuProductsSortedBySerial.value = GpuProductsMethods.getNamesBySerial(showingProducts.value)
-            _productsSortedBySerialModel.value = GpuProductsMethods.getCollapsedModels(showingGpuProductsSortedBySerial.value)
+            _showingGpuProductsSortedBySerial.value =
+                GpuProductsMethods.getNamesBySerial(showingProducts.value)
+            _productsSortedBySerialModel.value =
+                GpuProductsMethods.getCollapsedModels(showingGpuProductsSortedBySerial.value)
+        }
+    }
+
+    private fun setFavoriteProducts() {
+        crawlerProducts.value?.let {
+            val tempProducts: List<GpuProduct> = GpuProductsMethods.getProductsWithFavorites(
+                products = crawlerProducts.value,
+                favoriteProducts = favoriteProducts.value
+            )
+            _showingProducts.value = GpuProductsMethods.sortProductsWithPrice(
+                products = tempProducts,
+                showingOutOfStock = userPreferencesState.value.showingOutOfStock,
+                priceAscending = userPreferencesState.value.priceAscending,
+                showingNoPrice = userPreferencesState.value.showingNoPrice
+            )
+            _showingGpuProductsSortedBySerial.value =
+                GpuProductsMethods.getNamesBySerial(showingProducts.value)
         }
     }
 

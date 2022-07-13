@@ -8,6 +8,19 @@
     <string name="on_time">On Time</string>
     <string name="each_time">Each Time</string>
 
+    <string name="reminder">Reminder</string>
+    <string name="reminder_top_app_bar">Reminder</string>
+
     <string name="channel_name">Channel name</string>
     <string name="channel_description">Channel description</string>
+
+    <string name="price">Price</string>
+    <string name="serial">Serial</string>
+    <string name="buy_button_description">Buy It！</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+
+    <string name="show_unbuyable">Show out of stock</string>
+    <string name="price_ascending">Price ascending</string>
+    <string name="show_no_price">Show no price</string>
 </resources>

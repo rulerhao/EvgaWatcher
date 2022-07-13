@@ -67,6 +67,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
     debugImplementation "androidx.compose.ui:ui-tooling:1.1.1"
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
 
@@ -75,6 +76,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-compose:2.5.0'
     implementation "androidx.compose.material:material-icons-extended:1.1.1"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.24.13-rc")
+    implementation ('androidx.compose.runtime:runtime-livedata:1.3.0-alpha01')  // Compose Live Data
 
     // Room
     implementation("androidx.room:room-runtime:$roomVersion")
@@ -138,6 +141,9 @@ dependencies {
     // Junit 5
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    // Splash Screen
+    implementation "androidx.core:core-splashscreen:1.0.0-rc01"
 }
 
 protobuf {

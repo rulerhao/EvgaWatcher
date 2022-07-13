@@ -1,8 +1,8 @@
 package com.rulhouse.evgawatcher.get_different_products.price
 
-import com.rulhouse.evgawatcher.favorite_products.feature_node.data.GpuProduct
-import com.rulhouse.evgawatcher.notification_gpu_product_change.DifferenceReason
-import com.rulhouse.evgawatcher.notification_gpu_product_change.ProductsDifference
+import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 
 class TestPriceGoesDownObject {
     val favoriteGpuProduct: List<GpuProduct> = listOf(

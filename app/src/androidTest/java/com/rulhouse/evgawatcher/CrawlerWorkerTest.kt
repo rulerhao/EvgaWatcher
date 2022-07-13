@@ -10,14 +10,17 @@ import androidx.work.ListenableWorker
 import androidx.work.impl.utils.SynchronousExecutor
 import androidx.work.testing.TestListenableWorkerBuilder
 import androidx.work.testing.WorkManagerTestInitHelper
-import com.rulhouse.evgawatcher.crawler.use_cases.CrawlerUseCases
-import com.rulhouse.evgawatcher.notification.use_case.NotificationUseCase
-import com.rulhouse.evgawatcher.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
-import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorkManagerFactory
-import com.rulhouse.evgawatcher.work_manager.coroutine_work.CrawlerWorker
+import com.rulhouse.evgawatcher.methods.crawler.crawler.use_cases.CrawlerUseCases
+import com.rulhouse.evgawatcher.methods.notification.use_case.NotificationUseCase
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
+import com.rulhouse.evgawatcher.methods.work_manager.coroutine_work.CrawlerWorkManagerFactory
+import com.rulhouse.evgawatcher.methods.work_manager.coroutine_work.CrawlerWorker
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.hamcrest.core.Is.`is`
 import org.junit.Before
 import org.junit.Rule
@@ -39,6 +42,7 @@ class CrawlerWorkerTest {
 
     @Inject
     lateinit var getDifferentProductsUseCase: GetDifferentProductsUseCase
+
     @Inject
     lateinit var notificationUseCase: NotificationUseCase
 
@@ -57,14 +61,29 @@ class CrawlerWorkerTest {
         WorkManagerTestInitHelper.initializeTestWorkManager(context, config)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun testCrawlerWorker() {
+    fun testCrawlerWorker() = runTest {
         val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
-            .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
+            .setWorkerFactory(
+                CrawlerWorkManagerFactory(
+                    getDifferentProductsUseCase,
+                    notificationUseCase
+                )
+            )
             .build()
-        runBlocking {
-            val result = worker.doWork()
-            assertThat(result, `is`(ListenableWorker.Result.success()))
-        }
+        val result = worker.doWork()
+        assertThat(result, `is`(ListenableWorker.Result.success()))
     }
+
+//    @Test
+//    fun testCrawlerWorker() {
+//        val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
+//            .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
+//            .build()
+//        runBlocking {
+//            val result = worker.doWork()
+//            assertThat(result, `is`(ListenableWorker.Result.success()))
+//        }
+//    }
 }

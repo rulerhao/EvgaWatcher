@@ -3,16 +3,12 @@ package com.rulhouse.evgawatcher
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.rulhouse.evgawatcher.notification.impl.DifferentProductsNotification
-import com.rulhouse.evgawatcher.notification.use_case.NotificationUseCase
+import com.rulhouse.evgawatcher.methods.notification.use_case.NotificationUseCase
 import com.rulhouse.evgawatcher.product_difference.ProductDifferenceMockObject
-import dagger.hilt.android.testing.HiltAndroidRule
-import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import javax.inject.Inject

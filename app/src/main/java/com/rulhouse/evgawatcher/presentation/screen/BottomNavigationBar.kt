@@ -3,7 +3,8 @@ package com.rulhouse.evgawatcher.presentation.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -13,7 +14,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rulhouse.evgawatcher.presentation.Screen
 
@@ -21,12 +21,12 @@ import com.rulhouse.evgawatcher.presentation.Screen
 fun BottomNavigationBar (
     navController: NavController
 ) {
-    Column(Modifier.background(color = MaterialTheme.colors.surface)) {
+    Column(Modifier.background(color = MaterialTheme.colorScheme.surface)) {
         Divider(
-            color = MaterialTheme.colors.secondary.copy(alpha = 0.2f),
+            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f),
             thickness = 0.5.dp
         )
-        BottomNavigation(backgroundColor = MaterialTheme.colors.surface) {
+        NavigationBar() {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
             val dashTabs = getDashTabs()
@@ -51,16 +51,12 @@ private fun RowScope.BottomNavItem(
     currentDestination: NavDestination?,
     navController: NavController,
 ) {
-
-    BottomNavigationItem(
-//        selectedContentColor = SlackCloneColorProvider.colors.bottomNavSelectedColor,
-//        unselectedContentColor = SlackCloneColorProvider.colors.bottomNavUnSelectedColor,
+    NavigationBarItem(
         icon = { Icon(screen.image, contentDescription = null) },
         label = {
             Text(
-                stringResource(screen.resourceId),
+                text = stringResource(screen.resourceId),
                 maxLines = 1,
-//                style = SlackCloneTypography.overline,
             )
         },
         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
