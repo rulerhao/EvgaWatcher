@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document
 
 class WebCrawler {
     companion object {
+        @Throws(Exception::class)
         suspend fun getCrawlerProducts(): List<GpuProduct>? {
             var ans: List<GpuProduct>? = null
             withContext(Dispatchers.IO) {
@@ -98,7 +99,7 @@ class WebCrawler {
                         warrantyList = itemWarranty
                     )
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    throw e
                 }
             }
 

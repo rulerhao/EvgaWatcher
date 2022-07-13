@@ -12,23 +12,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.rulhouse.evgawatcher.R
+import com.rulhouse.evgawatcher.presentation.crawler_products_screen.event.CrawlerProductsScreenEvent
 import com.rulhouse.evgawatcher.presentation.main_scaffold.MainScaffold
 import com.rulhouse.evgawatcher.presentation.product_screen.item.UserPrefsFilterChips
 import com.rulhouse.evgawatcher.presentation.product_screen.item.UserPrefsFilterChipsV2
 import com.rulhouse.evgawatcher.presentation.products_screen.event.ProductsScreenEvent
 import com.rulhouse.evgawatcher.presentation.products_screen.item.filter_area.FilterArea
 import com.rulhouse.evgawatcher.presentation.products_screen.item.products_list.ProductsCardList
+import com.rulhouse.evgawatcher.presentation.products_screen.model.ProductState
 import com.rulhouse.evgawatcher.presentation.products_screen.view_model.ProductsScreenViewModel
 import com.rulhouse.evgawatcher.presentation.screen.BottomNavigationBar
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductsScreen(
     viewModel: ProductsScreenViewModel,
     navController: NavController,
-    loadingCrawlerState: Boolean = false,
-    loadingRepositoryState: Boolean = false
+    productState: ProductState = ProductState.Success
 ) {
     MainScaffold(
         navController = navController,
@@ -70,9 +72,16 @@ fun ProductsScreen(
             AnimatedVisibility(
                 modifier = Modifier
                     .align(Alignment.Center),
-                visible = loadingCrawlerState && loadingRepositoryState
+                visible = productState == ProductState.FinishedYet
             ) {
                 CircularProgressIndicator()
+            }
+            AnimatedVisibility(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                visible = productState == ProductState.NetWorkError
+            ) {
+                Text(text = "Network error. Please reload it.")
             }
             Column() {
                 ProductsCardList(
