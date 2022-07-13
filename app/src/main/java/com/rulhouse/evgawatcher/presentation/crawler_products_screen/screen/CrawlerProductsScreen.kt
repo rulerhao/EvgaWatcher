@@ -10,5 +10,10 @@ fun CrawlerProductsScreen(
     viewModel: CrawlerProductsScreenViewModel,
     navController: NavController
 ) {
-    ProductsScreen(viewModel, navController)
+    ProductsScreen(
+        viewModel,
+        navController,
+        loadingCrawlerState = viewModel.loadingCrawlerState.value,
+        loadingRepositoryState = viewModel.loadingRepositoryState.value
+    )
 }

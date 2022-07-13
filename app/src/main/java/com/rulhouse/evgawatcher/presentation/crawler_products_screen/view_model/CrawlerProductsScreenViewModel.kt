@@ -1,8 +1,12 @@
 package com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.rulhouse.evgawatcher.methods.crawler.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.methods.crawler.crawler_repository.domain.use_cases.CrawlerRepositoryUseCase
+import com.rulhouse.evgawatcher.methods.data_store.user_preferences.data.UserPreferencesState
 import com.rulhouse.evgawatcher.methods.data_store.user_preferences.use_cases.UserPreferencesDataStoreUseCases
 import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
@@ -22,16 +26,27 @@ class CrawlerProductsScreenViewModel @Inject constructor(
     userPreferencesDataStoreUseCases
 ) {
 
+    private val _loadingCrawlerState: MutableState<Boolean> =
+        mutableStateOf(true)
+    val loadingCrawlerState: State<Boolean> = _loadingCrawlerState
+
+    private val _loadingRepositoryState: MutableState<Boolean> =
+        mutableStateOf(true)
+    val loadingRepositoryState: State<Boolean> = _loadingRepositoryState
+
     private var crawlerProduct: List<GpuProduct>? = emptyList()
     init {
         viewModelScope.launch {
             crawlerProduct = crawlerUseCases.getGpuItems()
+            _loadingCrawlerState.value = false
             setProducts(crawlerProduct)
             setRepository(crawlerProduct, crawlerRepositoryUseCase)
         }
         viewModelScope.launch {
             crawlerRepositoryUseCase.getCrawlerRepositoryFlow().collect {
                 if (!getProductsBeenSet(crawlerProduct)) {
+                    if (it.isNotEmpty())
+                        _loadingRepositoryState.value = false
                     setProducts(it)
                 }
             }

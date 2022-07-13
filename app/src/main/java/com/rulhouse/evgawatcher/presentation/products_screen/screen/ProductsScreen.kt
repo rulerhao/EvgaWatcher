@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.products_screen.screen
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -25,7 +26,9 @@ import com.rulhouse.evgawatcher.presentation.screen.BottomNavigationBar
 @Composable
 fun ProductsScreen(
     viewModel: ProductsScreenViewModel,
-    navController: NavController
+    navController: NavController,
+    loadingCrawlerState: Boolean = false,
+    loadingRepositoryState: Boolean = false
 ) {
     MainScaffold(
         navController = navController,
@@ -59,14 +62,24 @@ fun ProductsScreen(
             }
         },
     ) { innerPadding ->
-        Column(
+        Box(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            ProductsCardList(
-                viewModel = viewModel,
-                navController = navController
-            )
+            AnimatedVisibility(
+                modifier = Modifier
+                    .align(Alignment.Center),
+                visible = loadingCrawlerState && loadingRepositoryState
+            ) {
+                CircularProgressIndicator()
+            }
+            Column() {
+                ProductsCardList(
+                    viewModel = viewModel,
+                    navController = navController
+                )
+            }
         }
     }
 }
