@@ -17,6 +17,15 @@
     <string name="price">Price</string>
     <string name="serial">Serial</string>
     <string name="buy_button_description">Buy It！</string>
+    <string name="no_product_change">No product change！</string>
+
+    <string name="price_goes_up">Price up</string>
+    <string name="price_goes_low">Price low</string>
+    <string name="get_out_of_stock">Get out of stock</string>
+    <string name="get_in_stock">Get in stock</string>
+
+    <string name="get_it_all">Get All</string>
+    <string name="get_it">Get It</string>
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
 

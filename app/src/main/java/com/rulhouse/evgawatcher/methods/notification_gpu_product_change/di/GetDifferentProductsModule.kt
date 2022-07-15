@@ -6,6 +6,7 @@ import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.impl.Get
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.repository.GetDifferentProductsRepository
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferenceProducts
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetProductsDifferenceWIthReason
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,7 @@ object GetDifferentProductsModule {
     fun provideGetDifferenceProductsUseCases(repository: GetDifferentProductsRepository): GetDifferentProductsUseCase {
         return GetDifferentProductsUseCase(
             getDifferenceProducts = GetDifferenceProducts(repository),
+            getProductsDifferenceWIthReason = GetProductsDifferenceWIthReason(repository)
         )
     }
 

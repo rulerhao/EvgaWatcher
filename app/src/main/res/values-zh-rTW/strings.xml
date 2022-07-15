@@ -15,6 +15,13 @@
 
     <string name="price">價格</string>
     <string name="serial">產品型號</string>
+    <string name="no_product_change">沒有產品有變化！</string>
+    <string name="price_goes_up">價格上升</string>
+    <string name="price_goes_low">價格上升</string>
+    <string name="get_out_of_stock">缺貨</string>
+    <string name="get_in_stock">有貨</string>
+    <string name="get_it_all">全部瞭解</string>
+    <string name="get_it">瞭解</string>
     <string name="buy_button_description">購買</string>
     <string name="ascending">升冪</string>
     <string name="descending">降冪</string>

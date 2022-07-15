@@ -4,6 +4,7 @@ import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.methods.crawler.crawler.use_cases.CrawlerUseCases
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -29,6 +30,11 @@ class NotificationGpuProductChange (
     fun getDifferenceProducts(): List<ProductsDifference> {
         getProducts()
         return GetGpuProductsDifference().getDifference(favoriteGpuProducts, crawlerGpuProducts)
+    }
+
+    fun getProductsDifferenceWithReason(): List<ProductsDifferenceWithReason> {
+        getProducts()
+        return GetGpuProductsDifference().getDifferenceWithReason(favoriteGpuProducts, crawlerGpuProducts)
     }
 
     private fun getProducts() {
