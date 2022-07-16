@@ -5,6 +5,7 @@ import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.Favori
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.repository.GetDifferentProductsRepository
+import kotlinx.coroutines.flow.Flow
 
 class GetDifferentProductsImpl(
     private val crawlerUseCases: CrawlerUseCases,
@@ -17,6 +18,10 @@ class GetDifferentProductsImpl(
 
     override suspend fun getProductsDifferenceWithReason(): List<ProductsDifferenceWithReason> {
         return NotificationGpuProductChange(crawlerUseCases, favoriteGpuProductUseCases).getProductsDifferenceWithReason()
+    }
+
+    override suspend fun getProductsDifferenceWithReasonFlow(): Flow<List<ProductsDifferenceWithReason>> {
+        return NotificationGpuProductChange(crawlerUseCases, favoriteGpuProductUseCases).getProductsDifferenceWithReasonFlow()
     }
 
 }

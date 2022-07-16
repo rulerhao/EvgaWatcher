@@ -13,6 +13,7 @@ import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.Products
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.ReminderMessageEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,7 +29,9 @@ class ReminderMessagesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _differenceProducts.value = getDifferentProductsUseCase.getProductsDifferenceWIthReason()
+            getDifferentProductsUseCase.getProductsDifferenceWIthReasonFlow().collect {
+                _differenceProducts.value = it
+            }
         }
     }
 

@@ -19,6 +19,8 @@ import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
 
 @Composable
 fun ReminderMessagesArea(
