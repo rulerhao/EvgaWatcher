@@ -29,4 +29,8 @@
     <string name="show_unbuyable">顯示缺貨產品</string>
     <string name="price_ascending">價格升冪</string>
     <string name="show_no_price">顯示無價格產品</string>
+    <string name="notification_product_button_text">知道了！</string>
+    <string name="products_changed_notification_title">產品狀態變化</string>
+    <string name="products_changed_notification_description">有一些產品有變化囉！趕快去看看吧！</string>
+    <string name="products_changed_notification_button_text">來看看！</string>
 </resources>

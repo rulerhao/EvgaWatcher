@@ -32,4 +32,8 @@
     <string name="show_unbuyable">Show out of stock</string>
     <string name="price_ascending">Price ascending</string>
     <string name="show_no_price">Show no price</string>
+    <string name="notification_product_button_text">I know it!</string>
+    <string name="products_changed_notification_title">Products changed</string>
+    <string name="products_changed_notification_description">Some products changed!</string>
+    <string name="products_changed_notification_button_text">Check it!</string>
 </resources>

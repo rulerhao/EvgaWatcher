@@ -10,6 +10,8 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.rulhouse.evgawatcher.R
+import com.rulhouse.evgawatcher.methods.notification.receiver.NotificationReceiver
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.methods.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver
 
@@ -48,14 +50,33 @@ class DifferentProductsNotification {
     fun doNotifyProductsDifference(context: Context, id: Int, productsDifference: ProductsDifference) {
         createNotificationChannel(context)
 
-        val pendingIntent = getPendingIntent(context, productsDifference)
-        val notification = getNotification(context = context, pendingIntent = pendingIntent, productsDifference = productsDifference)
+        val notification = getNotification(context = context, productsDifference = productsDifference)
         val summaryNotification = getSummaryNotification(context = context)
+        val notificationId = getNotificationID(
+            name = productsDifference.gpuProduct.name,
+            reason = productsDifference.reason
+        )
 
-        notifyStart(context, id, notification, summaryNotification)
+        notifyStart(context, notificationId, notification, summaryNotification)
     }
 
-    private fun getPendingIntent(context: Context, productsDifference: ProductsDifference): PendingIntent {
+    fun doNotifyProductsDifference(context: Context, productsDifference: ProductsDifference) {
+        createNotificationChannel(context)
+
+        val notification = getNotification(context = context, productsDifference = productsDifference)
+        val summaryNotification = getSummaryNotification(context = context)
+        val notificationId = getNotificationID(
+            name = productsDifference.gpuProduct.name,
+            reason = productsDifference.reason
+        )
+        notifyStart(context, notificationId, notification, summaryNotification)
+    }
+
+    private fun getNotificationID(name: String, reason: DifferenceReason): Int {
+        return (name + reason.name).hashCode()
+    }
+
+    private fun getSetIKnowItPendingIntent(context: Context, productsDifference: ProductsDifference): PendingIntent {
         val snoozeIntent = Intent(context, RenewFavoriteProductsBroadcastReceiver::class.java).apply {
             putExtra(RenewFavoriteProductsBroadcastReceiver.DIFFERENT_FAVORITE_PRODUCTS, productsDifference)
         }
@@ -63,14 +84,31 @@ class DifferentProductsNotification {
         return PendingIntent.getBroadcast(context, 0, snoozeIntent, Intent.FILL_IN_DATA or PendingIntent.FLAG_IMMUTABLE)
     }
 
-    private fun getNotification(context: Context, pendingIntent: PendingIntent, productsDifference: ProductsDifference): Notification {
+    private fun getReminderScreenPendingIntent(context: Context): PendingIntent {
+        val buttonIntent = Intent(context, NotificationReceiver::class.java)
+
+        return PendingIntent.getBroadcast(context, 0, buttonIntent, Intent.FILL_IN_DATA or PendingIntent.FLAG_IMMUTABLE)
+    }
+
+    private fun getNotification(context: Context, productsDifference: ProductsDifference): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(productsDifference.reason.name)
             .setContentText(productsDifference.gpuProduct.name)
-            .addAction(R.drawable.ic_launcher_foreground, "SNOOZE",
-                pendingIntent)
+            .addAction(R.drawable.ic_launcher_foreground, context.getString(R.string.notification_product_button_text),
+                getSetIKnowItPendingIntent(context, productsDifference))
+            .setContentIntent(getReminderScreenPendingIntent(context))
             .setGroup(GROUP_KEY)
+            .build()
+    }
+
+    private fun getNotification(context: Context, pendingIntent: PendingIntent): Notification {
+        return NotificationCompat.Builder(context, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle(context.getString(R.string.products_changed_notification_title))
+            .setContentText(context.getString(R.string.products_changed_notification_description))
+            .addAction(R.drawable.ic_launcher_foreground, context.getString(R.string.buy_button_description),
+                pendingIntent)
             .build()
     }
 
