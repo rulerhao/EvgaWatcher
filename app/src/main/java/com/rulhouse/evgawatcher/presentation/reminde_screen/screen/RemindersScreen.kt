@@ -19,6 +19,7 @@ import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.main_scaffold.MainScaffold
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.ReminderMessageEvent
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.RemindersScreenEvent
+import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenMethods
 import com.rulhouse.evgawatcher.presentation.reminde_screen.view_model.ReminderMessagesViewModel
 import com.rulhouse.evgawatcher.presentation.reminde_screen.view_model.RemindersScreenViewModel
 
@@ -57,7 +58,7 @@ fun RemindersScreen(
                     onGetAll = { reminderMessagesViewModel.onEvent(ReminderMessageEvent.OnGetAll) },
                     onGetIt = { reminderMessagesViewModel.onEvent(ReminderMessageEvent.OnGetIt(it)) },
                     onClick = {
-                        navigateToProductScreen(
+                        ReminderScreenMethods().navigateToProductScreen(
                             differenceProducts = reminderMessagesViewModel.differenceProducts.value,
                             navController = navController,
                             index = it
@@ -66,24 +67,5 @@ fun RemindersScreen(
                 )
             }
         }
-    }
-}
-
-private fun navigateToProductScreen(
-    differenceProducts: List<ProductsDifferenceWithReason>?,
-    navController: NavController,
-    index: Int
-) {
-    differenceProducts?.let { productsReason ->
-        val favoriteProduct = productsReason[index].productBeCompare
-        val crawlerProduct = productsReason[index].productGoCompare
-        val navigateProduct = favoriteProduct.copy(
-            canBeBought = crawlerProduct.canBeBought,
-            price = crawlerProduct.price
-        )
-        navController.navigate(
-            Screen.ProductScreen.route + "?gpuProduct=${
-                Uri.encode(Gson().toJson(navigateProduct))}"
-        )
     }
 }

@@ -1,9 +1,13 @@
 package com.rulhouse.evgawatcher.presentation.reminde_screen.util
 
+import android.net.Uri
+import androidx.navigation.NavController
+import com.google.gson.Gson
 import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
+import com.rulhouse.evgawatcher.presentation.Screen
 
 class ReminderScreenMethods {
     suspend fun setProductsOnGetAll(products: List<ProductsDifferenceWithReason>?, favoriteUseCase: FavoriteGpuProductUseCases) {
@@ -43,6 +47,25 @@ class ReminderScreenMethods {
                 product.productGoCompare.price
             } else product.productBeCompare.price
         )
+    }
+
+    fun navigateToProductScreen(
+        differenceProducts: List<ProductsDifferenceWithReason>?,
+        navController: NavController,
+        index: Int
+    ) {
+        differenceProducts?.let { productsReason ->
+            val favoriteProduct = productsReason[index].productBeCompare
+            val crawlerProduct = productsReason[index].productGoCompare
+            val navigateProduct = favoriteProduct.copy(
+                canBeBought = crawlerProduct.canBeBought,
+                price = crawlerProduct.price
+            )
+            navController.navigate(
+                Screen.ProductScreen.route + "?gpuProduct=${
+                    Uri.encode(Gson().toJson(navigateProduct))}"
+            )
+        }
     }
 
 }
