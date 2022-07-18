@@ -3,6 +3,7 @@ package com.rulhouse.evgawatcher.methods.renew_favorite_products
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference

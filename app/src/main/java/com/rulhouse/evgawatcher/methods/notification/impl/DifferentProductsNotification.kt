@@ -9,8 +9,8 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.rulhouse.evgawatcher.MainActivity
 import com.rulhouse.evgawatcher.R
-import com.rulhouse.evgawatcher.methods.notification.receiver.NotificationReceiver
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.methods.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver
@@ -85,9 +85,11 @@ class DifferentProductsNotification {
     }
 
     private fun getReminderScreenPendingIntent(context: Context): PendingIntent {
-        val buttonIntent = Intent(context, NotificationReceiver::class.java)
+        val buttonIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        }
 
-        return PendingIntent.getBroadcast(context, 0, buttonIntent, Intent.FILL_IN_DATA or PendingIntent.FLAG_IMMUTABLE)
+        return PendingIntent.getBroadcast(context, 0, buttonIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 
     private fun getNotification(context: Context, productsDifference: ProductsDifference): Notification {
@@ -98,6 +100,7 @@ class DifferentProductsNotification {
             .addAction(R.drawable.ic_launcher_foreground, context.getString(R.string.notification_product_button_text),
                 getSetIKnowItPendingIntent(context, productsDifference))
             .setContentIntent(getReminderScreenPendingIntent(context))
+//            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setGroup(GROUP_KEY)
             .build()
     }
