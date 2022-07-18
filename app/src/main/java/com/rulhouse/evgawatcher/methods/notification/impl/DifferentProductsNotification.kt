@@ -117,16 +117,9 @@ class DifferentProductsNotification {
 
     private fun getSummaryNotification(context: Context): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentTitle("有東西改變了3")
             //set content text to support devices running API level < 24
-            .setContentText("Two new messages")
             .setSmallIcon(R.drawable.ic_notification)
             //build summary info into InboxStyle template
-            .setStyle(NotificationCompat.InboxStyle()
-                .addLine("Alex Faarborg Check this out")
-                .addLine("Jeff Chang Launch Party")
-                .setBigContentTitle("2 new messages")
-                .setSummaryText("janedoe@example.com"))
             //specify which group this notification belongs to
             .setGroup(GROUP_KEY)
             //set this notification as the summary for the group
