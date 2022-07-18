@@ -28,6 +28,7 @@ import com.rulhouse.evgawatcher.presentation.screen.BottomNavigationBar
 
 @Composable
 fun ProductsScreen(
+    title: String = "",
     viewModel: ProductsScreenViewModel,
     navController: NavController,
     productState: ProductState = ProductState.Success
@@ -40,7 +41,7 @@ fun ProductsScreen(
             ) {
                 SmallTopAppBar(
                     title = {
-                        Text("EVGA WATCHER")
+                        Text(text = title)
                     },
                     actions = {
                         IconButton(

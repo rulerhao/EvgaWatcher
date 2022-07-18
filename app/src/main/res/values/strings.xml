@@ -32,6 +32,9 @@
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
 
+    <string name="products_list">Products</string>
+    <string name="favorite_products_list">Favorite Products</string>
+
     <string name="show_unbuyable">Show out of stock</string>
     <string name="price_ascending">Price ascending</string>
     <string name="show_no_price">Show no price</string>

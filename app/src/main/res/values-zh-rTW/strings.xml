@@ -28,6 +28,9 @@
     <string name="ascending">升冪</string>
     <string name="descending">降冪</string>
 
+    <string name="products_list">所有</string>
+    <string name="favorite_products_list">最愛</string>
+
     <string name="show_unbuyable">顯示缺貨產品</string>
     <string name="price_ascending">價格升冪</string>
     <string name="show_no_price">顯示無價格產品</string>
