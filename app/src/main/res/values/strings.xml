@@ -32,6 +32,7 @@
     <string name="ascending">Ascending</string>
     <string name="descending">Descending</string>
 
+    <string name="network_error_please_swipe_down_to_refresh">Network error. Please swipe down to refresh screen</string>
     <string name="products_list">Products</string>
     <string name="favorite_products_list">Favorite Products</string>
 

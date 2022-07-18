@@ -28,6 +28,8 @@
     <string name="ascending">升冪</string>
     <string name="descending">降冪</string>
 
+    <string name="network_error_please_swipe_down_to_refresh">網路異常，請下拉以重新讀取頁面。</string>
+
     <string name="products_list">所有</string>
     <string name="favorite_products_list">最愛</string>
 

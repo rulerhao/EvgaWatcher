@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -82,7 +83,7 @@ fun ProductsScreen(
                     .align(Alignment.Center),
                 visible = productState == ProductState.NetWorkError
             ) {
-                Text(text = "Network error. Please reload it.")
+                Text(stringResource(id = R.string.network_error_please_swipe_down_to_refresh))
             }
             Column() {
                 ProductsCardList(

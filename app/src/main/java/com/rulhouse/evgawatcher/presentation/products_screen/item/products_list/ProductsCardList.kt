@@ -1,9 +1,11 @@
 package com.rulhouse.evgawatcher.presentation.products_screen.item.products_list
 
 import android.net.Uri
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.google.gson.Gson
 import com.rulhouse.evgawatcher.presentation.Screen
@@ -20,7 +22,7 @@ fun ProductsCardList(
     val sortedModels = viewModel.productsSortedBySerialModel.value
 
     LazyColumn(
-
+        modifier = Modifier.fillMaxSize()
     ) {
         if (productsSortedBySerial != null && sortedModels != null) {
             itemsIndexed(productsSortedBySerial) { index, item ->
