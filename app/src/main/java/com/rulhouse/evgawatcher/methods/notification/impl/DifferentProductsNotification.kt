@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.rulhouse.evgawatcher.MainActivity
 import com.rulhouse.evgawatcher.R
+import com.rulhouse.evgawatcher.methods.notification.util.NotificationTitleTextMethods
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.methods.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver
@@ -95,7 +96,7 @@ class DifferentProductsNotification {
     private fun getNotification(context: Context, productsDifference: ProductsDifference): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(productsDifference.reason.name)
+            .setContentTitle(context.getString(NotificationTitleTextMethods().getTitleTextByReason(productsDifference.reason)))
             .setContentText(productsDifference.gpuProduct.name)
             .addAction(R.drawable.ic_notification, context.getString(R.string.notification_product_button_text),
                 getSetIKnowItPendingIntent(context, productsDifference))
