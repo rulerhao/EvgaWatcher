@@ -64,6 +64,8 @@ fun ReminderMessagesArea(
             }
             CrawlerState.Success -> {
                 products(
+                    modifier = Modifier
+                        .align(Alignment.Center),
                     items = items,
                     onGetAll = { onGetAll() },
                     onGetIt = { onGetIt(it) },
@@ -76,6 +78,7 @@ fun ReminderMessagesArea(
 
 @Composable
 private fun products(
+    modifier: Modifier,
     items: List<ProductsDifferenceWithReason>?,
     onGetAll: () -> Unit,
     onGetIt: (Int) -> Unit,
@@ -98,6 +101,9 @@ private fun products(
             )
         }
     } else {
-        Text(text = stringResource(id = R.string.no_product_change))
+        Text(
+            modifier = modifier,
+            text = stringResource(id = R.string.no_product_change)
+        )
     }
 }
