@@ -1,5 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.reminde_screen.screen
 
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -10,7 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.gson.Gson
 import com.rulhouse.evgawatcher.R
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
+import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferenceProducts
+import com.rulhouse.evgawatcher.presentation.Screen
 import com.rulhouse.evgawatcher.presentation.main_scaffold.MainScaffold
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.ReminderMessageEvent
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.RemindersScreenEvent
@@ -51,9 +56,34 @@ fun RemindersScreen(
                     reminderMessagesViewModel.differenceProducts.value,
                     onGetAll = { reminderMessagesViewModel.onEvent(ReminderMessageEvent.OnGetAll) },
                     onGetIt = { reminderMessagesViewModel.onEvent(ReminderMessageEvent.OnGetIt(it)) },
-                    onClick = {}
+                    onClick = {
+                        navigateToProductScreen(
+                            differenceProducts = reminderMessagesViewModel.differenceProducts.value,
+                            navController = navController,
+                            index = it
+                        )
+                    }
                 )
             }
         }
+    }
+}
+
+private fun navigateToProductScreen(
+    differenceProducts: List<ProductsDifferenceWithReason>?,
+    navController: NavController,
+    index: Int
+) {
+    differenceProducts?.let { productsReason ->
+        val favoriteProduct = productsReason[index].productBeCompare
+        val crawlerProduct = productsReason[index].productGoCompare
+        val navigateProduct = favoriteProduct.copy(
+            canBeBought = crawlerProduct.canBeBought,
+            price = crawlerProduct.price
+        )
+        navController.navigate(
+            Screen.ProductScreen.route + "?gpuProduct=${
+                Uri.encode(Gson().toJson(navigateProduct))}"
+        )
     }
 }
