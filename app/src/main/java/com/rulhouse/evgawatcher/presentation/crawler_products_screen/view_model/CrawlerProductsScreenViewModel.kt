@@ -64,10 +64,8 @@ class CrawlerProductsScreenViewModel @Inject constructor(
             CrawlerProductsScreenEvent.OnRefresh -> {
                 viewModelScope.launch {
                     _refreshingCrawler.value = true
-                    Log.d("CrawlerError", "refreshCrawler = ${refreshingCrawler.value}")
                     setByCrawler()
                     _refreshingCrawler.value = false
-                    Log.d("CrawlerError", "refreshCrawler = ${refreshingCrawler.value}")
                 }
             }
         }

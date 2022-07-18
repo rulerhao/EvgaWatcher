@@ -21,8 +21,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d("TestBundle", "value = ${this.intent.getStringExtra(NotificationReceiver().extraName)}")
-
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         installSplashScreen()
@@ -38,6 +36,5 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        Log.d("TestOnNewIntent", "Go")
     }
 }
