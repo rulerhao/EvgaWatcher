@@ -104,7 +104,6 @@ class WebCrawler {
             }
 
 
-            Log.d("TestCrawler", "Items = $ans")
             return ans
         }
 

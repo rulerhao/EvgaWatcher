@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.reminde_screen
+package com.rulhouse.evgawatcher.presentation.reminde_screen.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

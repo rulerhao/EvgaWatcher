@@ -35,6 +35,9 @@
         <receiver android:name="com.rulhouse.evgawatcher.methods.renew_favorite_products.RenewFavoriteProductsBroadcastReceiver"
             android:exported="false">
         </receiver>
+        <receiver android:name="com.rulhouse.evgawatcher.methods.notification.receiver.NotificationReceiver"
+            android:exported="false">
+        </receiver>
     </application>
 
 </manifest>

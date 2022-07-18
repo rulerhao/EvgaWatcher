@@ -1,7 +1,6 @@
 package com.rulhouse.evgawatcher.presentation.screen
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -17,12 +16,14 @@ import com.rulhouse.evgawatcher.presentation.favorite_products_screen.screen.Fav
 import com.rulhouse.evgawatcher.presentation.product_screen.ProductScreen
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.screen.CrawlerProductsScreen
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model.CrawlerProductsScreenViewModel
-import com.rulhouse.evgawatcher.presentation.reminde_screen.RemindersScreen
+import com.rulhouse.evgawatcher.presentation.reminde_screen.screen.RemindersScreen
+import com.rulhouse.evgawatcher.presentation.reminde_screen.view_model.ReminderMessagesViewModel
 
 @Composable
 fun MainScreen(
 ) {
     val viewModel: CrawlerProductsScreenViewModel = hiltViewModel()
+    val reminderMessagesViewModel: ReminderMessagesViewModel = hiltViewModel()
 
     val navController = rememberNavController()
 
@@ -44,7 +45,10 @@ fun MainScreen(
                 FavoriteProductsScreen(navController = navController)
             }
             composable(route = Screen.RemindersScreen.route) {
-                RemindersScreen(navController = navController)
+                RemindersScreen(
+                    navController = navController,
+                    reminderMessagesViewModel = reminderMessagesViewModel
+                )
             }
             composable(
                 route = Screen.ProductScreen.route + "?" +

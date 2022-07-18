@@ -1,4 +1,4 @@
-package com.rulhouse.evgawatcher.presentation.reminde_screen
+package com.rulhouse.evgawatcher.presentation.reminde_screen.view_model
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State

@@ -4,10 +4,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.rulhouse.evgawatcher.R
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.event.CrawlerProductsScreenEvent
 import com.rulhouse.evgawatcher.presentation.crawler_products_screen.view_model.CrawlerProductsScreenViewModel
 import com.rulhouse.evgawatcher.presentation.products_screen.screen.ProductsScreen
@@ -25,8 +28,9 @@ fun CrawlerProductsScreen(
         indicatorPadding = PaddingValues(80.dp)
     ) {
         ProductsScreen(
-            viewModel,
-            navController,
+            title = stringResource(id = R.string.products_list),
+            viewModel = viewModel,
+            navController = navController,
             productState = viewModel.productsState.value
         )
     }
