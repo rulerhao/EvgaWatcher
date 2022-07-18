@@ -94,10 +94,10 @@ class DifferentProductsNotification {
 
     private fun getNotification(context: Context, productsDifference: ProductsDifference): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(productsDifference.reason.name)
             .setContentText(productsDifference.gpuProduct.name)
-            .addAction(R.drawable.ic_launcher_foreground, context.getString(R.string.notification_product_button_text),
+            .addAction(R.drawable.ic_notification, context.getString(R.string.notification_product_button_text),
                 getSetIKnowItPendingIntent(context, productsDifference))
             .setContentIntent(getReminderScreenPendingIntent(context))
 //            .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -120,7 +120,7 @@ class DifferentProductsNotification {
             .setContentTitle("有東西改變了3")
             //set content text to support devices running API level < 24
             .setContentText("Two new messages")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_notification)
             //build summary info into InboxStyle template
             .setStyle(NotificationCompat.InboxStyle()
                 .addLine("Alex Faarborg Check this out")
