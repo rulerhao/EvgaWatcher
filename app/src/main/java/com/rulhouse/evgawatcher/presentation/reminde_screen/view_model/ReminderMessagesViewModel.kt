@@ -5,14 +5,15 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rulhouse.evgawatcher.methods.favorite_products.data.GpuProduct
 import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
-import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.DifferenceReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.ReminderMessageEvent
+import com.rulhouse.evgawatcher.presentation.reminde_screen.util.CrawlerState
+import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenCrawlerState
 import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenMethods
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,11 +27,15 @@ class ReminderMessagesViewModel @Inject constructor(
         mutableStateOf(null)
     val differenceProducts: State<List<ProductsDifferenceWithReason>?> = _differenceProducts
 
+    private var getProductsDifferenceWIthReasonFlow: Flow<List<ProductsDifferenceWithReason>>? = null
+
+    private val _screenState: MutableState<ReminderScreenCrawlerState> =
+        mutableStateOf(ReminderScreenCrawlerState())
+    val screenState: State<ReminderScreenCrawlerState> = _screenState
+
     init {
         viewModelScope.launch {
-            getDifferentProductsUseCase.getProductsDifferenceWIthReasonFlow().collect {
-                _differenceProducts.value = it
-            }
+            setProductsFlow()
         }
     }
 
@@ -53,6 +58,27 @@ class ReminderMessagesViewModel @Inject constructor(
                     )
                 }
             }
+            is ReminderMessageEvent.OnRefresh -> {
+                viewModelScope.launch {
+                    setProductsFlow()
+                }
+            }
+        }
+    }
+
+    private suspend fun setProductsFlow() {
+        try {
+            _screenState.value = screenState.value.copy(crawlerState = CrawlerState.Waiting)
+            getProductsDifferenceWIthReasonFlow = getDifferentProductsUseCase.getProductsDifferenceWIthReasonFlow()
+            getProductsDifferenceWIthReasonFlow?.let{ flow ->
+                flow.collect {
+                    _differenceProducts.value = it
+                    _screenState.value = screenState.value.copy(crawlerState = CrawlerState.Success)
+                }
+            }
+        } catch(e: Exception) {
+            e.printStackTrace()
+            _screenState.value = screenState.value.copy(crawlerState = CrawlerState.Failure)
         }
     }
 }

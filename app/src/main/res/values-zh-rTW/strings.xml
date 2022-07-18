@@ -13,6 +13,8 @@
     <string name="reminder">通知開啟</string>
     <string name="reminder_top_app_bar">通知</string>
 
+    <string name="network_error">網路連線異常</string>
+    <string name="network_refresh">重新讀取</string>
     <string name="price">價格</string>
     <string name="serial">產品型號</string>
     <string name="no_product_change">沒有產品有變化！</string>
