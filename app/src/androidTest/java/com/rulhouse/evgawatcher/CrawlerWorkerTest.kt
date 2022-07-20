@@ -2,7 +2,6 @@ package com.rulhouse.evgawatcher
 
 import android.content.Context
 import android.util.Log
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.work.Configuration
@@ -17,11 +16,9 @@ import com.rulhouse.evgawatcher.methods.work_manager.coroutine_work.CrawlerWorkM
 import com.rulhouse.evgawatcher.methods.work_manager.coroutine_work.CrawlerWorker
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
-import org.hamcrest.core.Is.`is`
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -73,17 +70,6 @@ class CrawlerWorkerTest {
             )
             .build()
         val result = worker.doWork()
-        assertThat(result, `is`(ListenableWorker.Result.success()))
+        assertEquals(result, ListenableWorker.Result.success())
     }
-
-//    @Test
-//    fun testCrawlerWorker() {
-//        val worker = TestListenableWorkerBuilder<CrawlerWorker>(context)
-//            .setWorkerFactory(CrawlerWorkManagerFactory(getDifferentProductsUseCase, notificationUseCase))
-//            .build()
-//        runBlocking {
-//            val result = worker.doWork()
-//            assertThat(result, `is`(ListenableWorker.Result.success()))
-//        }
-//    }
 }
