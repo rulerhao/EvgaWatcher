@@ -18,6 +18,7 @@ import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.Differen
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifference
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
 import com.rulhouse.evgawatcher.presentation.reminde_screen.util.CrawlerState
+import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenCrawlerState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 
@@ -28,7 +29,7 @@ fun ReminderMessagesArea(
     onGetIt: (Int) -> Unit,
     onClick: (Int) -> Unit,
     onRefresh: () -> Unit,
-    crawlerState: CrawlerState
+    crawlerState: CrawlerState = CrawlerState.Waiting
 ) {
     Box(
         modifier = Modifier

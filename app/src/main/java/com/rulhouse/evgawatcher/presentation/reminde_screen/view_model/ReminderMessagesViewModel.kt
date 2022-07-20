@@ -8,11 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.rulhouse.evgawatcher.methods.favorite_products.domain.use_case.FavoriteGpuProductUseCases
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.ProductsDifferenceWithReason
 import com.rulhouse.evgawatcher.methods.notification_gpu_product_change.use_case.GetDifferentProductsUseCase
+import com.rulhouse.evgawatcher.presentation.products_screen.model.ProductState
 import com.rulhouse.evgawatcher.presentation.reminde_screen.event.ReminderMessageEvent
 import com.rulhouse.evgawatcher.presentation.reminde_screen.util.CrawlerState
 import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenCrawlerState
 import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenMethods
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,9 +31,9 @@ class ReminderMessagesViewModel @Inject constructor(
 
     private var getProductsDifferenceWIthReasonFlow: Flow<List<ProductsDifferenceWithReason>>? = null
 
-    private val _screenState: MutableState<ReminderScreenCrawlerState> =
-        mutableStateOf(ReminderScreenCrawlerState())
-    val screenState: State<ReminderScreenCrawlerState> = _screenState
+    private val _crawlerState: MutableState<CrawlerState> =
+        mutableStateOf(CrawlerState.Waiting)
+    val crawlerState: State<CrawlerState> = _crawlerState
 
     init {
         viewModelScope.launch {
@@ -68,17 +70,17 @@ class ReminderMessagesViewModel @Inject constructor(
 
     private suspend fun setProductsFlow() {
         try {
-            _screenState.value = screenState.value.copy(crawlerState = CrawlerState.Waiting)
+            _crawlerState.value = CrawlerState.Waiting
             getProductsDifferenceWIthReasonFlow = getDifferentProductsUseCase.getProductsDifferenceWIthReasonFlow()
             getProductsDifferenceWIthReasonFlow?.let{ flow ->
                 flow.collect {
                     _differenceProducts.value = it
-                    _screenState.value = screenState.value.copy(crawlerState = CrawlerState.Success)
+                    _crawlerState.value = CrawlerState.Success
                 }
             }
         } catch(e: Exception) {
             e.printStackTrace()
-            _screenState.value = screenState.value.copy(crawlerState = CrawlerState.Failure)
+            _crawlerState.value = CrawlerState.Failure
         }
     }
 }
