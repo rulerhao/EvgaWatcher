@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        installSplashScreen()
+//        installSplashScreen()
 
         setContent {
             AppTheme {
