@@ -5,13 +5,14 @@
   <a href="https://github.com/rulerhao/EvgaWatcher/actions"><img alt="Build Status" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Android%20CI.svg"/></a> 
   <a href="https://github.com/rulerhao"><img alt="Github" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/GitHub-rulerhao.svg"/></a> 
 </p>
-<p align="end">
-  <a href="https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher">
-  <img alt="Google play" src="https://github.com/rulerhao/EvgaWatcher/blob/master/icon/google-play-download-icon-27.jpg" width=200px/>
-  </a>
+<p align="center">
+  <a href="Demo"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/demo.gif" />
+</p>
   
 # Download
-[EvgaWatcher](https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher)
+<a href="https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher">
+  <img alt="Google play" src="https://github.com/rulerhao/EvgaWatcher/blob/master/icon/google-play-download-icon-27.jpg" width=200px/>
+</a>
 
 # Data
 [Evga graphic card](https://tw.evga.com/products/productlist.aspx?type=0)
@@ -48,7 +49,7 @@
 # Unit Test
 ## MAD Score
 ![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
-## Tech stack & Open-source libraries
+## Tech stack
 - [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
 - [Repository Pattern](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#5)
