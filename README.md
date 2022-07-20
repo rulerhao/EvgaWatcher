@@ -1,5 +1,3 @@
-
-
 <h1 align="center">EvgaWatcher</h1>
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Apache%202.0.svg"/></a>
@@ -51,26 +49,23 @@
 ## MAD Score
 ![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
 ## Tech stack & Open-source libraries
-
--   Minimum SDK level 21
--   [Kotlin](https://kotlinlang.org/)  based,  [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)  +  [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)   + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)for asynchronous.
--   [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)  - Dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
--   [Repository Pattern](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#5)
--   Jetpack
+- [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
+- [Repository Pattern](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#5)
+- Jetpack
     - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) LiveData is lifecycle-aware and ensuresonly updates app component observers that are in an active lifecycle state.
-    -   Lifecycle - Observe Android lifecycles and handle UI states upon the lifecycle changes.
-    -   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manages UI-related data holder and lifecycle aware. Allows data to survive configuration changes such as screen rotations.
-    -   [Room](https://developer.android.com/jetpack/androidx/releases/room) - The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+    - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manages UI-related data holder and lifecycle aware. Allows data to survive configuration changes such as screen rotations.
+    - [Room](https://developer.android.com/jetpack/androidx/releases/room) - The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
     - [Compose](https://developer.android.com/jetpack/compose) - Android’s modern toolkit for building native UI. It simplifies and accelerates UI development on Android.
     - [Data Store](https://developer.android.com/topic/libraries/architecture/datastore) - A data storage solution that allows you to store key-value pairs or typed objects with [protocol buffers](https://developers.google.com/protocol-buffers) and uses Kotlin coroutines and Flow to store data asynchronously, consistently, and transactionally.
     - [Work Manager](https://developer.android.com/topic/libraries/architecture/workmanager) - The persistent working solution for android after background task restriction becomes harder.
--   Architecture
+- Architecture
     -   MVVM Architecture (View - ViewModel - Model)
--   [Glide](https://github.com/bumptech/glide) - Loading images from network.
--   [Material Design 3]((https://m3.material.io/))  - The latest version of Material Design includes personalization and accessibility features that put people at the center.
+- [Glide](https://github.com/bumptech/glide) - Loading images from network.
+- [Material Design 3](https://m3.material.io/) - The latest version of Material Design includes personalization and accessibility features that put people at the center.
 - [Jsoup](https://jsoup.org/) - A Java library that implements the [WHATWG HTML5](https://whatwg.org/html) specification and parses HTML to get information.
 - Unit Test
-	- Junit 4 - Unit testing framework for the Java.
+    - Junit 4 - Unit testing framework for the Java.
   
 # License
 ```xml
