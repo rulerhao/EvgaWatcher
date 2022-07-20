@@ -28,12 +28,11 @@ import com.rulhouse.evgawatcher.presentation.reminde_screen.util.ReminderScreenM
 import com.rulhouse.evgawatcher.presentation.reminde_screen.view_model.ReminderMessagesViewModel
 import com.rulhouse.evgawatcher.presentation.reminde_screen.view_model.RemindersScreenViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RemindersScreen(
     navController: NavController = rememberNavController(),
     viewModel: RemindersScreenViewModel = hiltViewModel(),
-    reminderMessagesViewModel: ReminderMessagesViewModel
+    reminderMessagesViewModel: ReminderMessagesViewModel = hiltViewModel()
 ) {
     MainScaffold(
         navController = navController,
@@ -67,7 +66,7 @@ fun RemindersScreen(
                         index = it
                     )
                 },
-                crawlerState = reminderMessagesViewModel.screenState.value.crawlerState,
+                crawlerState = reminderMessagesViewModel.crawlerState.value,
                 onRefresh = { reminderMessagesViewModel.onEvent(ReminderMessageEvent.OnRefresh) }
             )
         }

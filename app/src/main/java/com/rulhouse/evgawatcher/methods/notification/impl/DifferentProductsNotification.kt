@@ -106,16 +106,6 @@ class DifferentProductsNotification {
             .build()
     }
 
-    private fun getNotification(context: Context, pendingIntent: PendingIntent): Notification {
-        return NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(context.getString(R.string.products_changed_notification_title))
-            .setContentText(context.getString(R.string.products_changed_notification_description))
-            .addAction(R.drawable.ic_launcher_foreground, context.getString(R.string.buy_button_description),
-                pendingIntent)
-            .build()
-    }
-
     private fun getSummaryNotification(context: Context): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
             //set content text to support devices running API level < 24
