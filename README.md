@@ -52,7 +52,7 @@
 
   
 ## :bulb: Tech stack
-- [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
+- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
 - [Repository Pattern](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#5)
 - Jetpack
