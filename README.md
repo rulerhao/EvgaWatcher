@@ -1,6 +1,10 @@
 <h1 align="center">EvgaWatcher</h1>
 
 <p align="center">
+  Observer for evga products lovers. Notify you when the price and stock availability is updated.
+</p>
+
+<p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Apache%202.0.svg"/></a>
   <a href="https://developer.android.com/studio/releases/platforms#5.0"><img alt="API" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/API21%2B.svg"/></a>
   <a href="https://github.com/rulerhao/EvgaWatcher/actions"><img alt="Build Status" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Android%20CI.svg"/></a> 
@@ -50,9 +54,7 @@
 <a href="NotificationScreen"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/NotificationScreen.png" />
 </p>
 
-# Unit Test
-## MAD Score
-![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
+  
 ## Tech stack
 - [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
@@ -71,6 +73,9 @@
 - [Jsoup](https://jsoup.org/) - A Java library that implements the [WHATWG HTML5](https://whatwg.org/html) specification and parses HTML to get information.
 - Unit Test
     - Junit 4 - Unit testing framework for the Java.
+  
+## MAD Score
+![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
   
 # License
 ```xml
