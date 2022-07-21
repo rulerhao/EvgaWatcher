@@ -1,14 +1,18 @@
 <h1 align="center">EvgaWatcher</h1>
+
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Apache%202.0.svg"/></a>
   <a href="https://developer.android.com/studio/releases/platforms#5.0"><img alt="API" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/API21%2B.svg"/></a>
   <a href="https://github.com/rulerhao/EvgaWatcher/actions"><img alt="Build Status" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Android%20CI.svg"/></a> 
   <a href="https://github.com/rulerhao"><img alt="Github" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/GitHub-rulerhao.svg"/></a> 
 </p>
+
+![titleimage](https://github.com/rulerhao/EvgaWatcher/blob/master/images/TitleImage.png)
+
 <p align="center">
   <a href="Demo"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/demo.gif" />
 </p>
-  
+
 # Download
 <a href="https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher">
   <img alt="Google play" src="https://github.com/rulerhao/EvgaWatcher/blob/master/icon/google-play-download-icon-27.jpg" width=200px/>
