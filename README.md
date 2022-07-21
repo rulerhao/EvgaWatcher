@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  Observer for EVGA products lovers. Notify you when the price and stock availability are updated.
+  :earth_americas: Observer for EVGA products lovers. Notify you when the price and stock availability are updated.
 </p>
 
 <p align="center">
