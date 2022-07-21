@@ -1,8 +1,4 @@
-<h1 align="center">EvgaWatcher</h1>
-
-<p align="center">
-  Observer for evga products lovers. Notify you when the price and stock availability is updated.
-</p>
+![titleimage](https://github.com/rulerhao/EvgaWatcher/blob/master/images/TitleImage.png)
 
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/Apache%202.0.svg"/></a>
@@ -12,18 +8,26 @@
 </p>
 
 <p align="center">
+  Observer for EVGA products lovers. Notify you when the price and stock availability are updated.
+</p>
+
+<p align="center">
   <a href="https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher">
     <img alt="Google play" src="https://github.com/rulerhao/EvgaWatcher/blob/master/icon/google-play-download-icon-27.jpg" width=200px/>
   </a>
 </p>
 
-![titleimage](https://github.com/rulerhao/EvgaWatcher/blob/master/images/TitleImage.png)
+## Purpose
+- Implementing Jetpack Compose for entire UI.
+- Implementation of Android app with Jetpack libraries like work manager.
+- Doing background tasks with Coroutines, flow and livedata.
+- Following clean architecture principles.
 
+## Demonstrate
 <p align="center">
   <a href="Demo"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/demo.gif" />
 </p>
-
-## Demonstrate
+  
 ### All Products Screen
 <p align="center">
 <a href="CrawlerScreen1"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/CrawlerScreen1.png" />
@@ -46,7 +50,7 @@
 </p>
 
   
-## Tech stack
+## :bulb: Tech stack
 - [Kotlin](https://kotlinlang.org/) based, [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) + [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) + [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) for asynchronous.
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
 - [Repository Pattern](https://developer.android.com/codelabs/basic-android-kotlin-training-repository-pattern#5)
@@ -65,15 +69,15 @@
 - Unit Test
     - Junit 4 - Unit testing framework for the Java.
   
-# Data
-[Evga graphic card](https://tw.evga.com/products/productlist.aspx?type=0)
+## Data
+The information of gpu products is crawling from [Evga](https://tw.evga.com/products/productlist.aspx?type=0).
   
 ## MAD Score
 ![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
   
 # License
 ```xml
-Copyright [2022] [JiaHao Tsao]
+Copyright 2022 RulerHao(Jia-Hao Tsao) Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
