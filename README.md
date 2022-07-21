@@ -11,46 +11,37 @@
   <a href="https://github.com/rulerhao"><img alt="Github" src="https://github.com/rulerhao/EvgaWatcher/blob/master/badges/GitHub-rulerhao.svg"/></a> 
 </p>
 
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher">
+    <img alt="Google play" src="https://github.com/rulerhao/EvgaWatcher/blob/master/icon/google-play-download-icon-27.jpg" width=200px/>
+  </a>
+</p>
+
 ![titleimage](https://github.com/rulerhao/EvgaWatcher/blob/master/images/TitleImage.png)
 
 <p align="center">
   <a href="Demo"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/demo.gif" />
 </p>
 
-# Download
-<a href="https://play.google.com/store/apps/details?id=com.rulhouse.evgawatcher">
-  <img alt="Google play" src="https://github.com/rulerhao/EvgaWatcher/blob/master/icon/google-play-download-icon-27.jpg" width=200px/>
-</a>
-
-# Data
-[Evga graphic card](https://tw.evga.com/products/productlist.aspx?type=0)
-
-# All Products Screen
+## Demonstrate
+### All Products Screen
 <p align="center">
 <a href="CrawlerScreen1"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/CrawlerScreen1.png" />
 <a href="CrawlerScreen2"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/CrawlerScreen2.png" />
 <a href="CrawlerScreen3"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/CrawlerScreen3.png" />
 </p>
 
-# Favorite Products Screen
+### Favorite Products Screen
 <p align="center">
 <a href="FavoriteScreen1"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/FavoriteScreen1.png" />
 <a href="FavoriteScreen2"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/FavoriteScreen2.png" />
 <a href="FavoriteScreen3"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/FavoriteScreen3.png" />
 </p>
 
-# Single Product Screen
+### Others Screens
 <p align="center">
 <a href="ProducteScreen"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/ProductScreen.png" />
-</p>
-
-# Reminder Screen
-<p align="center">
 <a href="ReminderScreen"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/ReminderScreen1.png" />
-</p>
-
-# Notification
-<p align="center">
 <a href="NotificationScreen"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/NotificationScreen.png" />
 </p>
 
@@ -73,6 +64,9 @@
 - [Jsoup](https://jsoup.org/) - A Java library that implements the [WHATWG HTML5](https://whatwg.org/html) specification and parses HTML to get information.
 - Unit Test
     - Junit 4 - Unit testing framework for the Java.
+  
+# Data
+[Evga graphic card](https://tw.evga.com/products/productlist.aspx?type=0)
   
 ## MAD Score
 ![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
