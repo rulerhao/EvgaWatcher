@@ -17,13 +17,14 @@
   </a>
 </p>
 
-## Purpose
+## :evergreen_tree: Purpose
 - Implementing Jetpack Compose for entire UI.
 - Implementation of Android app with Jetpack libraries like work manager.
 - Doing background tasks with Coroutines, flow and livedata.
 - Following clean architecture principles.
+- Adopting android ci as the ci/cd tools for checking build and unit test passable.
 
-## Demonstrate
+## :light_rail: Demonstrate
 <p align="center">
   <a href="Demo"> <img width="300" src="https://github.com/rulerhao/EvgaWatcher/blob/master/screenshot/demo.gif" />
 </p>
@@ -69,13 +70,13 @@
 - Unit Test
     - Junit 4 - Unit testing framework for the Java.
   
-## Data
+## :blue_book: Data
 The information of gpu products is crawling from [Evga](https://tw.evga.com/products/productlist.aspx?type=0).
   
 ## MAD Score
 ![MAD Score](https://github.com/rulerhao/EvgaWatcher/blob/master/mad%20score/summary.png)
   
-# License
+## :pencil: License
 ```xml
 Copyright 2022 RulerHao(Jia-Hao Tsao) Reserved.
 
